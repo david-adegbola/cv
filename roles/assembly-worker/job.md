@@ -7,7 +7,7 @@
 - **Location:** Iisalmi
 - **Created:** 2026-10-30
 - **Status:** not yet applied
-- **Photo:** yes
+- **Photo:** no
 
 ## Target employers / job ads
 
