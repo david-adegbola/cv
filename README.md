@@ -15,6 +15,10 @@ On every push to `main`, GitHub Actions compiles each CV with `pdflatex` and pub
 
 Built PDFs are not committed to the repo. Pages serves them.
 
+## Rules for new CVs
+
+All CV rules (workflow, layout, writing, honesty, privacy, canonical facts) are in [CV-RULES.md](CV-RULES.md). AI agents are pointed there by `AGENTS.md` and `CLAUDE.md`.
+
 ## Layout
 
 ```
