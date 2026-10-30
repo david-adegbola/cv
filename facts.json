@@ -1,0 +1,23 @@
+{
+  "source": "CV-RULES.md (sections 6 and 7)",
+  "name": "David Adegbola",
+  "age": 24,
+  "location": "Joensuu, Finland",
+  "phone": "+358 46 800 7210",
+  "email": "adavidadegbola@gmail.com",
+  "languages": "Finnish basic (actively studying), English fluent, Yoruba native",
+  "cards": [
+    "occupational safety card (työturvallisuuskortti)"
+  ],
+  "not_held": [
+    "welding",
+    "welding certificates",
+    "hot-work card",
+    "forklift card",
+    "reading drawings"
+  ],
+  "not_confirmed": [
+    "B driving licence"
+  ],
+  "public_base": "https://david-adegbola.github.io/cv"
+}

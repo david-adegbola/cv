@@ -67,3 +67,14 @@ desktop.ini
 .env.*
 *.bak
 *.tmp
+
+# JobDesk: the local dashboard's database and any other SQLite files never leave this computer
+app/data/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Python caches
+__pycache__/
+*.pyc
