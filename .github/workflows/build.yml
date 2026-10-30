@@ -23,6 +23,17 @@ jobs:
       # Created here (not inside the TeX container, which runs as root) so later steps can write to it
       - run: mkdir -p _site
 
+      # Safety net for the published PDFs: strip EXIF/GPS and cap size at 600x600 for any
+      # photo in shared/photos (photos should already be prepared before committing)
+      - name: Strip metadata from profile photos
+        run: |
+          shopt -s nullglob nocaseglob
+          photos=(shared/photos/*.jpg shared/photos/*.jpeg shared/photos/*.png)
+          if [ ${#photos[@]} -eq 0 ]; then echo "No photos"; exit 0; fi
+          command -v mogrify >/dev/null || { sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick; }
+          mogrify -auto-orient -strip -resize '600x600>' "${photos[@]}"
+          identify "${photos[@]}"
+
       # Full TeX Live (includes libertine, fontawesome and babel-finnish). Each roles/<role>/cv-<lang>.tex
       # is compiled twice with pdflatex from inside its folder, so "Page X of Y" resolves.
       - name: Compile every roles/*/cv-*.tex with pdflatex

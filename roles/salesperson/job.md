@@ -5,6 +5,7 @@
 - **PDFs:** `david-adegbola-salesperson-en.pdf`, `david-adegbola-salesperson-fi.pdf`
 - **Source:** imported from Canva CV
 - **Created:** 2026-10-30
+- **Photo:** no
 
 ## Target employers / job ads
 

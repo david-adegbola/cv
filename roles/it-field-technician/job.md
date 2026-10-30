@@ -3,6 +3,7 @@
 - **Role:** IT Field Technician
 - **PDF:** `david-adegbola-it-field-technician-en.pdf`
 - **Created:** 2026-10-30
+- **Photo:** no
 
 ## Target employers / job ads
 

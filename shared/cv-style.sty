@@ -70,6 +70,46 @@
 \newcommand{\job}[2]{\large\sffamily \textbf{#1}\cvt{at}\textbf{#2}\rule[-0.45em]{0pt}{1.45em}}
 \newcommand{\sep}{\multicolumn{2}{c}{}\\}
 
+% Optional profile photo (off by default). Call \cvphoto{<path>} in a CV's preamble to show it
+% as a 3 cm circle left of the header; wrap the header (name, role, contact table) in
+% \begin{cvheader}...\end{cvheader}. Without \cvphoto the environment changes nothing.
+% A missing photo file only gives a warning, and the CV compiles without it.
+\usepackage{graphicx}
+\newif\ifcv@photo
+\newcommand{\cv@photopath}{}
+\newcommand{\cvphoto}[1]{%
+  \IfFileExists{#1}%
+    {\cv@phototrue\renewcommand{\cv@photopath}{#1}}%
+    {\PackageWarning{cv-style}{Photo file `#1' not found, compiling without a photo}}}
+\@onlypreamble\cvphoto
+\newlength{\cv@photosize}\setlength{\cv@photosize}{3cm}
+\newsavebox{\cv@photoraw}
+% Scale the photo to cover the circle (whichever side is shorter fills 3 cm), then clip
+\newcommand{\cv@photocircle}{%
+  \sbox{\cv@photoraw}{\includegraphics{\cv@photopath}}%
+  \ifdim\wd\cv@photoraw<\ht\cv@photoraw
+    \sbox{\cv@photoraw}{\includegraphics[width=\cv@photosize]{\cv@photopath}}%
+  \else
+    \sbox{\cv@photoraw}{\includegraphics[height=\cv@photosize]{\cv@photopath}}%
+  \fi
+  \begin{tikzpicture}
+    \begin{scope}
+      \clip (0,0) circle (0.5\cv@photosize);
+      \node[inner sep=0pt] at (0,0) {\usebox{\cv@photoraw}};
+    \end{scope}
+    \draw[tagtxt, line width=0.8pt] (0,0) circle (0.5\cv@photosize);
+  \end{tikzpicture}}
+\newenvironment{cvheader}
+  {\ifcv@photo
+     \par\noindent
+     \begin{minipage}[c]{\dimexpr\cv@photosize+2pt\relax}\cv@photocircle\end{minipage}%
+     \hspace{1.2em}%
+     \begin{minipage}[c]{\dimexpr\textwidth-\cv@photosize-2pt-1.2em\relax}%
+   \fi}
+  {\ifcv@photo
+     \end{minipage}\par
+   \fi}
+
 \usepackage{hyperref}
 \definecolor{linkcolor}{rgb}{0,0.2,0.6}
 \hypersetup{colorlinks,breaklinks,urlcolor=linkcolor, linkcolor=linkcolor}
