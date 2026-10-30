@@ -52,7 +52,7 @@ Remove the line to hide the photo again. With the photo on, it appears as a 3 cm
 
 Each CV's header sits inside `\begin{cvheader} ... \end{cvheader}`; keep that wrapper when you copy a CV. Record the choice as `Photo: yes/no` in the role's `job.md`. For Overleaf, also upload the photo and point `\cvphoto{...}` at it, e.g. `\cvphoto{david.jpg}`.
 
-**Adding the photo file** (placeholder: not added yet). Save it as `shared/photos/david.jpg`, and strip its EXIF/GPS metadata and resize it to at most 600×600 px **before committing**:
+**Replacing the photo file.** `shared/photos/david.jpg` is already committed (metadata stripped, 600×600 px). To replace it, save the new one in the same place, and strip its EXIF/GPS metadata and resize it to at most 600×600 px **before committing**:
 
 ```bash
 shared/photos/prepare-photo.sh ~/Pictures/my-photo.jpg

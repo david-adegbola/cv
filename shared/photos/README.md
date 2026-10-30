@@ -1,6 +1,6 @@
 # Profile photos
 
-Placeholder: add your photo here as `david.jpg`. No photo is committed yet, and no CV uses one.
+`david.jpg` is David's profile photo (metadata stripped, 600×600 px). It is off by default: a CV shows it only if its preamble has `\cvphoto{../../shared/photos/david.jpg}`.
 
 Before committing a photo, strip its metadata (EXIF, GPS location, camera details) and resize it to at most 600×600 px:
 
