@@ -8,6 +8,8 @@ The profile photo is stored at `shared/photos/david.jpg` (metadata stripped, 600
 
 | CV | File |
 |---|---|
+| Asentaja (FI) | `roles/assembly-worker/cv-fi.tex` (photo already on) |
+| Assembly Worker (EN) | `roles/assembly-worker/cv-en.tex` (photo already on) |
 | IT Field Technician (EN) | `roles/it-field-technician/cv-en.tex` |
 | Salesperson (EN) | `roles/salesperson/cv-en.tex` |
 | Myyjä (FI) | `roles/salesperson/cv-fi.tex` |

@@ -1,0 +1,80 @@
+% !TEX TS-program = pdflatex
+% David - Asentaja CV (suomi)
+% Layout from hmemcpy/cv template (adapted from Professional CV by Alessandro Plasmati).
+
+\documentclass[a4paper,11pt]{article}
+
+% Shared style: works from roles/<role>/ in this repo, or with cv-style.sty
+% uploaded next to this file (e.g. in Overleaf).
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+
+\cvlang{fi}
+\cvrole{Asentaja}
+\cvphoto{../../shared/photos/david.jpg}
+
+\begin{document}
+
+% --------------------TITLE-------------
+\begin{cvheader}
+\par{\centering
+		{\Huge \textsc{David Adegbola}}\\[0.4em]
+		{\Large Asentaja}
+	\bigskip\par}
+
+\hrule
+\vspace{0.5em}
+\begin{tabular}{rl}
+  \textsc{\cvt{location}:} & Joensuu, Suomi (valmis muuttamaan Iisalmeen)\\
+  \textsc{\cvt{phone}:}    & +358 46 800 7210\\
+  \textsc{\cvt{email}:}    & \href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}\\
+\end{tabular}
+\end{cvheader}
+
+\section{\cvt{summary}}
+\begin{tabular}{p{0.9\textwidth}}
+ Käytännönläheinen asentaja, jolla on kokemusta teollisuustyömaalta. UPM Kaukaan sellutehtaalla tein asennustöitä sähkösuodattimen uusimisessa, ja työnantaja arvioi työni kiitettäväksi. Osaan käyttää kulmahiomakonetta, nostolaitteita ja sähkötyökaluja. Olen tarkka, huolellinen ja oma-aloitteinen, ja toimin hyvin sekä itsenäisesti että tiimissä. Opin mielelläni uutta, ja haluan oppia erityisesti sähkö-, hydrauliikka- ja mekaanista asennusta. Olen valmis muuttamaan Iisalmeen ja tekemään kokoaikaista päivätyötä. Suomen kielen taitoni on perustasolla, ja opiskelen sitä aktiivisesti.
+\end{tabular}
+
+\renewcommand{\arraystretch}{1.12}
+\section{\cvt{skills}}
+\begin{tabular}{rl}
+  \textsc{Asennus:} & Asennus- ja kokoonpanotyöt; kulmahiomakone, nostolaitteet, sähkötyökalut\\
+  \textsc{Työtavat:} & Työohjeiden noudattaminen, työkalujen ja materiaalien inventaario, työturvallisuus\\
+  \textsc{\cvt{cards}:}     & Työturvallisuuskortti\\
+  \textsc{\cvt{languages}:} & Suomi (perustaso, opiskelen aktiivisesti), englanti (sujuva), yoruba (äidinkieli)\\
+  \textsc{Tietotekniikka:} & Tietotekniikan perustaidot\\
+\end{tabular}
+
+% Dates are split over two rows so the long Finnish month names fit
+\section{\cvt{experience}}
+\begin{longtable}{r|p{0.72\textwidth}}
+
+  \textsc{18.8.2025 --} & \job{Asentaja}{Axioma Servisas UAB}\\
+  \textsc{7.10.2025}
+    &UPM Kaukaan sellutehdas, Lappeenranta\\
+    &Asennustyöt sähkösuodattimen uusimisessa.\\
+    &Kulmahiomakoneen ja nostolaitteiden käyttö.\\
+    &Työmaan siisteys sekä työkalujen ja materiaalien seuranta.\\
+    &Tehtaan tiukkojen turvallisuusohjeiden noudattaminen.\\
+    &Työnantajan arvio: kiitettävä. Vastuullinen, tunnollinen, halukas oppimaan ja ottamaan vastuuta.\sotagrow{asennus,kulmahiomakone,nostolaitteet,työturvallisuus,tarkkuus}\sep
+
+  \textsc{huhtikuu 2025 --} & \job{Lehdenjakaja}{Finnbox ja SSM}, Vaasa\\
+  \textsc{elokuu 2025}
+    &Jakelureitit itsenäisesti aikaisin aamulla, ajallaan kaikissa sääolosuhteissa.\\\sep
+
+  \textsc{marraskuu 2024 --} & \job{AV-vapaaehtoinen}{Vaasa City Church}, Vaasa\\
+  \textsc{elokuu 2026}
+    &Ääni- ja videolaitteiden pystytys, käyttö ja purku huolellisesti joka viikonloppu.\\\sep
+
+  \textsc{kesä 2026} & Founder in Residence, Vaasa Startup Factory: digitaalisen tuotteen kehitys tiimissä.\\[0.4em]
+  \textsc{2016--2020} & Myynti- ja asiakaspalvelutyötä Nigeriassa (Desire Feeds, Bunmi Pastries).\\
+\end{longtable}
+
+\section{\cvt{education}}
+\begin{tabular}{rl}
+  \textsc{2026--nyt:}& B.Sc, Kestävä metsäbiotalous, Itä-Suomen yliopisto\\
+  \textsc{2024--2026:}& Tietotekniikan insinööriopintoja (keskeytetty), Vaasan ammattikorkeakoulu\\
+  \textsc{2019--2022:}& OND, tietojenkäsittely, The Polytechnic, Ibadan, Nigeria\\
+\end{tabular}
+
+\end{document}
