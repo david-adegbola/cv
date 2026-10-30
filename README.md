@@ -23,6 +23,7 @@ cv/
 │   ├── cv-style.sty             shared preamble: packages, colours, \sotag, \sotagrow, \job, \sep,
 │   │                            section format, footer, \cvrole{...}, \cvlang{en|fi}, \cvphoto{...}
 │   │                            ATS-friendly rows: \cvline{label}{value}, \begin{cventry}{dates}{title}
+│   │                            footer only on CVs longer than one page (automatic)
 │   └── photos/                  optional profile photos (prepare-photo.sh strips metadata)
 ├── roles/
 │   ├── assembly-worker/

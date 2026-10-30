@@ -51,11 +51,15 @@
 % headers and footers
 \usepackage{fancyhdr}
 \usepackage{lastpage}
+\usepackage{refcount}
 \pagestyle{fancy}
-\fancyfoot[L]{David Adegbola}
-\fancyfoot[C]{\cvt{pageof}}
-\fancyfoot[R]{\cv@role}
-\renewcommand{\footrulewidth}{0.4pt}
+% The footer only appears on CVs longer than one page. The page count comes from the
+% previous pdflatex run, so compile twice (the GitHub Action does).
+\newcommand{\cv@ifmultipage}[1]{\ifnum\getpagerefnumber{LastPage}>1 #1\fi}
+\fancyfoot[L]{\cv@ifmultipage{David Adegbola}}
+\fancyfoot[C]{\cv@ifmultipage{\cvt{pageof}}}
+\fancyfoot[R]{\cv@ifmultipage{\cv@role}}
+\renewcommand{\footrulewidth}{\ifnum\getpagerefnumber{LastPage}>1 0.4pt\else 0pt\fi}
 \fancyhead{}
 \renewcommand{\headrulewidth}{0pt}
 
