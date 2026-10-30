@@ -72,6 +72,10 @@ jobs:
             sh shared/combine.sh "$dir" "_site/david-adegbola-$(basename "$dir").pdf"
           done
 
+      # facts.json (contact details for the pages, also read by JobDesk) must match CV-RULES.md
+      - name: Check facts.json is up to date
+        run: python3 site/facts.py --check
+
       # Public site: a root page with name and contact only (no list of roles) and one employer page per role
       # at /r/<slug>/ with that role's CV. Every page is noindex. See site/build.py.
       - name: Build employer pages

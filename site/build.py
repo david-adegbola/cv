@@ -9,8 +9,8 @@
 - Every page has <meta name="robots" content="noindex">.
 - The PDFs stay where they were (_site/david-adegbola-<slug>[-<lang>].pdf), so old links keep working.
 
-Contact details come from facts.json (generated from CV-RULES.md by app/facts.py). No job or tracker data
-is read here; the dashboard's database never reaches this script.
+Contact details come from facts.json (generated from CV-RULES.md by site/facts.py). No job or tracker data
+is read here: JobDesk is a separate private repo, and its database never reaches this one.
 """
 
 import html

@@ -68,8 +68,7 @@ desktop.ini
 *.bak
 *.tmp
 
-# JobDesk: the local dashboard's database and any other SQLite files never leave this computer
-app/data/
+# SQLite files (JobDesk's database lives in its own private repo's data/ folder) never go in here
 *.db
 *.db-journal
 *.db-wal

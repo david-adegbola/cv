@@ -1,7 +1,10 @@
-"""Facts about David, read from CV-RULES.md (the authority) into facts.json (what the app reads).
+"""Generates facts.json from CV-RULES.md sections 6 and 7 (the authority).
 
-Run `python3 app/facts.py` after editing sections 6 or 7 of CV-RULES.md to regenerate facts.json.
-The dashboard compares the two on every start and shows a warning if they differ.
+    python3 site/facts.py            # after editing sections 6 or 7; commit facts.json with it
+    python3 site/facts.py --check    # fails if facts.json is out of date (run by the GitHub Action)
+
+facts.json gives the employer pages their contact details (site/build.py) and is read by JobDesk,
+the private dashboard in its own repo.
 """
 
 import json
@@ -54,37 +57,26 @@ def parse_rules(path=RULES_FILE):
     }
 
 
-def load():
-    """Return (facts, warning). warning is None when facts.json matches CV-RULES.md."""
-    try:
-        live = parse_rules()
-    except (OSError, ValueError) as e:
-        live, err = None, str(e)
-    try:
-        stored = json.loads(FACTS_FILE.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        stored = None
-    if stored is None and live is None:
-        raise SystemExit(f"Neither facts.json nor CV-RULES.md could be read: {err}")
-    if stored is None:
-        return live, "facts.json is missing. Run: python3 app/facts.py"
-    if live is None:
-        return stored, f"Could not read CV-RULES.md ({err}); using facts.json."
-    if live != stored:
-        diff = sorted(k for k in set(live) | set(stored) if live.get(k) != stored.get(k))
-        return live, ("facts.json differs from CV-RULES.md (" + ", ".join(diff) +
-                      "). CV-RULES.md is the authority and is used. Run: python3 app/facts.py")
-    return stored, None
-
-
 def write():
     facts = parse_rules()
     FACTS_FILE.write_text(json.dumps(facts, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return facts
 
 
+def check():
+    stored = json.loads(FACTS_FILE.read_text(encoding="utf-8"))
+    live = parse_rules()
+    diff = sorted(k for k in set(live) | set(stored) if live.get(k) != stored.get(k))
+    if diff:
+        sys.exit(f"facts.json is out of date ({', '.join(diff)}). Run: python3 site/facts.py and commit it.")
+    print("facts.json matches CV-RULES.md")
+
+
 if __name__ == "__main__":
     try:
+        if "--check" in sys.argv:
+            check()
+            sys.exit()
         f = write()
     except ValueError as e:
         sys.exit(str(e))

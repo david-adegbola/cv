@@ -240,9 +240,10 @@ Check the summary and every experience line in both languages:
 
 Only David changes these rules. When he gives a new standing rule ("always", "from now on",
 "every CV"), add it to the right section of this file in the same commit as the CV change.
-`facts.json` is generated from sections 6 and 7 for the JobDesk app: after changing either
-section, run `python3 app/facts.py` and commit `facts.json` in the same commit. This file stays
-the authority; the app warns when the two differ.
+`facts.json` is generated from sections 6 and 7 for the employer pages and the JobDesk app (a
+private repo that reads this one): after changing either section, run `python3 site/facts.py`
+and commit `facts.json` in the same commit. This file stays the authority; the GitHub Action
+fails if the two differ.
 Before starting any CV task, read this file in full. If a request differs from a fact in
 section 7, stop before editing and ask David: "Is this a correction for all CVs, or only for
 this one?"
