@@ -5,6 +5,5 @@ follow it. It has the workflow, layout, writing, honesty and privacy rules, and 
 facts every CV must agree with.
 
 Never add AI-generated `Co-authored-by:` trailers to commits. Preserve legitimate human
-co-authors. Run `./scripts/install-git-hooks.sh` to install the repository's shared
-commit-message safeguard; it removes recognized AI-agent co-author trailers and chains any
-existing `commit-msg` hook.
+co-authors. David's global git `commit-msg` hook removes AI co-author trailers; don't add
+a repo-level hook or set `core.hooksPath` in this repo.

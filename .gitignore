@@ -23,6 +23,8 @@ _site/
 
 # Private job application drafts; never publish or push
 applications/
+scripts/
+hooks/
 
 # Personal documents in any format: work certificates (työtodistus), ID or card scans,
 # Word/Pages/OpenDocument files, phone photos

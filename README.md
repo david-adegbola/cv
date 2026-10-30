@@ -13,9 +13,9 @@ On every push to `main`, GitHub Actions compiles each CV with `pdflatex` and pub
 - **Construction Worker (English):** https://david-adegbola.github.io/cv/david-adegbola-construction-master-en.pdf
 - **Production and Assembly Worker (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-industrial-master-fi.pdf
 - **Production and Assembly Worker (English):** https://david-adegbola.github.io/cv/david-adegbola-industrial-master-en.pdf
-- **Installer / Asentaja, steel structures (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-installer-teras-ja-kaide.pdf
-- **Asentaja, teräsrakenteet (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-installer-teras-ja-kaide-fi.pdf
-- **Installer, steel structures (English):** https://david-adegbola.github.io/cv/david-adegbola-installer-teras-ja-kaide-en.pdf
+- **Installer / Asentaja, steel structures (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-steel-installer.pdf
+- **Asentaja, teräsrakenteet (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-steel-installer-fi.pdf
+- **Installer, steel structures (English):** https://david-adegbola.github.io/cv/david-adegbola-steel-installer-en.pdf
 - **Assembly Worker (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-assembly-worker.pdf
 - **Asentaja (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-assembly-worker-fi.pdf
 - **Assembly Worker (English):** https://david-adegbola.github.io/cv/david-adegbola-assembly-worker-en.pdf
@@ -50,7 +50,7 @@ cv/
 │   │   ├── cv-fi.tex            Finnish CV (main version for this role)
 │   │   ├── cv-en.tex
 │   │   └── job.md
-│   ├── installer-teras-ja-kaide/
+│   ├── steel-installer/
 │   │   ├── cv-fi.tex            Finnish CV (main version for this role)
 │   │   ├── cv-en.tex
 │   │   └── job.md
@@ -80,16 +80,9 @@ cv/
 ## Git commit-message safeguard
 
 AI agents must not add AI-generated `Co-authored-by:` trailers; legitimate human co-authors
-should remain. Install the repository's shared hook in each clone with:
-
-```bash
-./scripts/install-git-hooks.sh
-```
-
-The hook removes recognized AI-agent co-author trailers and preserves human attribution. The
-installer creates a repository-local hooks directory and chains any existing hooks from the
-active hooks directory, without changing global hooks, user identity, or signing settings.
-It sets `core.hooksPath` in this repository's local Git config only.
+should remain. David's global git `commit-msg` hook removes AI co-author trailers, so this repo
+has no hook of its own. Don't set `core.hooksPath` here: a repo-level setting would stop the
+global hook from running.
 
 ## Languages
 
