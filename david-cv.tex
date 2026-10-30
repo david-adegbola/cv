@@ -1,0 +1,135 @@
+% !TEX TS-program = lualatex
+% David - IT Field Technician CV
+% Layout from hmemcpy/cv template (adapted from Professional CV by Alessandro Plasmati).
+
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{libertine}
+\usepackage{fontawesome}
+\usepackage{longtable}
+\usepackage{colortbl}
+\arrayrulecolor{black!35}
+\usepackage[cm]{fullpage}
+\usepackage{amssymb}
+
+% headers and footers
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyfoot[L]{David Adegbola}
+\fancyfoot[C]{Page \thepage\ of \pageref*{LastPage}}
+\fancyfoot[R]{IT Field Technician}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhead{}
+\renewcommand{\headrulewidth}{0pt}
+
+% StackOverflow-like tags
+\usepackage{tikz}
+\definecolor{tagbg}{RGB}{225,236,244}
+\definecolor{tagtxt}{RGB}{88,115,159}
+\newcommand{\sotag}[1]{\tikz[baseline]{\node[anchor=base, rounded corners=0.5ex, text height=1.5ex, text depth=.25ex, fill=tagbg, draw=tagbg, text=tagtxt] {#1};}}
+\makeatletter
+\newcommand{\sotagrow}[1]{\par\vspace{4pt}\noindent\@for\sotagitem:=#1\do{\sotag{\sotagitem} }\\}
+\makeatother
+
+% Helpers for adding job entries
+\newcommand{\job}[2]{\large\sffamily \textbf{#1} at \textbf{#2}\rule[-0.45em]{0pt}{1.45em}}
+\newcommand{\sep}{\multicolumn{2}{c}{}\\}
+
+\usepackage{hyperref}
+\definecolor{linkcolor}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolor, linkcolor=linkcolor}
+
+\usepackage{titlesec}
+\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{1em}{3pt}
+
+\begin{document}
+
+% --------------------TITLE-------------
+\par{\centering
+		{\Huge \textsc{David Adegbola}}\\[0.4em]
+		{\Large IT Field Technician}
+	\bigskip\par}
+
+\hrule
+\vspace{0.5em}
+\begin{tabular}{rl}
+  \textsc{Location:}  & Joensuu, Finland\\
+  \textsc{Phone:}     & +358 46 800 7210\\
+  \textsc{Email:}     & \href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}\\
+  \textsc{Links:}     & \faGithub{} \href{https://github.com/david-adegbola}{github.com/david-adegbola}\\
+  \textsc{Availability:} & Mornings, evenings and weekends\\
+\end{tabular}
+
+\section{Summary}
+\begin{tabular}{p{0.9\textwidth}}
+ Hands-on IT field technician with a background in computer science and IT studies, including Microsoft Active Directory administration.\\\\
+
+ Brings industrial site experience from UPM Kaukas pulp mill, working to strict safety rules under a foreman. Picks up new systems and procedures quickly and enjoys practical, physical work with equipment.\\\\
+
+ Keen to build a career in Finland's growing data centre sector.
+\end{tabular}
+
+\renewcommand{\arraystretch}{1.12}
+\section{Technical Profile}
+\begin{tabular}{rp{0.62\textwidth}}
+  \textsc{Data centre \& hardware:}& Rack-mounting servers; replacing drives, memory and power supplies; cable management and labelling under instruction\\
+  \textsc{Windows \& Active Directory:}& User accounts and groups, password resets, joining computers to a domain\\
+  \textsc{End-user IT:}& Setting up laptops, desktops, printers and peripherals; basic Windows troubleshooting\\
+  \textsc{Networking:}& Patching and tracing cables, connecting switches and access points, checking connectivity\\
+  \textsc{POS \& retail tech:}& Replacing payment terminals, receipt printers and scanners by following vendor steps\\
+  \textsc{Audio-visual:}& Setting up and operating sound, projection and video equipment\\
+  \textsc{Ways of working:}& Following work orders exactly, clear job notes and photos, safety awareness\\
+\end{tabular}
+
+\section{Experience}
+\begin{longtable}{r|p{0.72\textwidth}}
+
+  \textsc{Aug 2025--Oct 2025} & \job{Contract Worker}{Alvasaar OÜ}, UPM Kaukas, Lappeenranta \\(3 months)
+    &Assembly and installation work on a boiler renovation in a live industrial plant.\\&\\
+    &Tracked parts and materials inventory and kept the work area clean and safe.\\&\\
+    &Worked to strict site safety rules as part of a team supervised by a foreman.\sotagrow{installation,assembly,power-tools,site-safety,inventory}\sep
+
+  \textsc{Nov 2024--Aug 2026} & \job{Audio-Visual Volunteer}{Vaasa City Church}, Vaasa \\(1 year, 10 months)
+    &Set up, ran and packed down audio-visual equipment for services every weekend.\\&\\
+    &Fixed technical problems live, without stopping the service.\sotagrow{audio-visual,sound,projection,live-troubleshooting}\sep
+
+  \textsc{Mar 2025--Aug 2025} & \job{Independent Courier}{Finnbox and SSM}, Vaasa \\(6 months)
+    &Completed early-morning delivery routes alone, on time, in all weather.\sotagrow{reliability,independent-work}\sep
+
+  \textsc{Jun 2026--Aug 2026} & \job{Founder in Residence}{Summer Bloom}, Vaasa \\(3 months)
+    &Researched user needs through interviews and company calls; built and pitched a digital product (\href{https://hetkin.app}{hetkin.app}) with a team in one summer.\sotagrow{fast-learning,teamwork,user-research}
+\end{longtable}
+
+\section{Earlier Experience}
+\begin{longtable}{@{}p{0.20\textwidth}|p{0.29\textwidth}|p{0.43\textwidth}@{}}
+  \textsc{2019--2020} & \textbf{Sales Assistant}\newline Desire Feeds, Nigeria
+    &Sales, customer service and end-of-day cash balancing.
+    \par\vspace{8pt} \\
+  \textsc{2016--2018} & \textbf{Shop Assistant}\newline Bunmi Pastries, Nigeria
+    &Sales and customer service.
+    \par\vspace{5pt}
+\end{longtable}
+
+\section{Education}
+\begin{tabular}{rl}
+  \textsc{2024--2026:}& Information Technology studies, Vaasa University of Applied Sciences (VAMK)\\
+  & \footnotesize\itshape Including Microsoft Active Directory\\[0.3em]
+  \textsc{2019--2022:}& OND in Computer Science, The Polytechnic, Ibadan, Nigeria\\[0.3em]
+  \textsc{2026--present:}& Sustainable Forest Bioeconomy, University of Eastern Finland\\
+\end{tabular}
+
+\section{Certificates \& Languages}
+\begin{tabular}{rl}
+  \textsc{Certificates:}& Occupational safety card (työturvallisuuskortti)\\
+  \textsc{Languages:}& English (fluent), Yoruba (native), Finnish (basic)\\
+\end{tabular}
+
+\section{References}
+Available on request.
+
+\end{document}

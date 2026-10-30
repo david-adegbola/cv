@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>David Adegbola – IT Field Technician CV</title>
+  <style>
+    :root { --bg: #f6f7f9; --fg: #1d2330; --muted: #5b6475; --accent: #0b3d91; --accent-fg: #fff; --card: #fff; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #14171c; --fg: #e8ebf0; --muted: #a3abb8; --accent: #5b8def; --accent-fg: #0b1020; --card: #1d2128; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--fg); }
+    header { max-width: 960px; margin: 0 auto; padding: 32px 16px 16px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; }
+    h1 { margin: 0; font-size: 1.75rem; }
+    p { margin: 4px 0 0; color: var(--muted); }
+    .btn { display: inline-block; padding: 12px 22px; border-radius: 8px; background: var(--accent); color: var(--accent-fg); font-weight: 600; text-decoration: none; }
+    .btn:hover, .btn:focus-visible { filter: brightness(1.1); }
+    main { max-width: 960px; margin: 0 auto; padding: 0 16px 32px; }
+    object { width: 100%; height: 85vh; border: 0; border-radius: 8px; background: var(--card); box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+    .fallback { padding: 24px; }
+    footer { text-align: center; font-size: .85rem; color: var(--muted); padding: 0 16px 32px; }
+    footer a { color: inherit; }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>David Adegbola</h1>
+      <p>IT Field Technician – Curriculum Vitae</p>
+    </div>
+    <a class="btn" href="david-cv.pdf" download="David-Adegbola-CV.pdf">Download CV (PDF)</a>
+  </header>
+  <main>
+    <object data="david-cv.pdf" type="application/pdf" aria-label="David Adegbola CV">
+      <div class="fallback">Your browser can't show the PDF here. <a href="david-cv.pdf">Open the CV</a> instead.</div>
+    </object>
+  </main>
+  <footer>Layout adapted from <a href="https://github.com/hmemcpy/cv">hmemcpy/cv</a> (MIT) / Professional CV by Alessandro Plasmati.</footer>
+</body>
+</html>
