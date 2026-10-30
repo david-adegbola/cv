@@ -1,0 +1,59 @@
+# TeX Live packages the CI installs (zauguin/install-texlive in .github/workflows/build.yml).
+# This is everything the CVs load, found by compiling every roles/*/cv-*.tex with
+# `pdflatex -recorder` and mapping the recorded files to their TeX Live packages.
+# If a CI build fails with "File `xyz.sty' not found", add xyz's package here.
+
+# Engine, LaTeX format and Finnish hyphenation (loaded through the format, so the recorder misses them)
+latex-bin
+latex
+l3kernel
+l3backend
+hyphen-finnish
+
+# Packages loaded by shared/cv-style.sty and its dependencies
+amsfonts
+babel
+babel-finnish
+bigintcalc
+bitset
+cm
+colortbl
+ec
+epstopdf-pkg
+etoolbox
+fancyhdr
+fontawesome
+fontaxes
+gettitlestring
+graphics
+graphics-cfg
+graphics-def
+grfext
+hycolor
+hyperref
+iftex
+infwarerr
+intcalc
+kpathsea
+kvdefinekeys
+kvoptions
+kvsetkeys
+lastpage
+latexconfig
+libertine
+ltxcmds
+mptopdf
+mweights
+pdfescape
+pdftexcmds
+pgf
+preprint
+refcount
+rerunfilecheck
+stringenc
+titlesec
+tools
+uniquecounter
+url
+xcolor
+xkeyval
