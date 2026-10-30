@@ -1,0 +1,72 @@
+% !TEX TS-program = pdflatex
+% David - Warehouse Worker CV
+
+\documentclass[a4paper,11pt]{article}
+
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+
+\cvrole{Warehouse Worker}
+
+\begin{document}
+\small
+\setlength{\cvlabelw}{3.9cm}
+\titlespacing{\section}{0pt}{0.55em}{2pt}
+
+\begin{cvheader}
+\par{\centering
+		{\Huge \textsc{David Adegbola}}\\[0.4em]
+		{\Large Warehouse Worker}
+	\bigskip\par}
+
+\hrule
+\vspace{0.5em}
+\cvline[2.4cm]{\cvt{location}:}{Joensuu, Finland}
+\cvline[2.4cm]{\cvt{phone}:}{+358 46 800 7210}
+\cvline[2.4cm]{\cvt{email}:}{\href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}}
+\end{cvheader}
+
+\section{\cvt{summary}}
+\begin{tabular}{p{0.9\textwidth}}
+ Hi! I'm David, 24. At Axioma Servisas UAB, I tracked tools and materials on the UPM Kaukas pulp mill site. My employer rated my work excellent and described me as ``A responsible and conscientious employee, eager to learn and to take responsibility.'' I also advised customers and handled payments at Desire Feeds.\\\\
+
+ My IT studies at VAMK and OND in Computer Science are relevant technical education. I am used to physical work and learn quickly. I am available full-time immediately, including two shifts and weekends, and can work anywhere in Finland. My Finnish is still basic, and I'm actively studying it.
+\end{tabular}
+
+\section{\cvt{skills}}
+\cvline{Warehouse:}{Goods receiving and inventory; keen to learn SAP, warehouse systems and order picking}
+\cvline{Equipment:}{Lifting equipment, power and hand tools; keen to learn forklift work and picking scanners}
+\cvline{Customer service:}{Customer advice and cash handling}
+\cvline{Work practices:}{Physical work, moving materials, teamwork and responsible work}
+\cvline{IT:}{Basic IT skills}
+\cvline{\cvt{cards}:}{Occupational safety card (työturvallisuuskortti); hygiene passport (hygieniapassi)}
+\cvline{\cvt{languages}:}{Finnish (basic, actively studying); English (fluent); Yoruba (native)}
+
+\section{\cvt{experience}}
+\begin{cventry}{18 Aug 2025--7 Oct 2025}{\job{Fitter}{Axioma Servisas UAB}}
+  UPM Kaukas pulp mill, Lappeenranta\par
+  Worked on the electrostatic precipitator rebuild project at UPM Kaukas pulp mill.\par
+  Used angle grinders and lifting equipment.\par
+  Moved and organised materials, tracked tools, and kept the site clean and safe while following the mill's strict safety rules.\par
+  Employer rating: excellent. A responsible and conscientious employee, eager to learn and to take responsibility.
+  \sotagrow{tools-inventory,materials-tracking,lifting-equipment,site-safety,responsible}
+\end{cventry}
+\begin{cventry}{Apr 2025--Aug 2025}{\textbf{Independent Courier}, Finnbox and SSM, Vaasa: outdoor delivery routes alone, early starts and punctual delivery in all weather.}
+\end{cventry}
+\begin{cventry}{Mar 2019--Sep 2020}{\textbf{Salesperson}, Desire Feeds, Lagos: advised customers, carried purchases to their vehicles, took payments and balanced cash at closing.}
+\end{cventry}
+\begin{cventry}{Nov 2024--Aug 2026}{\textbf{Audio-Visual Volunteer}, Vaasa City Church, Vaasa: sound and video every weekend.}
+\end{cventry}
+\begin{cventry}{Jun 2026--Aug 2026}{\textbf{Founder in Residence}, Vaasa Startup Factory.}
+\end{cventry}
+\begin{cventry}{Sep 2016--Jun 2018}{\textbf{Sales Assistant and Kitchen Helper}, Bunmi Pastries, Ibadan.}
+\end{cventry}
+
+\section{\cvt{education}}
+\cvline{2026--present:}{B.Sc Sustainable Forest Bioeconomy, University of Eastern Finland (UEF)}
+\cvline{2024--2026:}{B.Eng studies, Information Technology, VAMK (Vaasa University of Applied Sciences); not completed, included Microsoft Active Directory}
+\cvline{2019--2022:}{OND in Computer Science, The Polytechnic, Ibadan, Nigeria}
+
+\section{\cvt{references}}
+Available on request.
+
+\end{document}

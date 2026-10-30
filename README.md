@@ -5,6 +5,9 @@ One repository, one tailored CV per job role, each in English and (when availabl
 On every push to `main`, GitHub Actions compiles each CV with `pdflatex` and publishes the PDFs, plus an index page, to GitHub Pages:
 
 - **All CVs:** https://david-adegbola.github.io/cv/
+- **Varastotyöntekijä / Warehouse Worker (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-warehouse-master.pdf
+- **Varastotyöntekijä (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-warehouse-master-fi.pdf
+- **Warehouse Worker (English):** https://david-adegbola.github.io/cv/david-adegbola-warehouse-master-en.pdf
 - **Rakennustyöntekijä / Construction Worker (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-construction-master.pdf
 - **Rakennustyöntekijä (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-construction-master-fi.pdf
 - **Construction Worker (English):** https://david-adegbola.github.io/cv/david-adegbola-construction-master-en.pdf
@@ -58,6 +61,10 @@ cv/
 │   │   ├── cv-fi.tex            Finnish master CV (main version)
 │   │   ├── cv-en.tex
 │   │   └── job.md               role name, target employers / job ads, date created, photo yes/no, notes
+│   ├── warehouse-master/
+│   │   ├── cv-fi.tex            Finnish master CV (main version)
+│   │   ├── cv-en.tex
+│   │   └── job.md
 │   └── salesperson/
 │       ├── cv-en.tex
 │       ├── cv-fi.tex            Finnish CV for this role
