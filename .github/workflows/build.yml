@@ -72,46 +72,12 @@ jobs:
             sh shared/combine.sh "$dir" "_site/david-adegbola-$(basename "$dir").pdf"
           done
 
-      # Role title comes from the first "# " heading in roles/<role>/job.md (falls back to the folder name).
-      # Each role lists its language versions, English first.
-      - name: Generate index.html
+      # Public site: a root page with name and contact only (no list of roles) and one employer page per role
+      # at /r/<slug>/ with that role's CV. Every page is noindex. See site/build.py.
+      - name: Build employer pages
         run: |
-          python3 - <<'PY'
-          import glob, html, os
-          LANGS = {"en": "English", "fi": "Suomi"}
-          order = lambda lang: (list(LANGS).index(lang) if lang in LANGS else len(LANGS), lang)
-          items = []
-          for role_dir in sorted(glob.glob("roles/*/")):
-              role = os.path.basename(role_dir.rstrip("/"))
-              langs = sorted((os.path.basename(t)[3:-4] for t in glob.glob(os.path.join(role_dir, "cv-*.tex"))), key=order)
-              if not langs:
-                  continue
-              title = role.replace("-", " ").title()
-              job = os.path.join(role_dir, "job.md")
-              if os.path.exists(job):
-                  for line in open(job, encoding="utf-8"):
-                      if line.startswith("# "):
-                          title = line[2:].strip()
-                          break
-              links = "".join(
-                  f'<a class="btn" href="david-adegbola-{role}-{lang}.pdf" hreflang="{lang}">'
-                  f'{html.escape(LANGS.get(lang, lang.upper()))}</a>'
-                  for lang in langs
-              )
-              # Roles with both languages also get the combined file (Finnish first) from the step above
-              if "fi" in langs and "en" in langs:
-                  links = f'<a class="btn" href="david-adegbola-{role}.pdf">Suomi + English</a>' + links
-              items.append(f'      <li><span class="role">{html.escape(title)}</span><span class="langs"><span class="hint">View / Download PDF:</span>{links}</span></li>')
-          page = open("index.html", encoding="utf-8").read()
-          # The local-only jobs table (job_check.py) must never reach the public site
-          import re
-          page, removed = re.subn(r"\n[ \t]*<!-- LOCAL-JOBS:START.*?<!-- LOCAL-JOBS:END -->", "", page, flags=re.S)
-          assert removed == 1 and "jobs-data.js" not in page, "LOCAL-JOBS block missing or not removed"
-          marker = "      <!-- ROLES: filled in by .github/workflows/build.yml from the roles/ folders -->"
-          assert marker in page, "ROLES marker missing from index.html"
-          open("_site/index.html", "w", encoding="utf-8").write(page.replace(marker, "\n".join(items)))
-          PY
-          ls -l _site
+          python3 site/build.py _site
+          ls -lR _site
 
       - uses: actions/configure-pages@v6
 
