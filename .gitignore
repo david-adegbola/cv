@@ -26,6 +26,11 @@ applications/
 scripts/
 hooks/
 
+# Weekly job checker (job_check.py): job data stays on this computer, never pushed
+jobs-data.js
+jobs_seen.json
+jobs_report_*.html
+
 # Personal documents in any format: work certificates (työtodistus), ID or card scans,
 # Word/Pages/OpenDocument files, phone photos
 *todistus*

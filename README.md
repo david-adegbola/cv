@@ -125,6 +125,30 @@ Read [CV-RULES.md](CV-RULES.md) first; it has the full workflow and rules.
 
 **Privacy:** this repo is public. Give only phone, email and town in CVs here: no street address, no photo in committed CVs, and write "Available on request" / "Suosittelijat pyydettäessä" instead of naming references.
 
+## Weekly job check
+
+`job_check.py` checks Jobly for new jobs in the four job types (industrial, construction,
+warehouse, IT / data centre) and shows them as a table on the landing page, on your computer only.
+Run it from the repo root (Python 3 only, no installs):
+
+```bash
+python3 job_check.py
+```
+
+It reads Jobly's Finland-wide category pages, waiting 10 s between requests as Jobly's robots.txt
+asks, and takes a few minutes. Then `index.html` opens with a **Jobs** table:
+- Each job links to its ad, with a green NEW badge if you haven't seen it before.
+- Red tags flag things you don't have yet (welding, forklift, C licence and so on).
+- The "Use CV" column links to the combined PDF to send.
+- A status dropdown (Not applied / Applied / Interview / Offer / Rejected) is saved in your browser.
+- You can filter by type and hide flagged or rejected jobs.
+
+Job data is **local only and never pushed**. `jobs-data.js` and `jobs_seen.json` are git-ignored,
+and the GitHub Action removes the jobs block from `index.html` before publishing (between the
+`LOCAL-JOBS:START` / `LOCAL-JOBS:END` markers). The public site never shows it.
+
+Jobly is the only site the script reads. Jobs from other sites arrive through their email alerts.
+
 ## Build locally (macOS)
 
 Install [MacTeX](https://www.tug.org/mactex/) (or BasicTeX plus the `libertine`, `fontawesome` and `babel-finnish` packages). Then run `pdflatex` twice from inside the role folder; the second run fills in "Page X of Y":

@@ -33,6 +33,124 @@
     <ul>
       <!-- ROLES: filled in by .github/workflows/build.yml from the roles/ folders -->
     </ul>
+    <!-- LOCAL-JOBS:START  Local-only jobs table. jobs-data.js is written by job_check.py and is
+         git-ignored; .github/workflows/build.yml deletes everything up to LOCAL-JOBS:END before
+         publishing, so the public site never contains this block. -->
+    <style>
+      /* wider than the CV list on big screens, centred; never wider than the window minus the 16px gutters */
+      .jobs { margin-top: 40px; width: min(1100px, calc(100vw - 48px)); margin-left: calc((100% - min(1100px, calc(100vw - 48px))) / 2); }
+      @media (max-width: 760px) { .jobs { width: auto; margin-left: 0; } }
+      .jobs h2 { margin: 0 0 4px; font-size: 1.4rem; }
+      .jobs .checked { margin: 0 0 16px; color: var(--muted); }
+      .jobs .filters { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin-bottom: 12px; }
+      .jobs .filters label { display: inline-flex; gap: 6px; align-items: center; }
+      .jobs select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
+      .jobs .scroll { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+      .jobs table { border-collapse: collapse; width: 100%; min-width: 860px; font-size: .85rem; }
+      .jobs th, .jobs td { padding: 7px 8px; text-align: left; vertical-align: top; border-top: 1px solid var(--line); }
+      .jobs thead th { border-top: 0; color: var(--muted); font-weight: 600; white-space: nowrap; }
+      .jobs td a { color: var(--accent); }
+      .jobs .nowrap { white-space: nowrap; }
+      .jobs .tag { display: inline-block; margin: 0 4px 4px 0; padding: 1px 6px; border-radius: 4px; font-size: .75rem; font-weight: 600; }
+      .jobs .new { background: #e5f4e4; color: #1a6b1a; }
+      .jobs .flag { background: #fbebeb; color: #9a2b2b; }
+      .jobs .empty { padding: 16px; color: var(--muted); }
+    </style>
+    <section class="jobs" id="jobs" hidden>
+      <h2>Jobs</h2>
+      <p class="checked" id="jobs-checked"></p>
+      <div class="filters">
+        <label>Type <select id="f-type"><option value="">All</option></select></label>
+        <label><input type="checkbox" id="f-flagged"> Hide flagged</label>
+        <label><input type="checkbox" id="f-rejected"> Hide rejected</label>
+      </div>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Status</th><th>Job</th><th>Company</th><th>Location</th><th>Posted</th><th>Type</th><th>Use CV</th><th>Flags</th></tr></thead>
+          <tbody id="jobs-body"></tbody>
+        </table>
+      </div>
+    </section>
+    <script src="jobs-data.js" onerror="void 0"></script>
+    <script>
+      (function () {
+        var data = window.JOBS;
+        if (!data || !Array.isArray(data.jobs)) return;   // public site: show nothing
+        var STATUSES = ["Not applied", "Applied", "Interview", "Offer", "Rejected"];
+        var CV_BASE = "https://david-adegbola.github.io/cv/david-adegbola-";
+        var SINGLE_LANGUAGE = { "it-field-technician": "-en" };   // roles without a combined PDF yet
+        function getStatus(id) { try { return localStorage.getItem("job-status:" + id) || STATUSES[0]; } catch (e) { return STATUSES[0]; } }
+        function setStatus(id, v) { try { localStorage.setItem("job-status:" + id, v); } catch (e) {} }
+        function getPref(k) { try { return localStorage.getItem("jobs-filter:" + k); } catch (e) { return null; } }
+        function setPref(k, v) { try { localStorage.setItem("jobs-filter:" + k, v); } catch (e) {} }
+        function el(tag, attrs, text) {
+          var n = document.createElement(tag);
+          for (var k in attrs || {}) n.setAttribute(k, attrs[k]);
+          if (text != null) n.textContent = text;
+          return n;
+        }
+
+        var cvList = document.querySelector("main > ul");
+        if (cvList && !cvList.querySelector("li")) cvList.hidden = true;   // local copy has no CV list
+        var jobs = data.jobs.slice().sort(function (a, b) { return (b.date || "").localeCompare(a.date || ""); });
+        var newCount = jobs.filter(function (j) { return j.is_new; }).length;
+        document.getElementById("jobs-checked").textContent =
+          "Last checked: " + String(data.updated || "").replace("T", " ") + ", " + newCount + " new";
+
+        var typeSel = document.getElementById("f-type");
+        jobs.map(function (j) { return j.category; })
+          .filter(function (c, i, all) { return c && all.indexOf(c) === i; })
+          .forEach(function (c) { typeSel.appendChild(el("option", { value: c }, c)); });
+        var hideFlagged = document.getElementById("f-flagged");
+        var hideRejected = document.getElementById("f-rejected");
+        typeSel.value = getPref("type") || "";
+        hideFlagged.checked = getPref("flagged") === "1";
+        hideRejected.checked = getPref("rejected") === "1";
+
+        var body = document.getElementById("jobs-body");
+        function render() {
+          body.textContent = "";
+          var shown = jobs.filter(function (j) {
+            if (typeSel.value && j.category !== typeSel.value) return false;
+            if (hideFlagged.checked && j.flags && j.flags.length) return false;
+            if (hideRejected.checked && getStatus(j.id) === "Rejected") return false;
+            return true;
+          });
+          if (!shown.length) {
+            var tr0 = el("tr"); var td0 = el("td", { colspan: "8", class: "empty" }, "No jobs match these filters.");
+            tr0.appendChild(td0); body.appendChild(tr0); return;
+          }
+          shown.forEach(function (j) {
+            var tr = el("tr");
+            var tdStatus = el("td"), sel = el("select", { "aria-label": "Status for " + j.title });
+            STATUSES.forEach(function (s) { sel.appendChild(el("option", { value: s }, s)); });
+            sel.value = getStatus(j.id);
+            sel.addEventListener("change", function () { setStatus(j.id, sel.value); if (hideRejected.checked) render(); });
+            tdStatus.appendChild(sel);
+            var places = (j.location || "").split(", ").filter(Boolean);
+            var tdPlace = el("td", places.length > 3 ? { title: places.join(", ") } : null,
+              places.length > 3 ? places.slice(0, 3).join(", ") + " +" + (places.length - 3) + " more" : places.join(", "));
+            var tdJob = el("td");
+            if (j.is_new) tdJob.appendChild(el("span", { class: "tag new" }, "NEW"));
+            tdJob.appendChild(el("a", { href: j.url, target: "_blank", rel: "noopener" }, j.title));
+            var tdCv = el("td", { class: "nowrap" });
+            if (j.cv) tdCv.appendChild(el("a", { href: CV_BASE + j.cv + (SINGLE_LANGUAGE[j.cv] || "") + ".pdf", target: "_blank", rel: "noopener" }, j.cv));
+            var tdFlags = el("td");
+            (j.flags || []).forEach(function (f) { tdFlags.appendChild(el("span", { class: "tag flag" }, f)); });
+            [tdStatus, tdJob, el("td", null, j.company || ""), tdPlace,
+             el("td", { class: "nowrap" }, j.date || ""), el("td", { class: "nowrap" }, j.category || ""), tdCv, tdFlags]
+              .forEach(function (td) { tr.appendChild(td); });
+            body.appendChild(tr);
+          });
+        }
+        typeSel.addEventListener("change", function () { setPref("type", typeSel.value); render(); });
+        hideFlagged.addEventListener("change", function () { setPref("flagged", hideFlagged.checked ? "1" : "0"); render(); });
+        hideRejected.addEventListener("change", function () { setPref("rejected", hideRejected.checked ? "1" : "0"); render(); });
+        document.getElementById("jobs").hidden = false;
+        render();
+      })();
+    </script>
+    <!-- LOCAL-JOBS:END -->
     <footer>Source on <a href="https://github.com/david-adegbola/cv">GitHub</a>. Layout adapted from <a href="https://github.com/hmemcpy/cv">hmemcpy/cv</a> (MIT) / Professional CV by Alessandro Plasmati.</footer>
   </main>
 </body>

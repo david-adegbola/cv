@@ -103,6 +103,10 @@ jobs:
                   links = f'<a class="btn" href="david-adegbola-{role}.pdf">Suomi + English</a>' + links
               items.append(f'      <li><span class="role">{html.escape(title)}</span><span class="langs"><span class="hint">View / Download PDF:</span>{links}</span></li>')
           page = open("index.html", encoding="utf-8").read()
+          # The local-only jobs table (job_check.py) must never reach the public site
+          import re
+          page, removed = re.subn(r"\n[ \t]*<!-- LOCAL-JOBS:START.*?<!-- LOCAL-JOBS:END -->", "", page, flags=re.S)
+          assert removed == 1 and "jobs-data.js" not in page, "LOCAL-JOBS block missing or not removed"
           marker = "      <!-- ROLES: filled in by .github/workflows/build.yml from the roles/ folders -->"
           assert marker in page, "ROLES marker missing from index.html"
           open("_site/index.html", "w", encoding="utf-8").write(page.replace(marker, "\n".join(items)))
