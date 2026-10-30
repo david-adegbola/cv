@@ -7,7 +7,6 @@
 latex-bin
 latex
 l3kernel
-l3backend
 hyphen-finnish
 
 # Packages loaded by shared/cv-style.sty and its dependencies
