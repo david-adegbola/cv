@@ -1,15 +1,13 @@
 # IT Field Technician
 
 - **Role:** IT Field Technician
-- **PDF:** `david-adegbola-it-field-technician-en.pdf`
+- **Job type:** Data centre and on-site hardware work, Windows / Active Directory, end-user IT, POS and AV equipment
+- **Languages:** English (`cv-en.tex`)
+- **PDFs:** `david-adegbola-it-field-technician-en.pdf`
 - **Created:** 2026-10-30
 - **Photo:** no
 
-## Target employers / job ads
-
-- _Add links to the job ads this CV is sent to._
-
 ## Notes
 
-- Focus: data centre and on-site hardware work, Windows / Active Directory, end-user IT, POS and AV equipment.
-- Aimed at Finland's growing data centre sector.
+- English only so far; a Finnish version (`cv-fi.tex`) is still needed for the combined PDF.
+- Employers, contacts, ad links, deadlines and status: private, in `applications/job-details/it-field-technician.md` (not in this public repo).

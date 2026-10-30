@@ -13,9 +13,9 @@ On every push to `main`, GitHub Actions compiles each CV with `pdflatex` and pub
 - **Construction Worker (English):** https://david-adegbola.github.io/cv/david-adegbola-construction-master-en.pdf
 - **Production and Assembly Worker (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-industrial-master-fi.pdf
 - **Production and Assembly Worker (English):** https://david-adegbola.github.io/cv/david-adegbola-industrial-master-en.pdf
-- **Installer – Teräs ja Kaide (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-installer-teras-ja-kaide.pdf
-- **Asentaja – Teräs ja Kaide (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-installer-teras-ja-kaide-fi.pdf
-- **Installer – Teräs ja Kaide (English):** https://david-adegbola.github.io/cv/david-adegbola-installer-teras-ja-kaide-en.pdf
+- **Installer / Asentaja, steel structures (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-installer-teras-ja-kaide.pdf
+- **Asentaja, teräsrakenteet (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-installer-teras-ja-kaide-fi.pdf
+- **Installer, steel structures (English):** https://david-adegbola.github.io/cv/david-adegbola-installer-teras-ja-kaide-en.pdf
 - **Assembly Worker (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-assembly-worker.pdf
 - **Asentaja (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-assembly-worker-fi.pdf
 - **Assembly Worker (English):** https://david-adegbola.github.io/cv/david-adegbola-assembly-worker-en.pdf
@@ -56,11 +56,11 @@ cv/
 │   │   └── job.md
 │   ├── it-field-technician/
 │   │   ├── cv-en.tex            English CV for this role
-│   │   └── job.md               role name, target employers / job ads, date created, Photo: no, notes
+│   │   └── job.md               role, job type, languages, PDFs, date, Photo: no, notes (no employers)
 │   ├── industrial-master/
 │   │   ├── cv-fi.tex            Finnish master CV (main version)
 │   │   ├── cv-en.tex
-│   │   └── job.md               role name, target employers / job ads, date created, Photo: no, notes
+│   │   └── job.md               role, job type, languages, PDFs, date, Photo: no, notes (no employers)
 │   ├── warehouse-master/
 │   │   ├── cv-fi.tex            Finnish master CV (main version)
 │   │   ├── cv-en.tex
@@ -127,7 +127,7 @@ Read [CV-RULES.md](CV-RULES.md) first; it has the full workflow and rules.
    cp -R roles/salesperson roles/warehouse-worker
    ```
 2. In each `cv-<lang>.tex`, change `\cvrole{...}` (the footer's right-hand text) and the title under the name, then tailor the content. Every role needs both `cv-fi.tex` and `cv-en.tex` (they are also joined into one combined PDF).
-3. Edit `job.md`. Set the `# ` heading to the role name, then add the target employers / job ads, the date, `Photo: no` and any notes.
+3. Edit `job.md`. Set the `# ` heading to the role name (no company names; it is shown on the public index page), then add the job type, languages, PDFs, the date, `Photo: no` and notes about the CV. Employers, contacts, ad links, deadlines and status go in the private, git-ignored `applications/job-details/<role>.md`.
 4. Commit and push to `main`. The new PDFs and their entry on the index page appear automatically, with no need to edit `index.html`.
 
 **Privacy:** this repo is public. Give only phone, email and town in CVs here: no street address, no photo in committed CVs, and write "Available on request" / "Suosittelijat pyydettäessä" instead of naming references.

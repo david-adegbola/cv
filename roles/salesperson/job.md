@@ -1,17 +1,13 @@
 # Salesperson / Myyjä
 
 - **Role:** Salesperson / Myyjä
-- **Languages:** English (`cv-en.tex`), Finnish (`cv-fi.tex`)
-- **PDFs:** `david-adegbola-salesperson.pdf` (combined: Finnish first, then English, the file to send), `david-adegbola-salesperson-en.pdf`, `david-adegbola-salesperson-fi.pdf`
-- **Source:** imported from Canva CV
+- **Job type:** Retail and sales jobs
+- **Languages:** Finnish (`cv-fi.tex`, main version), English (`cv-en.tex`)
+- **PDFs:** `david-adegbola-salesperson.pdf` (combined: Finnish first, then English, the file to send), `david-adegbola-salesperson-fi.pdf`, `david-adegbola-salesperson-en.pdf`
 - **Created:** 2026-10-30
 - **Photo:** no
 
-## Target employers / job ads
-
-- Retail and sales jobs in Joensuu.
-- _Add links to the job ads this CV is sent to._
-
 ## Notes
 
-- Street address, photo and named references from the Canva version were left out on purpose (public repo).
+- Imported from a Canva CV. Street address, photo and named references were left out on purpose (public repo).
+- Employers, contacts, ad links, deadlines and status: private, in `applications/job-details/salesperson.md` (not in this public repo).

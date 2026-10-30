@@ -35,10 +35,16 @@ written in LaTeX and published by GitHub Actions to https://david-adegbola.githu
   - `\cvrole{...}` sets the footer role text.
   - Finnish files also need `\cvlang{fi}`, and use `\cvt{key}` for the fixed labels
     (e.g. `\section{\cvt{experience}}`).
-- `job.md` starts with a `# ` heading (it becomes the title on the index page), then lists:
-  role, languages (mark the main one), PDF names (including the combined one), company / agency, location, job-ad link,
-  contact person, created date (today), status (e.g. "applying"), `Photo: no`,
-  a short summary of the ad, and notes on anything deliberately left out.
+- `job.md` is PUBLIC. It starts with a `# ` heading (it becomes the title on the public index
+  page; never put a company name in it), then lists: role, job type, languages (mark the main
+  one), PDF names (including the combined one), created date (today), `Photo: no`, and notes
+  about the CV's content (what was left out and why).
+- Everything about the application itself is PRIVATE and goes in the git-ignored
+  `applications/job-details/<role-slug>.md`: company / agency, location, job-ad link, contact
+  person and phone, deadline, status, and a summary of the ad. Never put these in `job.md`,
+  the README, commit messages, `.tex` comments or the role folder name.
+- Name role folders after the job type, not the employer (e.g. `roles/steel-installer/`,
+  not `roles/installer-<company>/`); the folder name is part of the public PDF URL.
 - Compile each file twice with pdflatex from inside its role folder:
   `cd roles/<role> && pdflatex cv-fi.tex && pdflatex cv-fi.tex`
   - Target ONE page.
