@@ -1,0 +1,78 @@
+% !TEX TS-program = pdflatex
+% David - Rakennustyöntekijä, master CV (suomi)
+% Layout from hmemcpy/cv template (adapted from Professional CV by Alessandro Plasmati).
+
+\documentclass[a4paper,11pt]{article}
+
+% Shared style: works from roles/<role>/ in this repo, or with cv-style.sty
+% uploaded next to this file (e.g. in Overleaf).
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+
+\cvlang{fi}
+\cvrole{Rakennustyöntekijä}
+
+\begin{document}
+\small
+\setlength{\cvlabelw}{3.9cm}
+\titlespacing{\section}{0pt}{0.55em}{2pt}
+
+% --------------------TITLE-------------
+\begin{cvheader}
+\par{\centering
+		{\Huge \textsc{David Adegbola}}\\[0.4em]
+		{\Large Rakennustyöntekijä}
+	\bigskip\par}
+
+\hrule
+\vspace{0.5em}
+\cvline[2.4cm]{\cvt{location}:}{Joensuu, Suomi (voin työskennellä missä päin Suomea tahansa)}
+\cvline[2.4cm]{\cvt{phone}:}{+358 46 800 7210}
+\cvline[2.4cm]{\cvt{email}:}{\href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}}
+\end{cvheader}
+
+\section{\cvt{summary}}
+\begin{tabular}{p{0.9\textwidth}}
+ Hei! Olen David, 24-vuotias. Olin asentajana suurella teollisuustyömaalla, UPM Kaukaan sellutehtaan sähkösuodattimen uudelleenrakennushankkeessa. Käytin kulmahiomakonetta ja nostolaitteita, pidin työmaan siistinä ja noudatin tehtaan tiukkoja turvallisuusohjeita. Työnantaja arvioi työni kiitettäväksi ja kuvasi minua halukkaaksi oppimaan ja ottamaan vastuuta.\\\\
+
+ Viihdyn raskaassa fyysisessä ulkotyössä. Haen apu- ja avustavia töitä rakennustyömailla ja haluan oppia alan työt käytännössä. Olen käytettävissä kokoaikatyöhön, voin aloittaa heti ja olen valmis matkustamaan. Suomen kielen taitoni on vielä perustasolla, ja opiskelen sitä aktiivisesti.
+\end{tabular}
+
+\section{\cvt{skills}}
+\cvline{Työkalut:}{Kulmahiomakone (kulmahiominta), nostolaitteet}
+\cvline{Työmaa:}{Työmaan siisteys; työkalujen ja materiaalien seuranta; turvalliset työtavat ja työmaan turvallisuusohjeet}
+\cvline{Työtavat:}{Tiimityö; raskas fyysinen ulkotyö}
+\cvline{Haluan oppia:}{Kirvesmiehen työt, muottityöt, betonityöt, telinetyöt, purkutyöt}
+\cvline{Saatavuus:}{Kokoaikatyö (myös keikkatyö), aloitus heti; koko Suomi, valmis matkustamaan}
+\cvline{\cvt{cards}:}{Työturvallisuuskortti}
+\cvline{\cvt{languages}:}{Suomi (perustaso, opiskelen aktiivisesti), englanti (sujuva), yoruba (äidinkieli)}
+
+\section{\cvt{experience}}
+\begin{cventry}{18.8.2025--7.10.2025}{\job{Asentaja}{Axioma Servisas UAB}}
+  UPM Kaukaan sellutehdas, Lappeenranta: suuri teollisuustyömaa\par
+  Työmaatyöt sähkösuodattimen uudelleenrakennushankkeessa.\par
+  Kulmahiomakoneen käyttö ja nostolaitteiden käyttö.\par
+  Työmaan siisteys sekä työkalujen ja materiaalien seuranta.\par
+  Tehtaan tiukkojen turvallisuusohjeiden noudattaminen.\par
+  Työnantajan arvio: kiitettävä. Vastuuntuntoinen ja tunnollinen työntekijä, halukas oppimaan ja ottamaan vastuuta.
+  \sotagrow{teollisuustyömaa,kulmahiomakone,nostolaitteet,työturvallisuus,siisteys,inventaario}
+\end{cventry}
+\begin{cventry}{4/2025--8/2025}{\job{Lehdenjakaja}{Finnbox ja SSM}, Vaasa}
+  Jakelureitit yksin ulkona kaikissa sääolosuhteissa, aikaisin aamulla ja aikataulussa.
+\end{cventry}
+\begin{cventry}{11/2024--8/2026}{\job{AV-vapaaehtoinen}{Vaasa City Church}, Vaasa}
+  Laitteiden pystytys, kantaminen ja purku joka viikonloppu.
+\end{cventry}
+\begin{cventry}{6/2026--8/2026}{\textbf{Founder in Residence}, Vaasa Startup Factory: tuotekehitystä tiimissä.}
+\end{cventry}
+\begin{cventry}{9/2016--9/2020}{Myynti- ja asiakaspalvelutyötä Nigeriassa (Desire Feeds, Bunmi Pastries).}
+\end{cventry}
+
+\section{\cvt{education}}
+\cvline{2026--nyt:}{B.Sc, Kestävä metsäbiotalous, Itä-Suomen yliopisto}
+\cvline{2024--2026:}{Tietotekniikan insinööriopintoja (keskeytetty), Vaasan ammattikorkeakoulu}
+\cvline{2019--2022:}{OND, tietojenkäsittely, The Polytechnic, Ibadan, Nigeria}
+
+\section{\cvt{references}}
+\cvt{refsavailable}
+
+\end{document}
