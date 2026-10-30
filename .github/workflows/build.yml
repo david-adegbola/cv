@@ -1,0 +1,84 @@
+name: Build CVs and deploy to Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Created here (not inside the TeX container, which runs as root) so later steps can write to it
+      - run: mkdir -p _site
+
+      # Full TeX Live (includes libertine and fontawesome). Each roles/<role>/cv.tex
+      # is compiled twice with pdflatex from inside its folder, so "Page X of Y" resolves.
+      - name: Compile every roles/*/cv.tex with pdflatex
+        uses: xu-cheng/texlive-action@v2
+        with:
+          scheme: full
+          run: |
+            set -e
+            for tex in roles/*/cv.tex; do
+              dir=$(dirname "$tex")
+              role=$(basename "$dir")
+              echo "::group::$role"
+              (cd "$dir" && pdflatex -interaction=nonstopmode -halt-on-error cv.tex && pdflatex -interaction=nonstopmode -halt-on-error cv.tex)
+              cp "$dir/cv.pdf" "_site/david-adegbola-$role.pdf"
+              echo "::endgroup::"
+            done
+
+      # Role title comes from the first "# " heading in roles/<role>/job.md (falls back to the folder name)
+      - name: Generate index.html
+        run: |
+          python3 - <<'PY'
+          import glob, html, os
+          items = []
+          for tex in sorted(glob.glob("roles/*/cv.tex")):
+              role = os.path.basename(os.path.dirname(tex))
+              title = role.replace("-", " ").title()
+              job = os.path.join("roles", role, "job.md")
+              if os.path.exists(job):
+                  for line in open(job, encoding="utf-8"):
+                      if line.startswith("# "):
+                          title = line[2:].strip()
+                          break
+              pdf = f"david-adegbola-{role}.pdf"
+              items.append(
+                  f'      <li><span class="role">{html.escape(title)}</span>'
+                  f'<a class="btn" href="{pdf}">View / Download PDF</a></li>'
+              )
+          page = open("index.html", encoding="utf-8").read()
+          marker = "      <!-- ROLES: filled in by .github/workflows/build.yml from the roles/ folders -->"
+          assert marker in page, "ROLES marker missing from index.html"
+          open("_site/index.html", "w", encoding="utf-8").write(page.replace(marker, "\n".join(items)))
+          PY
+          ls -l _site
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

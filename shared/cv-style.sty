@@ -1,0 +1,51 @@
+% cv-style.sty: shared layout for all of David Adegbola's role-specific CVs.
+% Layout from hmemcpy/cv template (adapted from Professional CV by Alessandro Plasmati).
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cv-style}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{libertine}
+\usepackage{fontawesome}
+\usepackage{longtable}
+\usepackage{colortbl}
+\arrayrulecolor{black!35}
+\usepackage[cm]{fullpage}
+\usepackage{amssymb}
+
+% Per-CV role shown in the footer: set with \cvrole{...} in each cv.tex
+\newcommand{\cv@role}{}
+\newcommand{\cvrole}[1]{\renewcommand{\cv@role}{#1}}
+
+% headers and footers
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyfoot[L]{David Adegbola}
+\fancyfoot[C]{Page \thepage\ of \pageref*{LastPage}}
+\fancyfoot[R]{\cv@role}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhead{}
+\renewcommand{\headrulewidth}{0pt}
+
+% StackOverflow-like tags
+\usepackage{tikz}
+\definecolor{tagbg}{RGB}{225,236,244}
+\definecolor{tagtxt}{RGB}{88,115,159}
+\newcommand{\sotag}[1]{\tikz[baseline]{\node[anchor=base, rounded corners=0.5ex, text height=1.5ex, text depth=.25ex, fill=tagbg, draw=tagbg, text=tagtxt] {#1};}}
+\newcommand{\sotagrow}[1]{\par\vspace{4pt}\noindent\@for\sotagitem:=#1\do{\sotag{\sotagitem} }\\}
+
+% Helpers for adding job entries
+\newcommand{\job}[2]{\large\sffamily \textbf{#1} at \textbf{#2}\rule[-0.45em]{0pt}{1.45em}}
+\newcommand{\sep}{\multicolumn{2}{c}{}\\}
+
+\usepackage{hyperref}
+\definecolor{linkcolor}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolor, linkcolor=linkcolor}
+
+\usepackage{titlesec}
+\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{1em}{3pt}
+
+\endinput
