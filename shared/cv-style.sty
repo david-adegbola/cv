@@ -70,6 +70,22 @@
 \newcommand{\job}[2]{\large\sffamily \textbf{#1}\cvt{at}\textbf{#2}\rule[-0.45em]{0pt}{1.45em}}
 \newcommand{\sep}{\multicolumn{2}{c}{}\\}
 
+% ATS-friendly rows: label and value sit on one text line, so PDF text extraction (and ATS
+% scanners) keep each date or label with its content. Two-column tables are read column by column.
+% \cvline[label width]{label}{value}: one row with a right-aligned label; long values wrap under the value.
+% \begin{cventry}{dates}{title line} ... \end{cventry}: one job, dates left of the title, details indented below.
+\newlength{\cvlabelw}\setlength{\cvlabelw}{3.3cm}
+% Keep this gap small: with a wide gap, pdftotext/ATS read short rows as two separate columns
+\newlength{\cvlabelsep}\setlength{\cvlabelsep}{5pt}
+\newlength{\cv@lw}
+\newcommand{\cvline}[3][\cvlabelw]{\par\begingroup\raggedright\noindent\setlength{\cv@lw}{#1}%
+  \hangindent=\dimexpr\cv@lw+\cvlabelsep\relax\hangafter=1
+  \makebox[\cv@lw][r]{\textsc{#2}}\hspace{\cvlabelsep}#3\par\endgroup}
+\newenvironment{cventry}[2]
+  {\par\noindent\makebox[\cvlabelw][r]{\textsc{#1}}\hspace{\cvlabelsep}{#2}\par
+   \begingroup\leftskip=\dimexpr\cvlabelw+\cvlabelsep\relax\parindent=0pt\parskip=1pt}
+  {\par\endgroup\vspace{7pt}}
+
 % Optional profile photo (off by default). Call \cvphoto{<path>} in a CV's preamble to show it
 % as a 3 cm circle left of the header; wrap the header (name, role, contact table) in
 % \begin{cvheader}...\end{cvheader}. Without \cvphoto the environment changes nothing.
