@@ -227,3 +227,6 @@ Check the summary and every experience line in both languages:
 
 Only David changes these rules. When he gives a new standing rule ("always", "from now on",
 "every CV"), add it to the right section of this file in the same commit as the CV change.
+Before starting any CV task, read this file in full. If a request differs from a fact in
+section 7, stop before editing and ask David: "Is this a correction for all CVs, or only for
+this one?"

@@ -5,6 +5,8 @@ One repository, one tailored CV per job role, each in English and (when availabl
 On every push to `main`, GitHub Actions compiles each CV with `pdflatex` and publishes the PDFs, plus an index page, to GitHub Pages:
 
 - **All CVs:** https://david-adegbola.github.io/cv/
+- **Production and Assembly Worker (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-industrial-master-fi.pdf
+- **Production and Assembly Worker (English):** https://david-adegbola.github.io/cv/david-adegbola-industrial-master-en.pdf
 - **Installer – Teräs ja Kaide (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-installer-teras-ja-kaide.pdf
 - **Asentaja – Teräs ja Kaide (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-installer-teras-ja-kaide-fi.pdf
 - **Installer – Teräs ja Kaide (English):** https://david-adegbola.github.io/cv/david-adegbola-installer-teras-ja-kaide-en.pdf
