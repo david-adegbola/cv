@@ -63,6 +63,20 @@ cv/
 
 `applications/` is listed in `.gitignore` and is for local application-email drafts only; its contents are never pushed.
 
+## Git commit-message safeguard
+
+AI agents must not add AI-generated `Co-authored-by:` trailers; legitimate human co-authors
+should remain. Install the repository's shared hook in each clone with:
+
+```bash
+./scripts/install-git-hooks.sh
+```
+
+The hook removes recognized AI-agent co-author trailers and preserves human attribution. The
+installer creates a repository-local hooks directory and chains any existing hooks from the
+active hooks directory, without changing global hooks, user identity, or signing settings.
+It sets `core.hooksPath` in this repository's local Git config only.
+
 ## Languages
 
 - Each role folder has `cv-en.tex` and, when there is a Finnish version, `cv-fi.tex`. The file name sets the language code: `cv-<lang>.tex` is published as `david-adegbola-<role>-<lang>.pdf`.
