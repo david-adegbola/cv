@@ -1,81 +1,98 @@
-# David Adegbola – CVs
+# JobDesk – David Adegbola's CVs and job search
 
-One repository, one tailored CV per job role, each in English and (when available) Finnish. Every CV shares the same LaTeX layout (`shared/cv-style.sty`) and has its own content in `roles/<role>/cv-<lang>.tex`.
+This repo is two things:
 
-On every push to `main`, GitHub Actions compiles each CV with `pdflatex` and publishes the PDFs, plus an index page, to GitHub Pages:
+1. **CVs.** One tailored CV per job role, in Finnish and English, all sharing one LaTeX layout
+   (`shared/cv-style.sty`). On every push to `main`, GitHub Actions compiles them and publishes one
+   **employer page** per role to GitHub Pages.
+2. **JobDesk**, a private dashboard that runs only on David's Mac (`app/`). It finds jobs, tracks
+   applications, matches each job to the best CV and writes the prompt for the next tailored CV.
 
-- **All CVs:** https://david-adegbola.github.io/cv/
-- **Varastotyöntekijä / Warehouse Worker (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-warehouse-master.pdf
-- **Varastotyöntekijä (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-warehouse-master-fi.pdf
-- **Warehouse Worker (English):** https://david-adegbola.github.io/cv/david-adegbola-warehouse-master-en.pdf
-- **Rakennustyöntekijä / Construction Worker (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-construction-master.pdf
-- **Rakennustyöntekijä (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-construction-master-fi.pdf
-- **Construction Worker (English):** https://david-adegbola.github.io/cv/david-adegbola-construction-master-en.pdf
-- **Production and Assembly Worker (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-industrial-master-fi.pdf
-- **Production and Assembly Worker (English):** https://david-adegbola.github.io/cv/david-adegbola-industrial-master-en.pdf
-- **Installer / Asentaja, steel structures (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-steel-installer.pdf
-- **Asentaja, teräsrakenteet (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-steel-installer-fi.pdf
-- **Installer, steel structures (English):** https://david-adegbola.github.io/cv/david-adegbola-steel-installer-en.pdf
-- **Assembly Worker (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-assembly-worker.pdf
-- **Asentaja (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-assembly-worker-fi.pdf
-- **Assembly Worker (English):** https://david-adegbola.github.io/cv/david-adegbola-assembly-worker-en.pdf
-- **IT Field Technician (English):** https://david-adegbola.github.io/cv/david-adegbola-it-field-technician-en.pdf
-- **Salesperson / Myyjä (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-salesperson.pdf
-- **Salesperson (English):** https://david-adegbola.github.io/cv/david-adegbola-salesperson-en.pdf
-- **Myyjä (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-salesperson-fi.pdf
-
-Built PDFs are not committed to the repo. Pages serves them. Roles with both languages also get one combined PDF (Finnish first, then English), made by `shared/combine.sh`, so a single file can be sent.
+Python 3 standard library, SQLite and plain HTML/CSS/JS only: nothing to install.
 
 ## Rules for new CVs
 
-All CV rules (workflow, layout, writing, honesty, privacy, canonical facts) are in [CV-RULES.md](CV-RULES.md). AI agents are pointed there by `AGENTS.md` and `CLAUDE.md`.
+All CV rules (workflow, layout, writing, honesty, privacy, canonical facts) are in
+[CV-RULES.md](CV-RULES.md). AI agents are pointed there by `AGENTS.md` and `CLAUDE.md`.
+`facts.json` is generated from CV-RULES.md (`python3 app/facts.py`) so the app reads one source;
+CV-RULES.md stays the authority, and the dashboard shows a warning if the two differ.
+
+## Employer links
+
+Each role gets one public page: `https://david-adegbola.github.io/cv/r/<role>/`. It shows David's
+name, the role title, contact details, the CV (the combined Finnish + English PDF, embedded) and
+Finnish / English download buttons. Nothing else: no other roles, no jobs, no tracker.
+
+- The root page (`https://david-adegbola.github.io/cv/`) shows only the name, contact details and
+  one line. It does **not** list the roles: links are shared one at a time, from the CVs page in
+  JobDesk ("Copy employer link").
+- Every public page has `<meta name="robots" content="noindex">`.
+- The PDFs keep their old addresses (`…/david-adegbola-<role>.pdf`, `-fi.pdf`, `-en.pdf`), so links
+  already sent still work.
+- The repo itself is public, so the `roles/` folders can still be seen on GitHub. This README and
+  the site just don't list them.
+
+The pages are built by `site/build.py` from `site/page.html` and `site/style.css`.
+
+## JobDesk (private dashboard)
+
+Start it from the repo root:
+
+```bash
+python3 app/server.py
+```
+
+It opens http://localhost:8765. It listens on this computer only (127.0.0.1). Pages:
+
+- **Jobs:** "Check for new jobs" reads Jobly's Finland-wide category pages, waiting 10 s between
+  requests as Jobly's robots.txt asks. "Add job manually" is for jobs from Duunitori,
+  Työmarkkinatori, Indeed, LinkedIn and email alerts. The table shows:
+  - **Match:** a 0–100 score with the matched words, so you can see why that CV fits best;
+  - **Blockers:** red tags for what the ad asks that you don't have yet;
+  - **Use CV:** the CV to send;
+  - **Status:** where the application is.
+
+  You can filter by type and status, hide blocked jobs, or show only jobs closing within 3 days.
+- **Tracker:** Kanban columns Saved / Applied / Interview / Offer / Rejected (drag or dropdown).
+  - Each card holds the date applied, the CV used, the link sent, the contact, notes, and the next
+    action with its date.
+  - Overdue actions show in red.
+  - "Applied" with no change for 5 days shows a "Call <contact>" reminder.
+  - Deadlines and interviews export as an `.ics` file for your calendar.
+- **CVs:** every role with its PDF links, employer link (copy button), last update and how many
+  applications used it. "Build PDFs" compiles them locally if `pdflatex` is installed.
+- **New CV prompt:** pick a job (or paste an ad). It lists the questions the ad raises that your
+  facts don't answer, and makes the Claude Code prompt only after you've answered them.
+- **Insights:** how often each blocker appears across all saved jobs (which course or licence to
+  get next), and the application funnel per CV.
+
+**Privacy: job data never leaves this Mac.** It lives in `app/data/jobdesk.db` (SQLite), which is
+git-ignored together with `*.db`, `applications/`, `jobs_seen.json` and `jobs-data.js`. Nothing the
+dashboard stores is committed, pushed or published. Only its code is in the repo.
+
+All data access is in `app/db.py`, and every table has a `user_id` column (default 1), so the app
+could support more users later.
 
 ## Layout
 
 ```
 cv/
+├── app/                         JobDesk (local dashboard): server.py, db.py, scraper.py, match.py,
+│   │                            prompt.py, ics.py, facts.py, static/ (HTML, CSS, JS)
+│   └── data/                    git-ignored: jobdesk.db
+├── site/                        public employer pages: build.py, page.html, style.css
 ├── shared/
-│   ├── cv-style.sty             shared preamble: packages, colours, \sotag, \sotagrow, \job, \sep,
-│   │                            section format, footer, \cvrole{...}, \cvlang{en|fi}, \cvphoto{...}
-│   │                            ATS-friendly rows: \cvline{label}{value}, \begin{cventry}{dates}{title}
+│   ├── cv-style.sty             shared LaTeX layout: \cvrole, \cvlang, \cvline, cventry, \cvphoto, tags,
 │   │                            footer only on CVs longer than one page (automatic)
-│   └── photos/                  optional profile photos (prepare-photo.sh strips metadata)
-├── applications/                ignored locally; private job application drafts
-├── roles/
-│   ├── construction-master/
-│   │   ├── cv-fi.tex            Finnish CV (main version for this role)
-│   │   ├── cv-en.tex
-│   │   └── job.md
-│   ├── assembly-worker/
-│   │   ├── cv-fi.tex            Finnish CV (main version for this role)
-│   │   ├── cv-en.tex
-│   │   └── job.md
-│   ├── steel-installer/
-│   │   ├── cv-fi.tex            Finnish CV (main version for this role)
-│   │   ├── cv-en.tex
-│   │   └── job.md
-│   ├── it-field-technician/
-│   │   ├── cv-en.tex            English CV for this role
-│   │   └── job.md               role, job type, languages, PDFs, date, Photo: no, notes (no employers)
-│   ├── industrial-master/
-│   │   ├── cv-fi.tex            Finnish master CV (main version)
-│   │   ├── cv-en.tex
-│   │   └── job.md               role, job type, languages, PDFs, date, Photo: no, notes (no employers)
-│   ├── warehouse-master/
-│   │   ├── cv-fi.tex            Finnish master CV (main version)
-│   │   ├── cv-en.tex
-│   │   └── job.md
-│   └── salesperson/
-│       ├── cv-en.tex
-│       ├── cv-fi.tex            Finnish CV for this role
-│       └── job.md
-├── .github/workflows/build.yml  builds every roles/*/cv-*.tex and deploys to Pages
-├── index.html                   landing page template (the role list is generated at build time)
-├── README.md
-└── LICENSE
+│   ├── combine.sh               joins the Finnish and English PDFs into one file
+│   └── photos/                  profile photo (off in committed CVs)
+├── roles/<role>/                cv-fi.tex (main), cv-en.tex, job.md (public: no employers)
+├── applications/                git-ignored: application emails and job-details/<role>.md
+├── facts.json                   generated from CV-RULES.md by app/facts.py
+├── CV-RULES.md                  the rules and canonical facts
+├── .github/workflows/build.yml  compiles every CV and publishes the employer pages
+└── README.md
 ```
-
-`applications/` is listed in `.gitignore` and is for local application-email drafts only; its contents are never pushed.
 
 ## Git commit-message safeguard
 
@@ -87,7 +104,7 @@ global hook from running.
 ## Languages
 
 - Each role folder has `cv-en.tex` and, when there is a Finnish version, `cv-fi.tex`. The file name sets the language code: `cv-<lang>.tex` is published as `david-adegbola-<role>-<lang>.pdf`.
-- On the index page each role shows one button per language ("English", "Suomi"). The role name comes from the first `# ` heading in its `job.md`.
+- Each role's employer page shows one download button per language. Its title comes from the first `# ` heading in `job.md`.
 - In the preamble of each CV, `\cvlang{en}` (the default) or `\cvlang{fi}` switches the fixed labels to that language. These are the contact labels, the section titles, "Page X of Y" / "Sivu X / Y", and the word joining job title and employer in `\job` ("at" in English, a comma in Finnish). `\cvlang{fi}` also loads Finnish hyphenation. Use the labels with `\cvt{key}`, for example `\section{\cvt{experience}}` or `\textsc{\cvt{phone}:}`. The available keys are listed in `shared/cv-style.sty`.
 - `ä`, `ö` and `å` can be typed directly; the style loads `fontenc` T1 and `inputenc` utf8.
 
@@ -120,34 +137,10 @@ Read [CV-RULES.md](CV-RULES.md) first; it has the full workflow and rules.
    cp -R roles/salesperson roles/warehouse-worker
    ```
 2. In each `cv-<lang>.tex`, change `\cvrole{...}` (the footer's right-hand text) and the title under the name, then tailor the content. Every role needs both `cv-fi.tex` and `cv-en.tex` (they are also joined into one combined PDF).
-3. Edit `job.md`. Set the `# ` heading to the role name (no company names; it is shown on the public index page), then add the job type, languages, PDFs, the date, `Photo: no` and notes about the CV. Employers, contacts, ad links, deadlines and status go in the private, git-ignored `applications/job-details/<role>.md`.
-4. Commit and push to `main`. The new PDFs and their entry on the index page appear automatically, with no need to edit `index.html`.
+3. Edit `job.md`. Set the `# ` heading to the role name (no company names; it is shown on the public employer page), then add the job type, languages, PDFs, the date, `Photo: no` and notes about the CV. Employers, contacts, ad links, deadlines and status go in the private, git-ignored `applications/job-details/<role>.md`.
+4. Commit and push to `main`. The PDFs and the employer page `/r/<role>/` appear automatically.
 
 **Privacy:** this repo is public. Give only phone, email and town in CVs here: no street address, no photo in committed CVs, and write "Available on request" / "Suosittelijat pyydettäessä" instead of naming references.
-
-## Weekly job check
-
-`job_check.py` checks Jobly for new jobs in the four job types (industrial, construction,
-warehouse, IT / data centre) and shows them as a table on the landing page, on your computer only.
-Run it from the repo root (Python 3 only, no installs):
-
-```bash
-python3 job_check.py
-```
-
-It reads Jobly's Finland-wide category pages, waiting 10 s between requests as Jobly's robots.txt
-asks, and takes a few minutes. Then `index.html` opens with a **Jobs** table:
-- Each job links to its ad, with a green NEW badge if you haven't seen it before.
-- Red tags flag things you don't have yet (welding, forklift, C licence and so on).
-- The "Use CV" column links to the combined PDF to send.
-- A status dropdown (Not applied / Applied / Interview / Offer / Rejected) is saved in your browser.
-- You can filter by type and hide flagged or rejected jobs.
-
-Job data is **local only and never pushed**. `jobs-data.js` and `jobs_seen.json` are git-ignored,
-and the GitHub Action removes the jobs block from `index.html` before publishing (between the
-`LOCAL-JOBS:START` / `LOCAL-JOBS:END` markers). The public site never shows it.
-
-Jobly is the only site the script reads. Jobs from other sites arrive through their email alerts.
 
 ## Build locally (macOS)
 

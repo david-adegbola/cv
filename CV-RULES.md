@@ -35,8 +35,8 @@ written in LaTeX and published by GitHub Actions to https://david-adegbola.githu
   - `\cvrole{...}` sets the footer role text.
   - Finnish files also need `\cvlang{fi}`, and use `\cvt{key}` for the fixed labels
     (e.g. `\section{\cvt{experience}}`).
-- `job.md` is PUBLIC. It starts with a `# ` heading (it becomes the title on the public index
-  page; never put a company name in it), then lists: role, job type, languages (mark the main
+- `job.md` is PUBLIC. It starts with a `# ` heading (it becomes the title on the role's public
+  employer page; never put a company name in it), then lists: role, job type, languages (mark the main
   one), PDF names (including the combined one), created date (today), `Photo: no`, and notes
   about the CV's content (what was left out and why).
 - Everything about the application itself is PRIVATE and goes in the git-ignored
@@ -58,14 +58,18 @@ written in LaTeX and published by GitHub Actions to https://david-adegbola.githu
     together (normally 1 + 1 = 2 pages).
   - The GitHub Action builds and publishes it automatically as
     `david-adegbola-<role-slug>.pdf`. Never commit it (PDFs are git-ignored).
-- Add the PDF links (combined, Finnish, English) to README.md, and add the role to the layout tree there.
+- Do NOT list the role or its links in README.md or on the public root page (David's decision,
+  2026-10-30: links are shared one at a time). The GitHub Action builds the role's employer page
+  `/r/<role-slug>/` automatically (`site/build.py`).
 - Commit only the .tex and .md files, e.g. "Add CV: <Role> (FI + EN)", and push to main.
 - Wait for the GitHub Action "Build CVs and deploy to Pages" to finish with build and deploy
-  both successful. Then check that each PDF link returns HTTP 200:
+  both successful. Then check that each link returns HTTP 200:
+  - employer page: `https://david-adegbola.github.io/cv/r/<role-slug>/`
   - combined: `https://david-adegbola.github.io/cv/david-adegbola-<role-slug>.pdf`
   - one language: `https://david-adegbola.github.io/cv/david-adegbola-<role-slug>-<lang>.pdf`
 - Report to David:
-  - the combined PDF link first (the file he submits), then both language links;
+  - the employer link `https://david-adegbola.github.io/cv/r/<role-slug>/` first (the link he
+    sends), then the combined PDF and both language links;
   - every fact that now differs from his other CVs;
   - anything you left out and why;
   - what you decided yourself (see section 0).
@@ -236,6 +240,9 @@ Check the summary and every experience line in both languages:
 
 Only David changes these rules. When he gives a new standing rule ("always", "from now on",
 "every CV"), add it to the right section of this file in the same commit as the CV change.
+`facts.json` is generated from sections 6 and 7 for the JobDesk app: after changing either
+section, run `python3 app/facts.py` and commit `facts.json` in the same commit. This file stays
+the authority; the app warns when the two differ.
 Before starting any CV task, read this file in full. If a request differs from a fact in
 section 7, stop before editing and ask David: "Is this a correction for all CVs, or only for
 this one?"
