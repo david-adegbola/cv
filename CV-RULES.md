@@ -173,6 +173,9 @@ Check the summary and every experience line in both languages:
   - any personal ID number (henkilötunnus);
   - his street address;
   - named personal references.
+- `.gitignore` blocks PDFs, `applications/`, work certificates, ID scans, office documents and
+  every image except `shared/photos/david.jpg`. Never use `git add -f` to get round it; if a file
+  is ignored, it must stay local.
 - PDFs are git-ignored; keep it that way. The certificate PDF may sit in the repo root,
   ignored. You may read it locally, but never copy text from it into the repo except the
   wordings in section 7.

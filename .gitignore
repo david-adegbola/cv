@@ -1,3 +1,5 @@
+# This repo is PUBLIC. Anything personal stays local. See CV-RULES.md, section 6.
+
 # LaTeX build files
 *.aux
 *.log
@@ -6,10 +8,55 @@
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+*.synctex(busy)
+*.bbl
+*.blg
+*.dvi
+*.xdv
+*.lof
+*.lot
 
-# Built CVs are published by GitHub Actions to Pages, not committed
+# Built CVs are published by GitHub Actions to Pages, not committed.
+# This also covers cv-combined.pdf, work certificates and other PDF documents.
 *.pdf
 _site/
 
 # Private job application drafts; never publish or push
 applications/
+
+# Personal documents in any format: work certificates (työtodistus), ID or card scans,
+# Word/Pages/OpenDocument files, phone photos
+*todistus*
+*Todistus*
+*.doc
+*.docx
+*.odt
+*.rtf
+*.pages
+*.heic
+*.HEIC
+
+# Images: only the prepared profile photo may be committed.
+# Raw photos and scans anywhere else (e.g. dropped in the repo root) stay local.
+*.jpg
+*.jpeg
+*.png
+*.JPG
+*.JPEG
+*.PNG
+!shared/photos/david.jpg
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*~
+
+# Local secrets and scratch files
+.env
+.env.*
+*.bak
+*.tmp

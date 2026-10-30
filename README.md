@@ -56,11 +56,11 @@ cv/
 │   │   └── job.md
 │   ├── it-field-technician/
 │   │   ├── cv-en.tex            English CV for this role
-│   │   └── job.md               role name, target employers / job ads, date created, photo yes/no, notes
+│   │   └── job.md               role name, target employers / job ads, date created, Photo: no, notes
 │   ├── industrial-master/
 │   │   ├── cv-fi.tex            Finnish master CV (main version)
 │   │   ├── cv-en.tex
-│   │   └── job.md               role name, target employers / job ads, date created, photo yes/no, notes
+│   │   └── job.md               role name, target employers / job ads, date created, Photo: no, notes
 │   ├── warehouse-master/
 │   │   ├── cv-fi.tex            Finnish master CV (main version)
 │   │   ├── cv-en.tex
@@ -100,7 +100,7 @@ It sets `core.hooksPath` in this repository's local Git config only.
 
 ## Profile photo (optional, off by default)
 
-No CV shows a photo unless it asks for one. To turn the photo on for a CV, add one line to its preamble, next to `\cvrole{...}`:
+Committed CVs never show the photo (see `CV-RULES.md`). When an application needs one, turn it on **locally only**: add this line to the CV's preamble, next to `\cvrole{...}`, compile, send the PDF, then remove the line again. Never commit it.
 
 ```latex
 \cvphoto{../../shared/photos/david.jpg}   % add to a CV's preamble to show the photo
@@ -108,7 +108,7 @@ No CV shows a photo unless it asks for one. To turn the photo on for a CV, add o
 
 Remove the line to hide the photo again. With the photo on, it appears as a 3 cm circle (with a thin border in the tag colour) to the left of the name, role and contact details. Without the line, the header is exactly as before. If the file is missing, the CV still compiles without the photo and LaTeX prints a `cv-style` warning.
 
-Each CV's header sits inside `\begin{cvheader} ... \end{cvheader}`; keep that wrapper when you copy a CV. Record the choice as `Photo: yes/no` in the role's `job.md`. For Overleaf, also upload the photo and point `\cvphoto{...}` at it, e.g. `\cvphoto{david.jpg}`.
+Each CV's header sits inside `\begin{cvheader} ... \end{cvheader}`; keep that wrapper when you copy a CV. Every `job.md` says `Photo: no`. For Overleaf, also upload the photo and point `\cvphoto{...}` at it, e.g. `\cvphoto{david.jpg}`.
 
 **Replacing the photo file.** `shared/photos/david.jpg` is already committed (metadata stripped, 600×600 px). To replace it, save the new one in the same place, and strip its EXIF/GPS metadata and resize it to at most 600×600 px **before committing**:
 
@@ -120,15 +120,17 @@ The script uses ImageMagick (`magick -strip -resize`) or, without it, `sips -Z 6
 
 ## Add a new role
 
+Read [CV-RULES.md](CV-RULES.md) first; it has the full workflow and rules.
+
 1. Copy an existing role folder, using a lowercase, hyphenated name:
    ```bash
    cp -R roles/salesperson roles/warehouse-worker
    ```
-2. In each `cv-<lang>.tex`, change `\cvrole{...}` (the footer's right-hand text) and the title under the name, then tailor the content. Delete `cv-fi.tex` if there is no Finnish version yet.
-3. Edit `job.md`. Set the `# ` heading to the role name, then add the target employers / job ads, the date, `Photo: yes/no` and any notes.
+2. In each `cv-<lang>.tex`, change `\cvrole{...}` (the footer's right-hand text) and the title under the name, then tailor the content. Every role needs both `cv-fi.tex` and `cv-en.tex` (they are also joined into one combined PDF).
+3. Edit `job.md`. Set the `# ` heading to the role name, then add the target employers / job ads, the date, `Photo: no` and any notes.
 4. Commit and push to `main`. The new PDFs and their entry on the index page appear automatically, with no need to edit `index.html`.
 
-**Privacy:** this repo is public. Give only phone, email and town in CVs here: no street address, a photo only if you turn it on deliberately, and write "Available on request" / "Suosittelijat pyydettäessä" instead of naming references.
+**Privacy:** this repo is public. Give only phone, email and town in CVs here: no street address, no photo in committed CVs, and write "Available on request" / "Suosittelijat pyydettäessä" instead of naming references.
 
 ## Build locally (macOS)
 
