@@ -1,0 +1,72 @@
+% !TEX TS-program = pdflatex
+% David - Asentaja CV, Teräs ja Kaide Oy (suomi)
+% Layout from hmemcpy/cv template (adapted from Professional CV by Alessandro Plasmati).
+
+\documentclass[a4paper,11pt]{article}
+
+% Shared style: works from roles/<role>/ in this repo, or with cv-style.sty
+% uploaded next to this file (e.g. in Overleaf).
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+
+\cvlang{fi}
+\cvrole{Asentaja}
+
+\begin{document}
+
+% --------------------TITLE-------------
+\begin{cvheader}
+\par{\centering
+		{\Huge \textsc{David Adegbola}}\\[0.4em]
+		{\Large Asentaja}
+	\bigskip\par}
+
+\hrule
+\vspace{0.5em}
+\cvline[2.4cm]{\cvt{location}:}{Joensuu, Suomi (valmis matkustamaan työmaille)}
+\cvline[2.4cm]{\cvt{phone}:}{+358 46 800 7210}
+\cvline[2.4cm]{\cvt{email}:}{\href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}}
+\end{cvheader}
+
+\section{\cvt{summary}}
+\begin{tabular}{p{0.9\textwidth}}
+ Hei! Olen David, 24-vuotias. Minulla on kokemusta metalliteollisuudesta UPM:n Kaukaan sellutehtaalta, jossa olin mukana soodakattilan sähkösuodattimen uusimisessa. Käytin kulmahiomakonetta, nostolaitteita ja sähkötyökaluja ja noudatin tehtaan tiukkoja turvallisuusohjeita. Työnantaja arvioi työni kiitettäväksi ja kuvasi minua vastuulliseksi ja tunnolliseksi. Teen työni tarkasti ja oma-aloitteisesti.\\\\
+
+ Matkustan mielelläni työmaille ja työskentelen parin kanssa. Työn ohessa haluan oppia hitsausta ja asennuspiirustusten lukemista. Suomen kielen taitoni on vielä perustasolla, ja opiskelen sitä aktiivisesti.
+\end{tabular}
+
+\section{\cvt{skills}}
+\cvline{Metallityö:}{Metallirakenteiden asennus; kulmahiominta ja leikkaus; mittaus ja sovitus}
+\cvline{Työkalut:}{Nostolaitteet, sähkötyökalut ja käsityökalut}
+\cvline{Työtavat:}{Työturvallisuus; parityöskentely; opettelen lukemaan asennuspiirustuksia}
+\cvline{\cvt{cards}:}{Työturvallisuuskortti}
+\cvline{\cvt{languages}:}{Suomi (perustaso, opiskelen aktiivisesti), englanti (sujuva), yoruba (äidinkieli)}
+\cvline{Tietotekniikka:}{Tietokoneen perustaidot}
+
+\section{\cvt{experience}}
+\begin{cventry}{18.8.2025--7.10.2025}{\job{Asentaja}{Axioma Servisas UAB}}
+  UPM Kaukaan sellutehdas, Lappeenranta\par
+  Metalliasennustyöt sähkösuodattimen uusimisessa.\par
+  Kulmahiomakoneen ja nostolaitteiden käyttö.\par
+  Tehtaan tiukkojen turvallisuusohjeiden noudattaminen.\par
+  Työmaan siisteys sekä työkalujen ja materiaalien seuranta.\par
+  Työnantajan arvio: kiitettävä. Vastuullinen, tunnollinen, halukas oppimaan ja ottamaan vastuuta.
+  \sotagrow{metalliasennus,kulmahiomakone,nostolaitteet,työturvallisuus,tarkkuus}
+\end{cventry}
+\begin{cventry}{4/2025--8/2025}{\textbf{Lehdenjakaja}, Finnbox ja SSM, Vaasa: jakelureitit yksin aikaisin aamulla.}
+\end{cventry}
+\begin{cventry}{11/2024--8/2026}{\textbf{AV-vapaaehtoinen}, Vaasa City Church: ääni- ja videolaitteet joka viikonloppu.}
+\end{cventry}
+\begin{cventry}{6/2026--8/2026}{\textbf{Founder in Residence}, Vaasa Startup Factory: tuotekehitystä tiimissä.}
+\end{cventry}
+\begin{cventry}{9/2016--9/2020}{Myynti- ja asiakaspalvelutyötä Nigeriassa (Desire Feeds, Bunmi Pastries).}
+\end{cventry}
+
+\section{\cvt{education}}
+\cvline{2026--nyt:}{B.Sc, Kestävä metsäbiotalous, Itä-Suomen yliopisto}
+\cvline{2024--2026:}{Tietotekniikan insinööriopintoja (keskeytetty), Vaasan ammattikorkeakoulu}
+\cvline{2019--2022:}{OND, tietojenkäsittely, The Polytechnic, Ibadan, Nigeria}
+
+\section{\cvt{references}}
+\cvt{refsavailable}
+
+\end{document}
