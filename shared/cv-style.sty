@@ -18,12 +18,42 @@
 \newcommand{\cv@role}{}
 \newcommand{\cvrole}[1]{\renewcommand{\cv@role}{#1}}
 
+% Language of the fixed labels: \cvlang{en} (default) or \cvlang{fi}, in the preamble.
+% Look labels up with \cvt{key}, e.g. \section{\cvt{experience}} or \textsc{\cvt{phone}:}.
+\newcommand{\cv@lang}{en}
+\newcommand{\cv@def}[3]{\expandafter\def\csname cv@#1@#2\endcsname{#3}}
+\newcommand{\cvt}[1]{\csname cv@\cv@lang @#1\endcsname}
+\newcommand{\cvlang}[1]{%
+  \renewcommand{\cv@lang}{#1}%
+  \def\cv@tmp{#1}\def\cv@fi{fi}%
+  \ifx\cv@tmp\cv@fi \RequirePackage[finnish]{babel}\fi}
+\@onlypreamble\cvlang
+
+\cv@def{en}{location}{Location}         \cv@def{fi}{location}{Sijainti}
+\cv@def{en}{phone}{Phone}               \cv@def{fi}{phone}{Puhelin}
+\cv@def{en}{email}{Email}               \cv@def{fi}{email}{Sähköposti}
+\cv@def{en}{links}{Links}               \cv@def{fi}{links}{Linkit}
+\cv@def{en}{summary}{Summary}           \cv@def{fi}{summary}{Yhteenveto}
+\cv@def{en}{skills}{Skills}             \cv@def{fi}{skills}{Taidot}
+\cv@def{en}{experience}{Work Experience} \cv@def{fi}{experience}{Työkokemus}
+\cv@def{en}{volunteering}{Volunteering and Projects} \cv@def{fi}{volunteering}{Vapaaehtoistyö ja projektit}
+\cv@def{en}{education}{Education}       \cv@def{fi}{education}{Koulutus}
+\cv@def{en}{cards}{Cards}               \cv@def{fi}{cards}{Kortit}
+\cv@def{en}{certificates}{Certificates} \cv@def{fi}{certificates}{Todistukset}
+\cv@def{en}{languages}{Languages}       \cv@def{fi}{languages}{Kielet}
+\cv@def{en}{references}{References}     \cv@def{fi}{references}{Suosittelijat}
+\cv@def{en}{refsavailable}{Available on request.} \cv@def{fi}{refsavailable}{Suosittelijat pyydettäessä.}
+\cv@def{en}{pageof}{Page \thepage\ of \pageref*{LastPage}}
+\cv@def{fi}{pageof}{Sivu \thepage\,/\,\pageref*{LastPage}}
+% joins job title and employer in \job: "Title at Employer" / "Title, Employer"
+\cv@def{en}{at}{ at }                   \cv@def{fi}{at}{, }
+
 % headers and footers
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 \pagestyle{fancy}
 \fancyfoot[L]{David Adegbola}
-\fancyfoot[C]{Page \thepage\ of \pageref*{LastPage}}
+\fancyfoot[C]{\cvt{pageof}}
 \fancyfoot[R]{\cv@role}
 \renewcommand{\footrulewidth}{0.4pt}
 \fancyhead{}
@@ -37,7 +67,7 @@
 \newcommand{\sotagrow}[1]{\par\vspace{4pt}\noindent\@for\sotagitem:=#1\do{\sotag{\sotagitem} }\\}
 
 % Helpers for adding job entries
-\newcommand{\job}[2]{\large\sffamily \textbf{#1} at \textbf{#2}\rule[-0.45em]{0pt}{1.45em}}
+\newcommand{\job}[2]{\large\sffamily \textbf{#1}\cvt{at}\textbf{#2}\rule[-0.45em]{0pt}{1.45em}}
 \newcommand{\sep}{\multicolumn{2}{c}{}\\}
 
 \usepackage{hyperref}

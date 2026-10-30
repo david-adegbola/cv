@@ -1,0 +1,119 @@
+% !TEX TS-program = pdflatex
+% David - Myyjä CV (suomi)
+% Layout from hmemcpy/cv template (adapted from Professional CV by Alessandro Plasmati).
+
+\documentclass[a4paper,11pt]{article}
+
+% Shared style: works from roles/<role>/ in this repo, or with cv-style.sty
+% uploaded next to this file (e.g. in Overleaf).
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+
+\cvlang{fi}
+\cvrole{Myyjä}
+
+\begin{document}
+
+% --------------------TITLE-------------
+\par{\centering
+		{\Huge \textsc{David Adegbola}}\\[0.4em]
+		{\Large Myyjä}
+	\bigskip\par}
+
+\hrule
+\vspace{0.5em}
+\begin{tabular}{rl}
+  \textsc{\cvt{location}:} & Joensuu, Suomi\\
+  \textsc{\cvt{phone}:}    & +358 46 800 7210\\
+  \textsc{\cvt{email}:}    & \href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}\\
+\end{tabular}
+
+\section{\cvt{summary}}
+\begin{tabular}{p{0.9\textwidth}}
+ Hei! Olen David, 24-vuotias kestävän metsäbiotalouden opiskelija Itä-Suomen yliopistossa. Muutin hiljattain Vaasasta Joensuuhun opintojeni vuoksi. Etsin työtä, jossa pääsen työskentelemään ihmisten parissa, hyödyntämään asiakaspalvelutaitojani ja tutustumaan paremmin paikalliseen yhteisöön. Minulla on kokemusta asiakaspalvelusta ja myynnistä jo teini-ikäisestä lähtien. Nigeriassa myin leivonnaisia ja myöhemmin eläinrehua. Rehuliikkeessä vastasin myös kassan laskemisesta päivän päätteeksi. Suomessa olen työskennellyt sanomalehdenjakajana sekä UPM:n Kaukaan sellutehtaalla kattilaremontissa. Näissä tehtävissä olen oppinut täsmällisyyttä, huolellisuutta ja turvallisten työtapojen merkitystä.\\\\
+
+ Olen helposti lähestyttävä, oma-aloitteinen ja tulen hyvin toimeen erilaisten ihmisten kanssa. Pidän ihmisten kanssa työskentelystä ja haluan palvella asiakkaita ystävällisesti ja luotettavasti. Suomen kielen taitoni on vielä kehittymässä, mutta opiskelen ja harjoittelen sitä aktiivisesti. Myyntityö tarjoaisi minulle erinomaisen mahdollisuuden kehittää kielitaitoani käytännössä sekä kartuttaa lisää kokemusta asiakaspalvelusta ja myynnistä.
+\end{tabular}
+
+\renewcommand{\arraystretch}{1.12}
+\section{\cvt{skills}}
+\begin{tabular}{rl}
+  & Asiakaspalvelu ja myynti\\
+  & Fyysinen työ ja inventaario\\
+  & Itsenäinen työskentely ja tiimityö\\
+  \textsc{Tietotekniikka:} & Microsoft Office, graafinen suunnittelu, videoeditointi\\
+\end{tabular}
+
+% Dates are split over two rows so the long Finnish month names fit
+\section{\cvt{experience}}
+\begin{longtable}{r|p{0.72\textwidth}}
+
+  \textsc{kesäkuu 2026 --} & \job{Founder in Residence}{Vaasa Startup Factory}, Vaasa\\
+  \textsc{elokuu 2026}
+    &Selvitin sähkön hinnan vaikutusta tuotannon kustannuksiin haastatteluilla, kyselyillä ja soittamalla yrityksille.\\
+    &Kehitimme tiimini kanssa Hetkin-palvelua tehtaille ja esittelimme sen.\sotagrow{asiakastutkimus,esiintyminen,tiimityö}\sep
+
+  \textsc{elokuu 2025 --} & \job{Asentaja (sopimustyö)}{Alvasaar OÜ}\\
+  \textsc{lokakuu 2025}
+    &UPM Kaukaan sellutehdas, Lappeenranta\\
+    &Asennustyöt kattilaremontissa.\\
+    &Työmaan siivous.\\
+    &Työkalujen ja materiaalien inventaario.\\
+    &Tehtaan turvallisuusohjeiden noudattaminen.\sotagrow{inventaario,fyysinen-työ,työturvallisuus,tiimityö}\sep
+
+  \textsc{huhtikuu 2025 --} & \job{Lehdenjakaja}{Finnbox}, Vaasa\\
+  \textsc{elokuu 2025}
+    &Sanoma- ja aikakauslehtien jakelu, pääosin aikaisin aamulla.\\
+    &Itsenäistä työtä tiukalla aikataululla.\sotagrow{luotettavuus,itsenäinen-työ,täsmällisyys}\sep
+
+  \textsc{maaliskuu 2019 --} & \job{Myyjä}{Desire Feeds}, Lagos, Nigeria\\
+  \textsc{syyskuu 2020}
+    &Siipikarja- ja kalanrehujen myynti ja asiakkaiden neuvominen.\\
+    &Ostosten kantaminen asiakkaiden autoihin.\\
+    &Maksujen vastaanotto ja kassan täsmäytys päivän päätteeksi.\sotagrow{myynti,asiakaspalvelu,kassatyö,tuoteneuvonta}\sep
+
+  \textsc{syyskuu 2016 --} & \job{Myyjä ja keittiöapulainen}{Bunmi Pastries}, Ibadan, Nigeria\\
+  \textsc{kesäkuu 2018}
+    &Asiakaspalvelu ja myynti.\\
+    &Tiskaus, juoksevien asioiden hoito ja liikkeen siivous.\sotagrow{myynti,asiakaspalvelu,tiimityö}
+\end{longtable}
+
+\section{\cvt{volunteering}}
+\begin{longtable}{r|p{0.72\textwidth}}
+
+  \textsc{marraskuu 2024 --} & \job{AV-vapaaehtoinen}{Vaasa City Church}\\
+  \textsc{elokuu 2026}
+    &Äänentoisto ja videotekniikka joka viikonloppu.\sotagrow{av-tekniikka,luotettavuus,tiimityö}\sep
+
+  \textsc{toukokuu 2025 --} & {\large\sffamily\textbf{Videotuotanto ja grafiikka}}\rule[-0.45em]{0pt}{1.45em}\\
+  \textsc{elokuu 2026}
+    &Agoo Festival, Vaasa (2025) ja Global Reach podcast (2025--2026).\\
+    &Kuvaus, videoeditointi, grafiikka ja sosiaalinen media.\sotagrow{videoeditointi,graafinen-suunnittelu,some}
+\end{longtable}
+
+\section{\cvt{education}}
+\begin{tabular}{rl}
+  \textsc{2026--nyt:}& B.Sc, Kestävä metsäbiotalous\\
+  & \footnotesize\itshape Itä-Suomen yliopisto, Joensuu\\[0.3em]
+  \textsc{2024--2026:}& Tietotekniikan insinööriopintoja (keskeytetty)\\
+  & \footnotesize\itshape Vaasan ammattikorkeakoulu\\[0.3em]
+  \textsc{2019--2022:}& OND, tietojenkäsittely\\
+  & \footnotesize\itshape The Polytechnic, Ibadan, Nigeria\\
+\end{tabular}
+
+\section{\cvt{cards}}
+\begin{tabular}{l}
+  Hygieniapassi\\
+  Työturvallisuuskortti\\
+\end{tabular}
+
+\section{\cvt{languages}}
+\begin{tabular}{rl}
+  \textsc{Englanti:} & sujuva\\
+  \textsc{Suomi:}    & perustaso (opiskelen)\\
+  \textsc{Yoruba:}   & äidinkieli\\
+\end{tabular}
+
+\section{\cvt{references}}
+\cvt{refsavailable}
+
+\end{document}

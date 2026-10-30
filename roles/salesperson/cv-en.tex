@@ -1,0 +1,111 @@
+% !TEX TS-program = pdflatex
+% David - Salesperson CV (English)
+% Layout from hmemcpy/cv template (adapted from Professional CV by Alessandro Plasmati).
+
+\documentclass[a4paper,11pt]{article}
+
+% Shared style: works from roles/<role>/ in this repo, or with cv-style.sty
+% uploaded next to this file (e.g. in Overleaf).
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+
+\cvlang{en}
+\cvrole{Salesperson}
+
+\begin{document}
+
+% --------------------TITLE-------------
+\par{\centering
+		{\Huge \textsc{David Adegbola}}\\[0.4em]
+		{\Large Salesperson}
+	\bigskip\par}
+
+\hrule
+\vspace{0.5em}
+\begin{tabular}{rl}
+  \textsc{\cvt{location}:} & Joensuu, Finland\\
+  \textsc{\cvt{phone}:}    & +358 46 800 7210\\
+  \textsc{\cvt{email}:}    & \href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}\\
+\end{tabular}
+
+\section{\cvt{summary}}
+\begin{tabular}{p{0.9\textwidth}}
+ Hi! I'm David, 24, a Sustainable Forest Bioeconomy student at the University of Eastern Finland. I recently moved to Joensuu from Vaasa for my studies. I've worked with customers since I was a teenager. In Nigeria I sold pastries and later animal feed, and at the feed shop I balanced the cash at the end of every day. In Finland I've delivered newspapers in the early mornings and worked on a boiler renovation at UPM's Kaukas mill. Those jobs taught me to be on time and to take safety seriously.\\\\
+
+ I enjoy talking with people, and I don't wait to be told what needs doing. My Finnish is still basic. I'm working on it, and a salesperson job is a good place to practise.
+\end{tabular}
+
+\renewcommand{\arraystretch}{1.12}
+\section{\cvt{skills}}
+\begin{tabular}{rl}
+  & Customer service and sales\\
+  & Physical work and inventory\\
+  & Independent work and team collaboration\\
+  \textsc{Computer skills:} & Microsoft Office, graphic design, video editing\\
+\end{tabular}
+
+\section{\cvt{experience}}
+\begin{longtable}{r|p{0.72\textwidth}}
+
+  \textsc{Jun 2026--Aug 2026} & \job{Founder in Residence}{Vaasa Startup Factory}, Vaasa\\
+    &Researched how electricity prices affect production costs through interviews, surveys and calls to companies.\\
+    &Built Hetkin with my team and pitched it, a tool that helps factories run shifts when power is cheaper.\sotagrow{customer-research,pitching,teamwork}\sep
+
+  \textsc{Aug 2025--Oct 2025} & \job{Assembly Worker (Contract work)}{Alvasaar OÜ}\\
+    &UPM Kaukas pulp mill, Lappeenranta\\
+    &Assembly work on a boiler renovation.\\
+    &Cleaning the work site.\\
+    &Inventory of tools and materials.\\
+    &Following the mill's safety rules.\sotagrow{inventory,physical-work,site-safety,teamwork}\sep
+
+  \textsc{Apr 2025--Aug 2025} & \job{Independent Courier}{Finnbox}, Vaasa\\
+    &Delivering newspapers and magazines, mostly early in the morning.\\
+    &Working alone on a tight schedule.\sotagrow{reliability,independent-work,punctuality}\sep
+
+  \textsc{Mar 2019--Sep 2020} & \job{Salesperson}{Desire Feeds}, Lagos, Nigeria\\
+    &Selling poultry \& fish feed to customers, also advising them on the best feed.\\
+    &Carrying purchases to customers' vehicles.\\
+    &Taking payments and balancing the cash at closing.\sotagrow{sales,customer-service,cash-handling,product-advice}\sep
+
+  \textsc{Sep 2016--Jun 2018} & \job{Sales Assistant and Kitchen Helper}{Bunmi Pastries}, Ibadan, Nigeria\\
+    &Serving and selling to customers.\\
+    &Washing dishes, running errands and cleaning the shop.\sotagrow{sales,customer-service,teamwork}
+\end{longtable}
+
+\section{\cvt{volunteering}}
+\begin{longtable}{r|p{0.72\textwidth}}
+
+  \textsc{Nov 2024--Aug 2026} & \job{Audio-Visual Volunteer}{Vaasa City Church}\\
+    &Operated sound and video every weekend.\sotagrow{audio-visual,reliability,teamwork}\sep
+
+  \textsc{May 2025--Aug 2026} & {\large\sffamily\textbf{Video and Graphics Work}}\rule[-0.45em]{0pt}{1.45em}\\
+    &Agoo Festival, Vaasa (2025) and Global Reach podcast (2025--2026).\\
+    &Filming, video editing, graphics and social media.\sotagrow{video-editing,graphic-design,social-media}
+\end{longtable}
+
+\section{\cvt{education}}
+\begin{tabular}{rl}
+  \textsc{2026--Present:}& B.Sc, Sustainable Forest Bioeconomy\\
+  & \footnotesize\itshape University of Eastern Finland, Joensuu\\[0.3em]
+  \textsc{2024--2026:}& B.Eng, Information Technology studies (not completed)\\
+  & \footnotesize\itshape Vaasa University of Applied Sciences\\[0.3em]
+  \textsc{2019--2022:}& OND, Computer Science\\
+  & \footnotesize\itshape The Polytechnic, Ibadan, Nigeria\\
+\end{tabular}
+
+\section{\cvt{cards}}
+\begin{tabular}{l}
+  Hygiene passport (hygieniapassi)\\
+  Occupational Safety Card (työturvallisuuskortti)\\
+\end{tabular}
+
+\section{\cvt{languages}}
+\begin{tabular}{rl}
+  \textsc{English:} & Fluent\\
+  \textsc{Finnish:} & Basic (still studying)\\
+  \textsc{Yoruba:}  & Native\\
+\end{tabular}
+
+\section{\cvt{references}}
+\cvt{refsavailable}
+
+\end{document}

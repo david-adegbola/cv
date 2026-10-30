@@ -20,6 +20,8 @@
     .role { font-weight: 600; font-size: 1.1rem; }
     .btn { display: inline-block; padding: 8px 16px; border-radius: 8px; background: var(--accent); color: var(--accent-fg); font-weight: 600; text-decoration: none; white-space: nowrap; }
     .btn:hover, .btn:focus-visible { filter: brightness(1.1); }
+    .langs { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .hint { color: var(--muted); font-size: .9rem; }
     footer { margin-top: 32px; font-size: .85rem; color: var(--muted); }
     footer a { color: inherit; }
   </style>
@@ -27,7 +29,7 @@
 <body>
   <main>
     <h1>David Adegbola – CVs</h1>
-    <p class="lead">One CV per job role. Pick a role to view or download the PDF.</p>
+    <p class="lead">One CV per job role. Pick a role and language to view or download the PDF.</p>
     <ul>
       <!-- ROLES: filled in by .github/workflows/build.yml from the roles/ folders -->
     </ul>
