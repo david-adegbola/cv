@@ -2,7 +2,7 @@
 
 - **Role:** Salesperson / Myyjä
 - **Languages:** English (`cv-en.tex`), Finnish (`cv-fi.tex`)
-- **PDFs:** `david-adegbola-salesperson-en.pdf`, `david-adegbola-salesperson-fi.pdf`
+- **PDFs:** `david-adegbola-salesperson.pdf` (combined: Finnish first, then English, the file to send), `david-adegbola-salesperson-en.pdf`, `david-adegbola-salesperson-fi.pdf`
 - **Source:** imported from Canva CV
 - **Created:** 2026-10-30
 - **Photo:** no

@@ -2,7 +2,7 @@
 
 - **Role:** Assembly Worker / Asentaja
 - **Languages:** Finnish (`cv-fi.tex`, main version: the ad requires Finnish), English (`cv-en.tex`)
-- **PDFs:** `david-adegbola-assembly-worker-fi.pdf`, `david-adegbola-assembly-worker-en.pdf`
+- **PDFs:** `david-adegbola-assembly-worker.pdf` (combined: Finnish first, then English, the file to send), `david-adegbola-assembly-worker-fi.pdf`, `david-adegbola-assembly-worker-en.pdf`
 - **Company:** Metallitö Vainio Oy, via Osuma Henkilöstöpalvelut Oy
 - **Location:** Iisalmi
 - **Created:** 2026-10-30

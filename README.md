@@ -5,15 +5,18 @@ One repository, one tailored CV per job role, each in English and (when availabl
 On every push to `main`, GitHub Actions compiles each CV with `pdflatex` and publishes the PDFs, plus an index page, to GitHub Pages:
 
 - **All CVs:** https://david-adegbola.github.io/cv/
+- **Installer – Teräs ja Kaide (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-installer-teras-ja-kaide.pdf
 - **Asentaja – Teräs ja Kaide (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-installer-teras-ja-kaide-fi.pdf
 - **Installer – Teräs ja Kaide (English):** https://david-adegbola.github.io/cv/david-adegbola-installer-teras-ja-kaide-en.pdf
+- **Assembly Worker (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-assembly-worker.pdf
 - **Asentaja (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-assembly-worker-fi.pdf
 - **Assembly Worker (English):** https://david-adegbola.github.io/cv/david-adegbola-assembly-worker-en.pdf
 - **IT Field Technician (English):** https://david-adegbola.github.io/cv/david-adegbola-it-field-technician-en.pdf
+- **Salesperson / Myyjä (Suomi + English, one PDF):** https://david-adegbola.github.io/cv/david-adegbola-salesperson.pdf
 - **Salesperson (English):** https://david-adegbola.github.io/cv/david-adegbola-salesperson-en.pdf
 - **Myyjä (Suomi):** https://david-adegbola.github.io/cv/david-adegbola-salesperson-fi.pdf
 
-Built PDFs are not committed to the repo. Pages serves them.
+Built PDFs are not committed to the repo. Pages serves them. Roles with both languages also get one combined PDF (Finnish first, then English), made by `shared/combine.sh`, so a single file can be sent.
 
 ## Rules for new CVs
 

@@ -2,7 +2,7 @@
 
 - **Role:** Installer / Asentaja
 - **Languages:** Finnish (`cv-fi.tex`, main version), English (`cv-en.tex`)
-- **PDFs:** `david-adegbola-installer-teras-ja-kaide-fi.pdf`, `david-adegbola-installer-teras-ja-kaide-en.pdf`
+- **PDFs:** `david-adegbola-installer-teras-ja-kaide.pdf` (combined: Finnish first, then English, the file to send), `david-adegbola-installer-teras-ja-kaide-fi.pdf`, `david-adegbola-installer-teras-ja-kaide-en.pdf`
 - **Company:** Teräs ja Kaide Oy
 - **Location:** Liperi
 - **Job ad:** https://www.jobly.fi/tyopaikka/asentaja-2-tyopaikkaa-2780289 (Jobly, 16.10.2026)

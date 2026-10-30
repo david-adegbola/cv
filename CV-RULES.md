@@ -36,7 +36,7 @@ written in LaTeX and published by GitHub Actions to https://david-adegbola.githu
   - Finnish files also need `\cvlang{fi}`, and use `\cvt{key}` for the fixed labels
     (e.g. `\section{\cvt{experience}}`).
 - `job.md` starts with a `# ` heading (it becomes the title on the index page), then lists:
-  role, languages (mark the main one), PDF names, company / agency, location, job-ad link,
+  role, languages (mark the main one), PDF names (including the combined one), company / agency, location, job-ad link,
   contact person, created date (today), status (e.g. "applying"), `Photo: no`,
   a short summary of the ad, and notes on anything deliberately left out.
 - Compile each file twice with pdflatex from inside its role folder:
@@ -44,13 +44,22 @@ written in LaTeX and published by GitHub Actions to https://david-adegbola.githu
   - Target ONE page.
   - The log must have no "Overfull" warnings.
   - Render the PDF to an image and look at it.
-- Add both PDF links to README.md, and add the role to the layout tree there.
+- Make the single combined PDF, the file David actually submits:
+  `shared/combine.sh roles/<role>` writes `roles/<role>/cv-combined.pdf`, with the Finnish
+  version first and then the English one, in one file.
+  - Every role must have both `cv-fi.tex` and `cv-en.tex`, so every role gets a combined PDF.
+  - Check it: both versions are there in that order, and the page count is the two added
+    together (normally 1 + 1 = 2 pages).
+  - The GitHub Action builds and publishes it automatically as
+    `david-adegbola-<role-slug>.pdf`. Never commit it (PDFs are git-ignored).
+- Add the PDF links (combined, Finnish, English) to README.md, and add the role to the layout tree there.
 - Commit only the .tex and .md files, e.g. "Add CV: <Role> (FI + EN)", and push to main.
 - Wait for the GitHub Action "Build CVs and deploy to Pages" to finish with build and deploy
   both successful. Then check that each PDF link returns HTTP 200:
-  `https://david-adegbola.github.io/cv/david-adegbola-<role-slug>-<lang>.pdf`
+  - combined: `https://david-adegbola.github.io/cv/david-adegbola-<role-slug>.pdf`
+  - one language: `https://david-adegbola.github.io/cv/david-adegbola-<role-slug>-<lang>.pdf`
 - Report to David:
-  - both PDF links;
+  - the combined PDF link first (the file he submits), then both language links;
   - every fact that now differs from his other CVs;
   - anything you left out and why;
   - what you decided yourself (see section 0).

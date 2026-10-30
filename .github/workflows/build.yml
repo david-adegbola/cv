@@ -53,6 +53,16 @@ jobs:
               echo "::endgroup::"
             done
 
+      # One PDF per role that has both languages (Finnish first, then English), so a single file can be sent
+      - name: Combine FI + EN into one PDF
+        run: |
+          command -v pdfunite >/dev/null || { sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils; }
+          for dir in roles/*/; do
+            dir=${dir%/}
+            [ -f "$dir/cv-fi.pdf" ] && [ -f "$dir/cv-en.pdf" ] || continue
+            sh shared/combine.sh "$dir" "_site/david-adegbola-$(basename "$dir").pdf"
+          done
+
       # Role title comes from the first "# " heading in roles/<role>/job.md (falls back to the folder name).
       # Each role lists its language versions, English first.
       - name: Generate index.html
@@ -79,6 +89,9 @@ jobs:
                   f'{html.escape(LANGS.get(lang, lang.upper()))}</a>'
                   for lang in langs
               )
+              # Roles with both languages also get the combined file (Finnish first) from the step above
+              if "fi" in langs and "en" in langs:
+                  links = f'<a class="btn" href="david-adegbola-{role}.pdf">Suomi + English</a>' + links
               items.append(f'      <li><span class="role">{html.escape(title)}</span><span class="langs"><span class="hint">View / Download PDF:</span>{links}</span></li>')
           page = open("index.html", encoding="utf-8").read()
           marker = "      <!-- ROLES: filled in by .github/workflows/build.yml from the roles/ folders -->"
