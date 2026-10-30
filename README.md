@@ -25,6 +25,7 @@ cv/
 │   │                            ATS-friendly rows: \cvline{label}{value}, \begin{cventry}{dates}{title}
 │   │                            footer only on CVs longer than one page (automatic)
 │   └── photos/                  optional profile photos (prepare-photo.sh strips metadata)
+├── applications/                ignored locally; private job application drafts
 ├── roles/
 │   ├── assembly-worker/
 │   │   ├── cv-fi.tex            Finnish CV (main version for this role)
@@ -37,6 +38,10 @@ cv/
 │   ├── it-field-technician/
 │   │   ├── cv-en.tex            English CV for this role
 │   │   └── job.md               role name, target employers / job ads, date created, photo yes/no, notes
+│   ├── industrial-master/
+│   │   ├── cv-fi.tex            Finnish master CV (main version)
+│   │   ├── cv-en.tex
+│   │   └── job.md               role name, target employers / job ads, date created, photo yes/no, notes
 │   └── salesperson/
 │       ├── cv-en.tex
 │       ├── cv-fi.tex            Finnish CV for this role
@@ -46,6 +51,8 @@ cv/
 ├── README.md
 └── LICENSE
 ```
+
+`applications/` is listed in `.gitignore` and is for local application-email drafts only; its contents are never pushed.
 
 ## Languages
 

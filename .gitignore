@@ -10,3 +10,6 @@
 # Built CVs are published by GitHub Actions to Pages, not committed
 *.pdf
 _site/
+
+# Private job application drafts; never publish or push
+applications/

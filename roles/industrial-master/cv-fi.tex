@@ -1,0 +1,69 @@
+% !TEX TS-program = pdflatex
+% David - Tuotanto- ja asennustyöntekijä CV (suomi)
+
+\documentclass[a4paper,11pt]{article}
+
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+
+\cvlang{fi}
+\cvrole{Tuotanto- ja asennustyöntekijä}
+\cvphoto{../../shared/photos/david.jpg}
+
+\begin{document}
+\setlength{\cvlabelw}{2.4cm}
+\titlespacing{\section}{0pt}{0.55em}{2pt}
+
+\begin{cvheader}
+\par{\centering
+		{\Huge \textsc{David Adegbola}}\\[0.4em]
+		{\Large Tuotanto- ja asennustyöntekijä}
+	\bigskip\par}
+
+\hrule
+\vspace{0.5em}
+\cvline[2.4cm]{\cvt{location}:}{Joensuu, Suomi}
+\cvline[2.4cm]{\cvt{phone}:}{+358 46 800 7210}
+\cvline[2.4cm]{\cvt{email}:}{\href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}}
+\end{cvheader}
+
+\section{\cvt{summary}}
+{\small Käytännönläheinen asentaja, jolla on teollisuuskokemusta UPM Kaukaan sellutehtaan sähkösuodattimen uudelleenrakennuksesta; työnantajan arvio: kiitettävä. Käytän kulmahiomakonetta, nostolaitteita ja sähkötyökaluja. Olen tarkka, turvallisuustietoinen ja nopea oppimaan; työskentelen itsenäisesti ja tiimissä. IT-tausta (OND ja VAMK-opinnot), nykyiset UEF:n kestävän metsäbiotalouden opinnot ja kiinnostus puu- ja metsäalaan. Suomen kieli perustasolla, opiskelen aktiivisesti. Käytettävissä kokoaikatyöhön.\par}
+
+\section{\cvt{skills}}
+\cvline{Asennus:}{Asennus- ja kokoonpanotyöt; kulmahiomakone, nostolaitteet, sähkö- ja käsityökalut}
+\cvline{Tuotanto:}{Koneiden käyttö ja valvonta (opettelen); laadun tarkistus ja pakkaaminen}
+\cvline{Työtavat:}{Työkalujen ja materiaalien inventointi; työturvallisuus; tarkkuus}
+\cvline{\cvt{cards}:}{Työturvallisuuskortti}
+\cvline{Tietotekniikka:}{Tietotekniikan perustaidot}
+
+\section{\cvt{experience}}
+\begin{cventry}{18.8.2025--7.10.2025}{\job{Asentaja}{Axioma Servisas UAB}}
+  UPM Kaukaan sellutehdas, Lappeenranta\par
+  Asennustyöt sähkösuodattimen uudelleenrakennushankkeessa; kulmahiomakoneen ja nostolaitteiden käyttö.\par
+  Työkalujen ja materiaalien inventointi sekä tehtaan tiukkojen turvallisuusohjeiden noudattaminen.\par
+  Työnantajan arvio: kiitettävä.
+  \sotagrow{assembly,angle-grinder,lifting-equipment,site-safety,precision,fast-learner}
+\end{cventry}
+\begin{cventry}{4/2025--8/2025}{\textbf{Itsenäinen jakelutyöntekijä}, Finnbox, Vaasa: aikaiset aamut, itsenäinen työ ja luotettavuus.}
+\end{cventry}
+\begin{cventry}{11/2024--8/2026}{\textbf{AV-vapaaehtoinen}, Vaasa City Church: laitteiden käyttökuntoon laitto ja käsittely.}
+\end{cventry}
+\begin{cventry}{6/2026--8/2026}{\textbf{Founder in Residence}, Vaasa Startup Factory.}
+\end{cventry}
+\begin{cventry}{9/2016--9/2020}{Myynti- ja asiakaspalvelutyötä Nigeriassa.}
+\end{cventry}
+
+\section{\cvt{education}}
+\cvline{2026--nykyhetki:}{Kestävä metsäbiotalous, Itä-Suomen yliopisto (UEF)}
+\cvline{2024--2026:}{Tietotekniikan opintoja (kesken), Vaasan ammattikorkeakoulu (VAMK)}
+\cvline{2019--2022:}{OND, tietojenkäsittely, The Polytechnic, Ibadan, Nigeria}
+
+\section{\cvt{languages}}
+\cvline{Suomi:}{Perustaso, opiskelen aktiivisesti}
+\cvline{Englanti:}{Sujuva}
+\cvline{Yoruba:}{Äidinkieli}
+
+\section{\cvt{references}}
+\cvt{refsavailable}
+
+\end{document}

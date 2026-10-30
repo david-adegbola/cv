@@ -1,0 +1,68 @@
+% !TEX TS-program = pdflatex
+% David - Production and Assembly Worker CV
+
+\documentclass[a4paper,11pt]{article}
+
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+
+\cvrole{Production and Assembly Worker}
+\cvphoto{../../shared/photos/david.jpg}
+
+\begin{document}
+\setlength{\cvlabelw}{2.4cm}
+\titlespacing{\section}{0pt}{0.55em}{2pt}
+
+\begin{cvheader}
+\par{\centering
+		{\Huge \textsc{David Adegbola}}\\[0.4em]
+		{\Large Production and Assembly Worker}
+	\bigskip\par}
+
+\hrule
+\vspace{0.5em}
+\cvline[2.4cm]{\cvt{location}:}{Joensuu, Finland}
+\cvline[2.4cm]{\cvt{phone}:}{+358 46 800 7210}
+\cvline[2.4cm]{\cvt{email}:}{\href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}}
+\end{cvheader}
+
+\section{\cvt{summary}}
+{\small Hands-on worker with industrial assembly experience on the electrostatic precipitator rebuild at UPM Kaukas pulp mill; rated excellent by my employer. Skilled with angle grinders, lifting equipment and power tools. Precise, safety-minded and quick to learn; effective alone or in a team. My IT background (OND and studies at VAMK) and current Sustainable Forest Bioeconomy studies at UEF support my interest in the wood and forest industry. My Finnish is basic, and I am actively studying. Available full-time.\par}
+
+\section{\cvt{skills}}
+\cvline{Assembly:}{Assembly and installation; angle grinder, lifting equipment, power and hand tools}
+\cvline{Production:}{Operating and monitoring machines (learning); quality checking and packing}
+\cvline{Work practices:}{Tool and material inventory; site safety; precision}
+\cvline{\cvt{cards}:}{Occupational safety card (työturvallisuuskortti)}
+\cvline{IT:}{Basic IT skills}
+
+\section{\cvt{experience}}
+\begin{cventry}{18 Aug 2025--7 Oct 2025}{\job{Fitter}{Axioma Servisas UAB}}
+  UPM Kaukas pulp mill, Lappeenranta\par
+  Assembly work on the electrostatic precipitator rebuild; used angle grinders and lifting equipment.\par
+  Tracked tools and materials and followed the mill's strict site safety rules.\par
+  Employer rating: excellent.
+  \sotagrow{assembly,angle-grinder,lifting-equipment,site-safety,precision,fast-learner}
+\end{cventry}
+\begin{cventry}{Apr 2025--Aug 2025}{\textbf{Independent Courier}, Finnbox, Vaasa: early starts, working alone and reliability.}
+\end{cventry}
+\begin{cventry}{Nov 2024--Aug 2026}{\textbf{Audio-Visual Volunteer}, Vaasa City Church: setting up and handling equipment.}
+\end{cventry}
+\begin{cventry}{Jun 2026--Aug 2026}{\textbf{Founder in Residence}, Vaasa Startup Factory.}
+\end{cventry}
+\begin{cventry}{Sep 2016--Sep 2020}{Sales and customer service work in Nigeria.}
+\end{cventry}
+
+\section{\cvt{education}}
+\cvline{2026--present:}{Sustainable Forest Bioeconomy, University of Eastern Finland (UEF)}
+\cvline{2024--2026:}{Information Technology studies (not completed), VAMK}
+\cvline{2019--2022:}{OND in Computer Science, The Polytechnic, Ibadan, Nigeria}
+
+\section{\cvt{languages}}
+\cvline{Finnish:}{Basic, actively studying}
+\cvline{English:}{Fluent}
+\cvline{Yoruba:}{Native}
+
+\section{\cvt{references}}
+\cvt{refsavailable}
+
+\end{document}
