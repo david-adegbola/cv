@@ -1,0 +1,73 @@
+% !TEX TS-program = pdflatex
+% David - Trainee CV
+
+\documentclass[a4paper,11pt]{article}
+
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+
+\cvrole{Trainee}
+
+\begin{document}
+\small
+\setlength{\cvlabelw}{3.9cm}
+\titlespacing{\section}{0pt}{0.55em}{2pt}
+
+\begin{cvheader}
+\par{\centering
+		{\Huge \textsc{David Adegbola}}\\[0.4em]
+		{\Large Trainee}
+	\bigskip\par}
+
+\hrule
+\vspace{0.5em}
+\cvline[2.4cm]{\cvt{location}:}{Joensuu, Finland}
+\cvline[2.4cm]{\cvt{phone}:}{+358 46 800 7210}
+\cvline[2.4cm]{\cvt{email}:}{\href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}}
+\end{cvheader}
+
+\section{\cvt{summary}}
+\begin{tabular}{p{0.9\textwidth}}
+ Hi! I'm David, 24, a full-time degree student in Finland: I study Sustainable Forest Bioeconomy at the University of Eastern Finland. I have an IT background from engineering studies at VAMK and an OND in Computer Science. At UPM Kaukas pulp mill I worked on a large industrial site. My employer rated my work excellent and called me eager to learn and to take responsibility.\\\\
+
+ At Vaasa Startup Factory I worked in a team: we interviewed users, called companies and presented our product to an audience. I speak fluent English and can work in Vaasa. My Finnish is still basic, and I'm actively studying it.
+\end{tabular}
+
+\section{\cvt{education}}
+\cvline{2026--present:}{B.Sc Sustainable Forest Bioeconomy, University of Eastern Finland (UEF), full-time student}
+\cvline{2024--2026:}{B.Eng studies, Information Technology, VAMK (Vaasa University of Applied Sciences); not completed, included Microsoft Active Directory}
+\cvline{2019--2022:}{OND in Computer Science, The Polytechnic, Ibadan, Nigeria}
+
+\section{\cvt{skills}}
+\cvline{Computer skills:}{Microsoft Office; Microsoft Active Directory (VAMK IT studies)}
+\cvline{Research:}{User interviews and calls to companies}
+\cvline{Ways of working:}{Teamwork; presenting; communication and cooperation}
+\cvline{Safety:}{Following industrial site safety rules}
+\cvline{Want to learn:}{The data analysis tools used in the role}
+\cvline{\cvt{cards}:}{Occupational safety card (työturvallisuuskortti)}
+\cvline{\cvt{languages}:}{English (fluent); Finnish (basic, actively studying); Yoruba (native)}
+
+\section{\cvt{experience}}
+\begin{cventry}{Jun 2026--Aug 2026}{\job{Founder in Residence}{Vaasa Startup Factory}, Vaasa}
+  Researched how electricity prices affect production costs through user interviews and calls to companies.\par
+  Built hetkin.app with my team and pitched it to an audience.
+\end{cventry}
+\begin{cventry}{18 Aug 2025--7 Oct 2025}{\job{Fitter}{Axioma Servisas UAB}}
+  UPM Kaukas pulp mill, Lappeenranta: electrostatic precipitator rebuild project.\par
+  Followed the mill's strict safety rules, kept the work site clean, and tracked tools and materials.\par
+  Employer rating: excellent. A responsible and conscientious employee, eager to learn and to take responsibility.
+  \sotagrow{industrial-site,site-safety,responsible,teamwork,eager-to-learn}
+\end{cventry}
+\begin{cventry}{Nov 2024--Aug 2026}{\textbf{Audio-Visual Volunteer}, Vaasa City Church, Vaasa: ran sound and video every weekend.}
+\end{cventry}
+\begin{cventry}{Apr 2025--Aug 2025}{\textbf{Independent Courier}, Finnbox and SSM, Vaasa: early-morning delivery routes alone.}
+\end{cventry}
+\begin{cventry}{Sep 2016--Sep 2020}{Sales and customer service jobs in Nigeria (Desire Feeds, Bunmi Pastries): customer contact and cash handling.}
+\end{cventry}
+
+\section{\cvt{hobbies}}
+Gym, fixing things and photography.
+
+\section{\cvt{references}}
+\cvt{refsavailable}
+
+\end{document}

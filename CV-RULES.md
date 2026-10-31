@@ -199,6 +199,8 @@ Check the summary and every experience line in both languages:
 - Name: David Adegbola, age 24 (as of October 2026), lives in Joensuu, Finland.
   Phone +358 46 800 7210, email adavidadegbola@gmail.com.
 - Languages: Finnish basic (actively studying), English fluent, Yoruba native.
+- Computer skills: Microsoft Office (David, 2026-10-31); Microsoft Active Directory from the VAMK
+  IT studies.
 - Cards: occupational safety card (työturvallisuuskortti). The hygiene passport (hygieniapassi)
   is only listed for food or retail jobs.
 - Main job, following his work certificate wording exactly:
@@ -237,6 +239,8 @@ Check the summary and every experience line in both languages:
 - Tailoring by job type:
   - Technical / industrial jobs: drop video/graphics work, Microsoft Office and sales lines.
     Keep IT to one line ("Basic computer skills").
+  - Exception (David, 2026-10-31): trainee, office and student roles at industrial companies may
+    list Microsoft Office and Microsoft Active Directory.
   - Sales jobs: keep the sales detail and the volunteering / video work.
 
 ## 8. Changing these rules

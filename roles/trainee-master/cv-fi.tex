@@ -1,0 +1,74 @@
+% !TEX TS-program = pdflatex
+% David - Harjoittelija CV (suomi)
+
+\documentclass[a4paper,11pt]{article}
+
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+
+\cvlang{fi}
+\cvrole{Harjoittelija}
+
+\begin{document}
+\small
+\setlength{\cvlabelw}{3.9cm}
+\titlespacing{\section}{0pt}{0.55em}{2pt}
+
+\begin{cvheader}
+\par{\centering
+		{\Huge \textsc{David Adegbola}}\\[0.4em]
+		{\Large Harjoittelija}
+	\bigskip\par}
+
+\hrule
+\vspace{0.5em}
+\cvline[2.4cm]{\cvt{location}:}{Joensuu, Suomi}
+\cvline[2.4cm]{\cvt{phone}:}{+358 46 800 7210}
+\cvline[2.4cm]{\cvt{email}:}{\href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}}
+\end{cvheader}
+
+\section{\cvt{summary}}
+\begin{tabular}{p{0.9\textwidth}}
+ Hei! Olen David, 24-vuotias päätoiminen tutkinto-opiskelija Suomessa: opiskelen kestävää metsäbiotaloutta Itä-Suomen yliopistossa. Taustani on tietotekniikassa, sillä opiskelin tietotekniikkaa VAMKissa ja suoritin OND-tutkinnon tietojenkäsittelystä. UPM Kaukaan sellutehtaalla työskentelin suurella teollisuustyömaalla. Työnantaja arvioi työni kiitettäväksi ja kuvasi minua halukkaaksi oppimaan ja ottamaan vastuuta.\\\\
+
+ Vaasa Startup Factoryssa tein töitä tiimissä: haastattelimme käyttäjiä, soitimme yrityksille ja esittelimme tuotteemme yleisölle. Puhun sujuvaa englantia ja voin työskennellä Vaasassa. Suomen kielen taitoni on vielä perustasolla, ja opiskelen sitä aktiivisesti.
+\end{tabular}
+
+\section{\cvt{education}}
+\cvline{2026--nykyhetki:}{B.Sc, kestävä metsäbiotalous, Itä-Suomen yliopisto (UEF), päätoiminen opiskelija}
+\cvline{2024--2026:}{B.Eng-opinnot, tietotekniikka, Vaasan ammattikorkeakoulu (VAMK), kesken; opinnoissa Microsoft Active Directory}
+\cvline{2019--2022:}{OND, tietojenkäsittely, The Polytechnic, Ibadan, Nigeria}
+
+\section{\cvt{skills}}
+\cvline{Tietotekniikka:}{Microsoft Office; Microsoft Active Directory (VAMKin opinnot)}
+\cvline{Selvitystyö:}{Käyttäjähaastattelut ja yrityksille soittaminen}
+\cvline{Työtavat:}{Tiimityö; esiintyminen; viestintä ja yhteistyö}
+\cvline{Turvallisuus:}{Teollisuustyömaan turvallisuusohjeiden noudattaminen}
+\cvline{Haluan oppia:}{Tehtävässä käytettävät data-analyysityökalut}
+\cvline{\cvt{cards}:}{Työturvallisuuskortti}
+\cvline{\cvt{languages}:}{Englanti (sujuva); suomi (perustaso, opiskelen aktiivisesti); yoruba (äidinkieli)}
+
+\section{\cvt{experience}}
+\begin{cventry}{6/2026--8/2026}{\job{Founder in Residence}{Vaasa Startup Factory}, Vaasa}
+  Selvitin sähkön hinnan vaikutusta tuotantokustannuksiin käyttäjähaastatteluilla ja yrityksille soittamalla.\par
+  Kehitimme tiimini kanssa hetkin.app-palvelun ja esittelin sen yleisölle.
+\end{cventry}
+\begin{cventry}{18.8.2025--7.10.2025}{\job{Asentaja}{Axioma Servisas UAB}}
+  UPM Kaukaan sellutehdas, Lappeenranta: sähkösuodattimen uudelleenrakennushanke.\par
+  Noudatin tehtaan tiukkoja turvallisuusohjeita, pidin työmaan siistinä ja seurasin työkaluja ja materiaaleja.\par
+  Työnantajan arvio: kiitettävä. Vastuuntuntoinen ja tunnollinen työntekijä, halukas oppimaan ja ottamaan vastuuta.
+  \sotagrow{teollisuustyömaa,työturvallisuus,vastuullisuus,tiimityö,oppimishalu}
+\end{cventry}
+\begin{cventry}{11/2024--8/2026}{\textbf{AV-vapaaehtoinen}, Vaasa City Church, Vaasa: hoidin ääni- ja videotekniikan joka viikonloppu.}
+\end{cventry}
+\begin{cventry}{4/2025--8/2025}{\textbf{Lehdenjakaja}, Finnbox ja SSM, Vaasa: jakelureitit yksin aikaisin aamulla.}
+\end{cventry}
+\begin{cventry}{9/2016--9/2020}{Myynti- ja asiakaspalvelutyötä Nigeriassa (Desire Feeds, Bunmi Pastries): kassan käsittely.}
+\end{cventry}
+
+\section{\cvt{hobbies}}
+Kuntosali, asioiden korjaaminen ja valokuvaus.
+
+\section{\cvt{references}}
+\cvt{refsavailable}
+
+\end{document}
