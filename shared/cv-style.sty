@@ -87,7 +87,8 @@
   \hangindent=\dimexpr\cv@lw+\cvlabelsep\relax\hangafter=1
   \makebox[\cv@lw][r]{\textsc{#2}}\hspace{\cvlabelsep}#3\par\endgroup}
 \newenvironment{cventry}[2]
-  {\par\noindent\makebox[\cvlabelw][r]{\textsc{#1}}\hspace{\cvlabelsep}{#2}\par
+  {\par\noindent\hangindent=\dimexpr\cvlabelw+\cvlabelsep\relax\hangafter=1
+   \makebox[\cvlabelw][r]{\textsc{#1}}\hspace{\cvlabelsep}{#2}\par
    \begingroup\leftskip=\dimexpr\cvlabelw+\cvlabelsep\relax\parindent=0pt\parskip=1pt}
   {\par\endgroup\vspace{7pt}}
 

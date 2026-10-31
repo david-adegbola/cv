@@ -129,10 +129,12 @@ Never drop:
   added 2026-10-31).
 - Contact details go in the body (inside `\begin{cvheader}...\end{cvheader}`), never only in
   a footer.
-- Use one date format per CV, with each date on the same line as its job:
+- Use month and year for every work-experience date, with each date on the same line as its
+  job. Use one localized format consistently within each CV:
   - English: "Apr 2025--Aug 2025".
   - Finnish: "4/2025--8/2025".
-  - The certificate job may use exact dates: "18.8.2025--7.10.2025" / "18 Aug 2025--7 Oct 2025".
+  - The certificate job also uses month and year: "8/2025--10/2025" /
+    "Aug 2025--Oct 2025".
 - Use the job ad's own keywords, but only for things David has done or says he wants to learn.
 - Spell out acronyms and cards once, e.g. "Occupational safety card (työturvallisuuskortti)".
 - Before committing, run `pdftotext cv-xx.pdf -` and check that:
