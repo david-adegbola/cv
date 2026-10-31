@@ -1,0 +1,6 @@
+{
+  "_comment": "Merged roles: old slug -> the role that absorbed it. site/build.py makes /r/<old>/ redirect to /r/<new>/ and publishes the new PDFs under the old file names, so links already sent keep working. JobDesk reads this file to move tracker entries to the new role.",
+  "assembly-worker": "industrial-master",
+  "construction-master": "industrial-master",
+  "steel-installer": "industrial-master"
+}

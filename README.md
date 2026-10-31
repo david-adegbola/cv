@@ -26,6 +26,8 @@ a download button per language. Nothing else: no other roles, no jobs, no tracke
 - Every public page has `<meta name="robots" content="noindex">`.
 - The PDFs keep their old addresses (`…/david-adegbola-<role>.pdf`, `-fi.pdf`, `-en.pdf`), so links
   already sent still work.
+- When roles are merged, `site/redirects.json` maps each old role to the one that absorbed it: the old
+  employer page redirects there, and the old PDF names serve the new PDFs (same language).
 - The repo itself is public, so the `roles/` folders can still be seen on GitHub. This README and
   the site just don't list them.
 
@@ -35,7 +37,7 @@ The pages are built by `site/build.py` from `site/page.html` and `site/style.css
 
 ```
 cv/
-├── site/                        public employer pages: build.py, page.html, style.css, language.py;
+├── site/                        public employer pages: build.py, page.html, style.css, language.py, redirects.json;
 │                                facts.py (makes facts.json from CV-RULES.md)
 ├── shared/
 │   ├── cv-style.sty             shared LaTeX layout: \cvrole, \cvlang, \cvline, cventry, \cvphoto, tags,

@@ -49,8 +49,14 @@ written in LaTeX and published by GitHub Actions to https://david-adegbola.githu
   `applications/job-details/<role-slug>.md`: company / agency, location, job-ad link, contact
   person and phone, deadline, status, and a summary of the ad. Never put these in `job.md`,
   the README, commit messages, `.tex` comments or the role folder name.
-- Name role folders after the job type, not the employer (e.g. `roles/steel-installer/`,
+- Name role folders after the job type, not the employer (e.g. `roles/industrial-master/`,
   not `roles/installer-<company>/`); the folder name is part of the public PDF URL.
+- No redundant roles (David, 2026-10-31): roles that would read almost the same to an employer
+  (same first experience entry, mostly the same bullets, skills and tags, same cards and same
+  language setting) are one role. Keep roles separate when the lead experience, the cards or
+  the language setting differ in a way an employer would notice. When roles are merged, delete
+  the absorbed folders and add each `old-slug: new-slug` to `site/redirects.json`, so old
+  employer links and PDF names keep working.
 - Compile each file twice with pdflatex from inside its role folder:
   `cd roles/<role> && pdflatex cv-fi.tex && pdflatex cv-fi.tex`
   - Target ONE page.

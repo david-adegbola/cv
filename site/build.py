@@ -9,6 +9,8 @@
   first (no Finnish button for en-only roles; see site/language.py). Nothing else.
 - Every page has <meta name="robots" content="noindex">.
 - The PDFs stay where they were (_site/david-adegbola-<slug>[-<lang>].pdf), so old links keep working.
+- Merged roles (site/redirects.json): /r/<old>/ redirects to /r/<new>/, and the new PDFs are also published
+  under the old file names (combined -> combined, -fi -> -fi, -en -> -en).
 
 Contact details come from facts.json (generated from CV-RULES.md by site/facts.py). No job or tracker data
 is read here: JobDesk is a separate private repo, and its database never reaches this one.
@@ -17,6 +19,7 @@ is read here: JobDesk is a separate private repo, and its database never reaches
 import html
 import json
 import re
+import shutil
 import sys
 from pathlib import Path
 from string import Template
@@ -25,6 +28,34 @@ import language
 
 REPO = Path(__file__).resolve().parent.parent
 SITE_SRC = Path(__file__).resolve().parent
+
+
+REDIRECT_PAGE = """<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="0; url=../{new}/"><link rel="canonical" href="../{new}/">
+<title>{name}</title></head>
+<body><p>This CV has moved: <a href="../{new}/">open it here</a>.</p>
+<script>location.replace("../{new}/" + location.hash)</script></body></html>
+"""
+
+
+def redirects(out, made, name):
+    """Old employer pages and PDF names of merged roles point at the role that absorbed them."""
+    mapping = json.loads((SITE_SRC / "redirects.json").read_text(encoding="utf-8"))
+    done = []
+    for old, new in mapping.items():
+        if old.startswith("_") or new not in made or (REPO / "roles" / old).exists():
+            continue
+        target = out / "r" / old
+        target.mkdir(parents=True, exist_ok=True)
+        (target / "index.html").write_text(REDIRECT_PAGE.format(new=new, name=name), encoding="utf-8")
+        for suffix in ("", "-fi", "-en"):
+            src = out / f"david-adegbola-{new}{suffix}.pdf"
+            if src.exists():
+                shutil.copyfile(src, out / f"david-adegbola-{old}{suffix}.pdf")
+        done.append(f"r/{old}/ -> r/{new}/")
+    return done
 
 
 def esc(text):
@@ -90,3 +121,5 @@ if __name__ == "__main__":
         sys.exit("usage: python3 site/build.py <output dir, e.g. _site>")
     slugs = build(sys.argv[1])
     print("Employer pages:", ", ".join(f"r/{s}/" for s in slugs) or "none")
+    facts = json.loads((REPO / "facts.json").read_text(encoding="utf-8"))
+    print("Redirects:", ", ".join(redirects(Path(sys.argv[1]), slugs, esc(facts["name"]))) or "none")
