@@ -35,7 +35,7 @@ def normalized(text):
 
 
 def extract_pdf(pdf, layout=False):
-    command = ["pdftotext", "-layout"] if layout else ["pdftotext"]
+    command = ["pdftotext", "-bbox-layout"] if layout else ["pdftotext"]
     result = subprocess.run(
         [*command, str(pdf), "-"],
         check=True,
