@@ -27,7 +27,7 @@ jobs:
         run: |
           missing=""
           command -v mogrify >/dev/null || missing="$missing imagemagick"
-          command -v pdfunite >/dev/null || missing="$missing poppler-utils"
+          if ! command -v pdfunite >/dev/null || ! command -v pdftotext >/dev/null; then missing="$missing poppler-utils"; fi
           if [ -n "$missing" ]; then sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends $missing; fi
 
       # Safety net for the published PDFs: strip EXIF/GPS and cap size at 600x600 for any
@@ -88,6 +88,9 @@ jobs:
         run: |
           python3 site/build.py _site
           ls -lR _site
+
+      - name: Test CV and employer-site output
+        run: python3 -m unittest discover -s tests -v
 
       - uses: actions/configure-pages@v6
 

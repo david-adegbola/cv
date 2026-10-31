@@ -33,6 +33,12 @@ a download button per language. Nothing else: no other roles, no jobs, no tracke
 
 The pages are built by `site/build.py` from `site/page.html` and `site/style.css`.
 
+## Tests
+
+After compiling the CVs, run `python3 -m unittest discover -s tests -v` to check localized work
+dates, PDF text and layout, and employer-page links. PDF extraction checks need Poppler's
+`pdftotext`; the GitHub Actions build installs it and runs the same tests.
+
 ## Layout
 
 ```

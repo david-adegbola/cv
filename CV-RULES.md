@@ -76,7 +76,8 @@ written in LaTeX and published by GitHub Actions to https://david-adegbola.githu
   2026-10-30: links are shared one at a time). The GitHub Action builds the role's employer page
   `/r/<role-slug>/` automatically (`site/build.py`).
 - Commit only the .tex and .md files, e.g. "Add CV: <Role> (FI + EN)" ("(EN)" for en-only), and
-  push to main.
+  push to main. When adding regression tests or CI test steps, include only directly related
+  test and workflow files in that commit; never commit generated PDFs.
 - Wait for the GitHub Action "Build CVs and deploy to Pages" to finish with build and deploy
   both successful. Then check that each link returns HTTP 200:
   - employer page: `https://david-adegbola.github.io/cv/r/<role-slug>/`
@@ -129,11 +130,12 @@ Never drop:
   added 2026-10-31).
 - Contact details go in the body (inside `\begin{cvheader}...\end{cvheader}`), never only in
   a footer.
-- Use month and year for every work-experience date, with each date on the same line as its
-  job. Use one localized format consistently within each CV:
-  - English: "Apr 2025--Aug 2025".
-  - Finnish: "4/2025--8/2025".
-  - The certificate job also uses month and year: "8/2025--10/2025" /
+- Use month names and year for every work-experience date, with each date on the same line as
+  its job. Use one localized format consistently within each CV:
+  - English: abbreviated month names, e.g. "Apr 2025--Aug 2025".
+  - Finnish: short Finnish month names (tammi, helmi, maalis, huhti, touko, kesä, heinä, elo,
+    syys, loka, marras, joulu), e.g. "huhti 2025--elo 2025". Do not use numeric months.
+  - The certificate job also uses month names: "elo 2025--loka 2025" /
     "Aug 2025--Oct 2025".
 - Use the job ad's own keywords, but only for things David has done or says he wants to learn.
 - Spell out acronyms and cards once, e.g. "Occupational safety card (työturvallisuuskortti)".
