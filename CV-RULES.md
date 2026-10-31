@@ -214,6 +214,13 @@ Check the summary and every experience line in both languages:
 - Languages: Finnish basic (actively studying), English fluent, Yoruba native.
 - Computer skills: Microsoft Office (David, 2026-10-31); Microsoft Active Directory from the VAMK
   IT studies.
+- Hands-on IT work David has done (confirmed by David, 2026-10-31; used on the IT Field Technician CV):
+  rack-mounting servers; replacing drives, memory and power supplies; cable management and
+  labelling; patching and tracing network cables, connecting switches and access points, checking
+  connectivity; replacing payment terminals, receipt printers and scanners by following vendor
+  steps; setting up laptops, desktops, printers and peripherals, basic Windows troubleshooting;
+  Active Directory user accounts and groups, password resets, joining computers to a domain;
+  following work orders and keeping job notes and photos.
 - Cards: occupational safety card (työturvallisuuskortti). The hygiene passport (hygieniapassi)
   is only listed for food or retail jobs.
 - Main job, following his work certificate wording exactly:
