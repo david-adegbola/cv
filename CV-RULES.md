@@ -106,7 +106,8 @@ Never drop:
   paragraphs separated by `\\\\` and a blank line.
 - Use the standard headings: Summary / Yhteenveto, Skills / Taidot,
   Work Experience / Työkokemus, Education / Koulutus, Languages / Kielet, Cards / Kortit,
-  References / Suosittelijat.
+  References / Suosittelijat, and the optional Hobbies / Harrastukset (`\section{\cvt{hobbies}}`,
+  added 2026-10-31).
 - Contact details go in the body (inside `\begin{cvheader}...\end{cvheader}`), never only in
   a footer.
 - Use one date format per CV, with each date on the same line as its job:
@@ -137,7 +138,9 @@ Never drop:
   - The age is 24 as of October 2026. If you believe it may be out of date, ask David for
     his current age; never leave it out.
   - Add "a Sustainable Forest Bioeconomy student at the University of Eastern Finland" only
-    when it helps the application, e.g. for part-time jobs. Leave it out for full-time jobs.
+    when it helps the application, e.g. for part-time jobs. Leave it out for other full-time jobs.
+  - Exception (David, 2026-10-31): forestry, forest bioeconomy, trainee and research roles keep the
+    student line even when the work is full-time, because the degree is the main fit.
 - Paragraph 1: the relevant work story in plain words, using specific facts. The employer's
   own words from the certificate are best.
 - Paragraph 2: how he works, then why he fits this job. It always ends with an honest line on
