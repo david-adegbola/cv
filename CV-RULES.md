@@ -93,6 +93,10 @@ Try these first, in this order:
 3. Remove duplicates between the header, summary and skills.
 4. Shorten the summary.
 
+Exception (David, 2026-10-31): it-field-technician, trainee-master and forestry-master may run
+to two pages with the AI Automation Developer entry. Don't shorten them to fit; the footer
+appears automatically.
+
 Never drop:
 - the age;
 - the References section;
@@ -235,6 +239,24 @@ Check the summary and every experience line in both languages:
   Nov 2024–Aug 2026. Sound and video every weekend.
 - Founder in Residence: Vaasa Startup Factory, Jun 2026–Aug 2026. Researched user needs with
   interviews and calls, then built and pitched hetkin.app with a team.
+- AI Automation Developer (Finnish: Tekoälykehittäjä), own projects, Jan 2026–present
+  (1/2026–). I build practical tools and automate work with AI coding agents (Claude Code).
+  I write the spec and the rules the agent follows, guide it and check the result. Code is
+  managed on GitHub (repos, GitHub Actions, GitHub Pages). Link: github.com/david-adegbola.
+  Projects:
+  - CV pipeline (david-adegbola/cv): role-specific CVs in Finnish and English, built to PDF
+    automatically with GitHub Actions and published on GitHub Pages.
+  - CV-RULES.md: the rules file he wrote that keeps the agent's output accurate (fixed facts,
+    claims it may never make, checks before every task).
+  - A job scraper and application tracker (Python, SQLite).
+  - His portfolio website, built with Claude Code (in progress).
+  - A 2D forest learning game for children aged 8–16, built with AI agents (in progress).
+  - Always call these "own projects" / "omat projektit". Never present them as paid or client
+    work. Never claim to write Python, JavaScript or other languages (including LaTeX) by hand,
+    or to review code line by line.
+  - Placement: it-field-technician and trainee-master get the full entry after Vaasa Startup
+    Factory; forestry-master gets bullets 1, 2 and 5; the other CVs get one Skills mention only,
+    merged into their single IT row (technical / industrial CVs still keep IT to one row).
 - Nigeria:
   - Salesperson, Desire Feeds, Lagos, Mar 2019–Sep 2020. Feed sales, advice, cash balancing.
   - Sales Assistant and Kitchen Helper, Bunmi Pastries, Ibadan, Sep 2016–Jun 2018.
