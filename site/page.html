@@ -5,15 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
   <title>$title</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@300;400;600&display=swap">
   <style>
 $style
   </style>
 </head>
 <body>
-  <main>
-    <h1>$name</h1>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">$eyebrow</p>
+        <h1>$name</h1>
+        $hero
+      </div>
+      $contact
+    </div>
+  </header>
+  <main class="wrap">
     $body
-    $contact
   </main>
 </body>
 </html>

@@ -1,18 +1,68 @@
-    :root { --bg: #f6f7f9; --fg: #1d2330; --muted: #5b6475; --accent: #0b3d91; --accent-fg: #fff; --card: #fff; --line: #e2e5ea; }
-    @media (prefers-color-scheme: dark) {
-      :root { --bg: #14171c; --fg: #e8ebf0; --muted: #a3abb8; --accent: #5b8def; --accent-fg: #0b1020; --card: #1d2128; --line: #2c313a; }
-    }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--fg); line-height: 1.5; }
-    main { max-width: 900px; margin: 0 auto; padding: 40px 16px; }
-    h1 { margin: 0 0 4px; font-size: 1.9rem; }
-    .lead, .role { margin: 0 0 20px; color: var(--muted); font-size: 1.1rem; }
-    .buttons { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
-    .btn { display: inline-block; padding: 8px 16px; border-radius: 8px; background: var(--accent); color: var(--accent-fg); font-weight: 600; text-decoration: none; }
-    .btn:hover, .btn:focus-visible { filter: brightness(1.1); }
-    .cv { display: block; width: 100%; height: 80vh; min-height: 480px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
-    .cv p { padding: 16px; }
-    .open { margin: 8px 0 0; }
-    .open a { color: var(--accent); }
-    .contact { margin-top: 24px; color: var(--muted); }
-    .contact a { color: inherit; }
+/* Employer pages: David's "IBM Carbon-Inspired Design System" (Claude Design). IBM Plex, one blue
+   accent, 0px corners, depth from background layers; white theme, Gray 100 theme for dark mode. */
+:root {
+  --background: #ffffff; --layer-01: #f4f4f4; --layer-hover: #e8e8e8;
+  --text-primary: #161616; --text-secondary: #525252; --border-subtle: #e0e0e0; --border-strong: #8d8d8d;
+  --link: #0f62fe; --link-hover: #0043ce;
+  --interactive: #0f62fe; --interactive-hover: #0353e9; --interactive-active: #002d9c;
+  --hero: #161616; --hero-text: #f4f4f4; --hero-secondary: #c6c6c6; --hero-link: #78a9ff;
+  --focus: #0f62fe; --focus-inset: #ffffff;
+  --font-sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", Menlo, Courier, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #161616; --layer-01: #262626; --layer-hover: #333333;
+    --text-primary: #f4f4f4; --text-secondary: #c6c6c6; --border-subtle: #393939; --border-strong: #6f6f6f;
+    --link: #78a9ff; --link-hover: #a6c8ff;
+    --hero: #0b0b0b; --focus: #ffffff; --focus-inset: #161616;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--font-sans); font-size: 1rem; line-height: 1.5; background: var(--background); color: var(--text-primary); }
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; }
+:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--focus), 0 0 0 3px var(--focus-inset); }
+.wrap { max-width: 1056px; margin: 0 auto; padding: 0 32px; }
+
+/* dark hero band: who and for which job, with contact details */
+.hero { background: var(--hero); color: var(--hero-text); padding: 48px 0 40px; }
+.hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 24px 48px; align-items: end; }
+.eyebrow { margin: 0 0 16px; font-family: var(--font-mono); font-size: .75rem; letter-spacing: .32px; color: var(--hero-secondary); }
+h1 { margin: 0; font-size: 2.625rem; line-height: 1.19; font-weight: 300; letter-spacing: 0; }
+.role, .lead { margin: 8px 0 0; font-size: 1.25rem; line-height: 1.4; font-weight: 400; color: var(--hero-secondary); }
+.contact { display: grid; grid-template-columns: auto auto; gap: 4px 16px; margin: 0; font-size: .875rem; letter-spacing: .16px; }
+.contact dt { font-family: var(--font-mono); font-size: .75rem; letter-spacing: .32px; color: var(--hero-secondary); align-self: center; }
+.contact dd { margin: 0; color: var(--hero-text); }
+.contact a { color: var(--hero-link); }
+.contact a:hover { color: #a6c8ff; }
+
+/* downloads: rectangular Carbon buttons, 48px, asymmetric padding, 1px gap */
+main.wrap { padding-top: 32px; padding-bottom: 64px; }
+main.wrap:empty { display: none; }
+.buttons { display: flex; flex-wrap: wrap; gap: 1px; margin: 0 0 24px; }
+.btn {
+  display: inline-flex; align-items: center; min-height: 48px; padding: 0 64px 0 16px; font-size: .875rem; letter-spacing: .16px;
+  background: var(--interactive); color: #ffffff; border: 1px solid transparent; transition: background 110ms cubic-bezier(.2, 0, .38, .9);
+}
+.btn:hover { background: var(--interactive-hover); color: #ffffff; text-decoration: none; }
+.btn:active { background: var(--interactive-active); }
+.btn.secondary { background: #393939; }
+.btn.secondary:hover { background: #4c4c4c; }
+
+/* the CV itself, in a flat layer frame */
+.cv { display: block; width: 100%; height: 82vh; min-height: 520px; border: 0; background: var(--layer-01); }
+.cv p { padding: 16px; margin: 0; }
+.open { margin: 16px 0 0; font-size: .875rem; letter-spacing: .16px; }
+
+@media (max-width: 672px) {
+  .wrap { padding: 0 16px; }
+  .hero { padding: 32px 0; }
+  .hero-grid { grid-template-columns: 1fr; }
+  h1 { font-size: 2rem; line-height: 1.25; }
+  .role, .lead { font-size: 1rem; }
+  .btn { flex: 1 1 100%; }
+  .cv { height: 70vh; min-height: 420px; }
+}

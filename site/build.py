@@ -77,9 +77,9 @@ def role_title(slug):
 
 def contact_html(facts):
     phone_href = re.sub(r"\s+", "", facts["phone"])
-    return (f'<p class="contact">{esc(facts["location"])}<br>'
-            f'<a href="tel:{esc(phone_href)}">{esc(facts["phone"])}</a><br>'
-            f'<a href="mailto:{esc(facts["email"])}">{esc(facts["email"])}</a></p>')
+    return (f'<dl class="contact"><dt>Location</dt><dd>{esc(facts["location"])}</dd>'
+            f'<dt>Phone</dt><dd><a href="tel:{esc(phone_href)}">{esc(facts["phone"])}</a></dd>'
+            f'<dt>Email</dt><dd><a href="mailto:{esc(facts["email"])}">{esc(facts["email"])}</a></dd></dl>')
 
 
 def build(out_dir):
@@ -90,8 +90,8 @@ def build(out_dir):
     common = {"name": esc(facts["name"]), "contact": contact_html(facts), "style": style}
 
     (out / "index.html").write_text(page.substitute(
-        common, title=esc(facts["name"]),
-        body=f'<p class="lead">Job applications. If I sent you a link, it opens my CV for that job.</p>'),
+        common, title=esc(facts["name"]), eyebrow="Job applications",
+        hero='<p class="lead">If I sent you a link, it opens my CV for that job.</p>', body=""),
         encoding="utf-8")
 
     made = []
@@ -103,18 +103,19 @@ def build(out_dir):
         combined = (out / f"david-adegbola-{slug}.pdf").exists()
         embed = f"david-adegbola-{slug}.pdf" if combined else f"david-adegbola-{slug}-{langs[0]}.pdf"
         labels = {"fi": "Lataa CV (suomi)", "en": "Download CV (English)"}
-        buttons = "".join(f'<a class="btn" href="../../david-adegbola-{slug}-{lang}.pdf" download hreflang="{lang}">'
-                          f'{labels[lang]}</a>' for lang in langs)
+        # the main language is the primary button, the other one secondary
+        buttons = "".join(f'<a class="btn{" secondary" if i else ""}" href="../../david-adegbola-{slug}-{lang}.pdf" download hreflang="{lang}">'
+                          f'{labels[lang]}</a>' for i, lang in enumerate(langs))
         title = role_title(slug)
-        body = (f'<p class="role">{esc(title)}</p>'
-                f'<p class="buttons">{buttons}</p>'
+        body = (f'<p class="buttons">{buttons}</p>'
                 f'<object class="cv" data="../../{embed}{esc(VIEWER)}" type="application/pdf" aria-label="CV: {esc(title)}">'
                 f'<p>Your browser can\'t show the PDF here. <a href="../../{embed}">Open the CV</a>.</p></object>'
                 f'<p class="open"><a href="../../{embed}">Open the CV as a PDF</a></p>')
         target = out / "r" / slug
         target.mkdir(parents=True, exist_ok=True)
         (target / "index.html").write_text(page.substitute(
-            common, title=f"{esc(facts['name'])} – {esc(title)}", body=body), encoding="utf-8")
+            common, title=f"{esc(facts['name'])} – {esc(title)}", eyebrow="CV · Ansioluettelo",
+            hero=f'<p class="role">{esc(title)}</p>', body=body), encoding="utf-8")
         made.append(slug)
     return made
 
