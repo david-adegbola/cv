@@ -28,6 +28,9 @@ import language
 
 REPO = Path(__file__).resolve().parent.parent
 SITE_SRC = Path(__file__).resolve().parent
+# Open the embedded CV fitted to the box's width with the thumbnail sidebar closed
+# (Chrome/Edge: navpanes, view; Firefox: pagemode). Download and "Open" links get the plain PDF.
+VIEWER = "#view=FitH&navpanes=0&pagemode=none"
 
 
 REDIRECT_PAGE = """<!doctype html>
@@ -105,7 +108,7 @@ def build(out_dir):
         title = role_title(slug)
         body = (f'<p class="role">{esc(title)}</p>'
                 f'<p class="buttons">{buttons}</p>'
-                f'<object class="cv" data="../../{embed}" type="application/pdf" aria-label="CV: {esc(title)}">'
+                f'<object class="cv" data="../../{embed}{esc(VIEWER)}" type="application/pdf" aria-label="CV: {esc(title)}">'
                 f'<p>Your browser can\'t show the PDF here. <a href="../../{embed}">Open the CV</a>.</p></object>'
                 f'<p class="open"><a href="../../{embed}">Open the CV as a PDF</a></p>')
         target = out / "r" / slug
