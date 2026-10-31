@@ -5,7 +5,8 @@
 
 - _site/index.html: name, contact and one line. It does NOT list the roles; David shares role links one at a time.
 - _site/r/<slug>/index.html: one employer page per role: name, role title, contact, the CV embedded
-  (combined FI + EN PDF, or the single language there is), and FI / EN download buttons. Nothing else.
+  (the combined PDF, main language first) and one download button per language built, main language
+  first (no Finnish button for en-only roles; see site/language.py). Nothing else.
 - Every page has <meta name="robots" content="noindex">.
 - The PDFs stay where they were (_site/david-adegbola-<slug>[-<lang>].pdf), so old links keep working.
 
@@ -19,6 +20,8 @@ import re
 import sys
 from pathlib import Path
 from string import Template
+
+import language
 
 REPO = Path(__file__).resolve().parent.parent
 SITE_SRC = Path(__file__).resolve().parent
@@ -60,7 +63,7 @@ def build(out_dir):
     made = []
     for d in sorted((REPO / "roles").glob("*/")):
         slug = d.name
-        langs = [lang for lang in ("fi", "en") if (out / f"david-adegbola-{slug}-{lang}.pdf").exists()]
+        langs = [lang for lang in language.langs(d) if (out / f"david-adegbola-{slug}-{lang}.pdf").exists()]
         if not langs:
             continue
         combined = (out / f"david-adegbola-{slug}.pdf").exists()

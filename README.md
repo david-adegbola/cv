@@ -18,8 +18,8 @@ JobDesk. CV-RULES.md stays the authority, and the GitHub Action fails if the two
 ## Employer links
 
 Each role gets one public page: `https://david-adegbola.github.io/cv/r/<role>/`. It shows David's
-name, the role title, contact details, the CV (the combined Finnish + English PDF, embedded) and
-Finnish / English download buttons. Nothing else: no other roles, no jobs, no tracker.
+name, the role title, contact details, the CV (the combined PDF, main language first, embedded) and
+a download button per language. Nothing else: no other roles, no jobs, no tracker.
 
 - The root page (`https://david-adegbola.github.io/cv/`) shows only the name, contact details and
   one line. It does **not** list the roles: links are shared one at a time.
@@ -35,14 +35,14 @@ The pages are built by `site/build.py` from `site/page.html` and `site/style.css
 
 ```
 cv/
-├── site/                        public employer pages: build.py, page.html, style.css;
+├── site/                        public employer pages: build.py, page.html, style.css, language.py;
 │                                facts.py (makes facts.json from CV-RULES.md)
 ├── shared/
 │   ├── cv-style.sty             shared LaTeX layout: \cvrole, \cvlang, \cvline, cventry, \cvphoto, tags,
 │   │                            footer only on CVs longer than one page (automatic)
-│   ├── combine.sh               joins the Finnish and English PDFs into one file
+│   ├── combine.sh               makes the one PDF to send (language order from job.md)
 │   └── photos/                  profile photo (off in committed CVs)
-├── roles/<role>/                cv-fi.tex (main), cv-en.tex, job.md (public: no employers)
+├── roles/<role>/                cv-fi.tex, cv-en.tex, job.md (public: no employers; sets the language)
 ├── applications/                git-ignored: application emails and job-details/<role>.md
 ├── facts.json                   generated from CV-RULES.md by site/facts.py
 ├── CV-RULES.md                  the rules and canonical facts
@@ -57,9 +57,23 @@ should remain. David's global git `commit-msg` hook removes AI co-author trailer
 has no hook of its own. Don't set `core.hooksPath` here: a repo-level setting would stop the
 global hook from running.
 
+## Language option
+
+Each role's `job.md` has a line `- **Language:** fi-first`, `en-first` or `en-only` (no line means
+fi-first). It decides what is built and which file you send, `david-adegbola-<role>.pdf`:
+
+- **fi-first:** Finnish is the main version; the combined PDF is Finnish, then English.
+- **en-first:** English is the main version; the combined PDF is English, then Finnish. For
+  employers that work in English.
+- **en-only:** only `cv-en.tex` is built (no `cv-fi.tex` needed); the combined PDF is the English
+  CV, so the file name stays the same.
+
+The employer page shows the main version first and only the download buttons that exist.
+`site/language.py` reads the setting for the GitHub Action, `shared/combine.sh` and the pages.
+
 ## Languages
 
-- Each role folder has `cv-en.tex` and, when there is a Finnish version, `cv-fi.tex`. The file name sets the language code: `cv-<lang>.tex` is published as `david-adegbola-<role>-<lang>.pdf`.
+- Each role folder has `cv-en.tex` and, unless the role is en-only, `cv-fi.tex`. The file name sets the language code: `cv-<lang>.tex` is published as `david-adegbola-<role>-<lang>.pdf`.
 - Each role's employer page shows one download button per language. Its title comes from the first `# ` heading in `job.md`.
 - In the preamble of each CV, `\cvlang{en}` (the default) or `\cvlang{fi}` switches the fixed labels to that language. These are the contact labels, the section titles, "Page X of Y" / "Sivu X / Y", and the word joining job title and employer in `\job` ("at" in English, a comma in Finnish). `\cvlang{fi}` also loads Finnish hyphenation. Use the labels with `\cvt{key}`, for example `\section{\cvt{experience}}` or `\textsc{\cvt{phone}:}`. The available keys are listed in `shared/cv-style.sty`.
 - `ä`, `ö` and `å` can be typed directly; the style loads `fontenc` T1 and `inputenc` utf8.
@@ -92,7 +106,7 @@ Read [CV-RULES.md](CV-RULES.md) first; it has the full workflow and rules.
    ```bash
    cp -R roles/salesperson roles/warehouse-worker
    ```
-2. In each `cv-<lang>.tex`, change `\cvrole{...}` (the footer's right-hand text) and the title under the name, then tailor the content. Every role needs both `cv-fi.tex` and `cv-en.tex` (they are also joined into one combined PDF).
+2. In each `cv-<lang>.tex`, change `\cvrole{...}` (the footer's right-hand text) and the title under the name, then tailor the content. Every role needs both `cv-fi.tex` and `cv-en.tex` unless it is en-only (see Language option).
 3. Edit `job.md`. Set the `# ` heading to the role name (no company names; it is shown on the public employer page), then add the job type, languages, PDFs, the date, `Photo: no` and notes about the CV. Employers, contacts, ad links, deadlines and status go in the private, git-ignored `applications/job-details/<role>.md`.
 4. Commit and push to `main`. The PDFs and the employer page `/r/<role>/` appear automatically.
 

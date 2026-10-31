@@ -3,6 +3,7 @@
 - **Role:** Construction Worker / Rakennustyöntekijä (master CV)
 - **Job type:** Construction helper, general site work, demolition and groundworks; sent unchanged to similar jobs
 - **Languages:** Finnish (`cv-fi.tex`, main version), English (`cv-en.tex`)
+- **Language:** fi-first
 - **PDFs:** `david-adegbola-construction-master.pdf` (combined: Finnish first, then English, the file to send), `david-adegbola-construction-master-fi.pdf`, `david-adegbola-construction-master-en.pdf`
 - **Created:** 2026-10-30
 - **Photo:** no

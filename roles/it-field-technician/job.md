@@ -3,7 +3,8 @@
 - **Role:** IT Field Technician
 - **Job type:** Data centre and on-site hardware work, Windows / Active Directory, end-user IT, POS and AV equipment
 - **Languages:** English (`cv-en.tex`)
-- **PDFs:** `david-adegbola-it-field-technician-en.pdf`
+- **Language:** en-only
+- **PDFs:** `david-adegbola-it-field-technician.pdf` (the file to send; en-only, so the same as the English PDF), `david-adegbola-it-field-technician-en.pdf`
 - **Created:** 2026-10-30
 - **Photo:** no
 

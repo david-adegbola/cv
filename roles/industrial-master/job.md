@@ -3,6 +3,7 @@
 - **Role:** Production and Assembly Worker / Tuotanto- ja asennustyöntekijä (master CV)
 - **Job type:** Production, assembly, installation, sawmill / planing-mill and machine-shop jobs; sent unchanged to similar jobs
 - **Languages:** Finnish (`cv-fi.tex`, main version), English (`cv-en.tex`)
+- **Language:** fi-first
 - **PDFs:** `david-adegbola-industrial-master.pdf` (combined: Finnish first, then English, the file to send), `david-adegbola-industrial-master-fi.pdf`, `david-adegbola-industrial-master-en.pdf`
 - **Created:** 2026-10-30
 - **Photo:** no

@@ -3,6 +3,7 @@
 - **Role:** Installer / Asentaja
 - **Job type:** Installing steel structures, railings and stairs, in the workshop and on construction sites
 - **Languages:** Finnish (`cv-fi.tex`, main version), English (`cv-en.tex`)
+- **Language:** fi-first
 - **PDFs:** `david-adegbola-steel-installer.pdf` (combined: Finnish first, then English, the file to send), `david-adegbola-steel-installer-fi.pdf`, `david-adegbola-steel-installer-en.pdf`
 - **Created:** 2026-10-30
 - **Photo:** no

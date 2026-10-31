@@ -47,28 +47,34 @@ jobs:
         with:
           package_file: .github/texlive-packages.txt
 
-      # Each roles/<role>/cv-<lang>.tex is compiled twice from inside its folder, so "Page X of Y"
-      # and the one-page/multi-page footer check resolve
-      - name: Compile every roles/*/cv-*.tex with pdflatex
+      # Each role builds the languages its job.md asks for (Language: fi-first, en-first or en-only;
+      # see site/language.py). Each cv-<lang>.tex is compiled twice from inside its folder, so
+      # "Page X of Y" and the one-page/multi-page footer check resolve
+      - name: Compile each role's CVs with pdflatex
         run: |
           set -e
-          for tex in roles/*/cv-*.tex; do
-            dir=$(dirname "$tex")
+          for dir in roles/*/; do
+            dir=${dir%/}
             role=$(basename "$dir")
-            name=$(basename "$tex" .tex)
-            lang=${name#cv-}
-            echo "::group::$role ($lang)"
-            (cd "$dir" && pdflatex -interaction=nonstopmode -halt-on-error "$name.tex" && pdflatex -interaction=nonstopmode -halt-on-error "$name.tex")
-            cp "$dir/$name.pdf" "_site/david-adegbola-$role-$lang.pdf"
-            echo "::endgroup::"
+            setting=$(python3 site/language.py "$dir")
+            for lang in $(python3 site/language.py "$dir" --langs); do
+              if [ ! -f "$dir/cv-$lang.tex" ]; then
+                echo "::error::$role is $setting but has no cv-$lang.tex"
+                exit 1
+              fi
+              echo "::group::$role ($lang, $setting)"
+              (cd "$dir" && pdflatex -interaction=nonstopmode -halt-on-error "cv-$lang.tex" && pdflatex -interaction=nonstopmode -halt-on-error "cv-$lang.tex")
+              cp "$dir/cv-$lang.pdf" "_site/david-adegbola-$role-$lang.pdf"
+              echo "::endgroup::"
+            done
           done
 
-      # One PDF per role that has both languages (Finnish first, then English), so a single file can be sent
-      - name: Combine FI + EN into one PDF
+      # One PDF per role, the file that is sent: main language first (fi-first: FI + EN, en-first: EN + FI),
+      # or the English CV alone for en-only, so every role has david-adegbola-<role>.pdf
+      - name: Combine each role into one PDF
         run: |
           for dir in roles/*/; do
             dir=${dir%/}
-            [ -f "$dir/cv-fi.pdf" ] && [ -f "$dir/cv-en.pdf" ] || continue
             sh shared/combine.sh "$dir" "_site/david-adegbola-$(basename "$dir").pdf"
           done
 

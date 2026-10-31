@@ -3,6 +3,7 @@
 - **Role:** Assembly Worker / Asentaja
 - **Job type:** Assembly and installation work in manufacturing (electrical, hydraulic, mechanical and pre-assembly)
 - **Languages:** Finnish (`cv-fi.tex`, main version), English (`cv-en.tex`)
+- **Language:** fi-first
 - **PDFs:** `david-adegbola-assembly-worker.pdf` (combined: Finnish first, then English, the file to send), `david-adegbola-assembly-worker-fi.pdf`, `david-adegbola-assembly-worker-en.pdf`
 - **Created:** 2026-10-30
 - **Photo:** no

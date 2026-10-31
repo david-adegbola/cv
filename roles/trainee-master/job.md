@@ -2,8 +2,9 @@
 
 - **Role:** Trainee / Harjoittelija (master CV)
 - **Job type:** Student trainee roles at industrial technology companies: on-call trainee and summer trainee roles; sent unchanged to similar trainee roles
-- **Languages:** Finnish (`cv-fi.tex`, main version), English (`cv-en.tex`)
-- **PDFs:** `david-adegbola-trainee-master.pdf` (combined: Finnish first, then English, the file to send), `david-adegbola-trainee-master-fi.pdf`, `david-adegbola-trainee-master-en.pdf`
+- **Languages:** English (`cv-en.tex`, main version), Finnish (`cv-fi.tex`)
+- **Language:** en-first
+- **PDFs:** `david-adegbola-trainee-master.pdf` (combined: English first, then Finnish, the file to send), `david-adegbola-trainee-master-fi.pdf`, `david-adegbola-trainee-master-en.pdf`
 - **Created:** 2026-10-31
 - **Photo:** no
 

@@ -27,9 +27,15 @@ written in LaTeX and published by GitHub Actions to https://david-adegbola.githu
 ## 1. Repo layout and workflow for a new CV
 
 - One folder per job: `roles/<role-slug>/` containing
-  - `cv-fi.tex` (Finnish; usually the MAIN version for jobs in Finland),
+  - `cv-fi.tex` (Finnish; not needed for en-only roles),
   - `cv-en.tex` (English), and
   - `job.md`.
+- Each role sets its language in job.md: fi-first (default), en-first or en-only.
+  Use en-first or en-only for employers that work in English.
+  - Write it as the line `- **Language:** fi-first` (or `en-first` / `en-only`) under the
+    `Languages` line. No line means fi-first.
+  - fi-first: `cv-fi.tex` is the main version. en-first: `cv-en.tex` is the main version.
+    en-only: only `cv-en.tex` is built.
 - Start by copying the closest existing role folder, then tailor the copy.
 - Preamble:
   - `\cvrole{...}` sets the footer role text.
@@ -51,17 +57,20 @@ written in LaTeX and published by GitHub Actions to https://david-adegbola.githu
   - The log must have no "Overfull" warnings.
   - Render the PDF to an image and look at it.
 - Make the single combined PDF, the file David actually submits:
-  `shared/combine.sh roles/<role>` writes `roles/<role>/cv-combined.pdf`, with the Finnish
-  version first and then the English one, in one file.
-  - Every role must have both `cv-fi.tex` and `cv-en.tex`, so every role gets a combined PDF.
+  `shared/combine.sh roles/<role>` writes `roles/<role>/cv-combined.pdf`, with the main
+  version first: Finnish then English for fi-first, English then Finnish for en-first. For
+  en-only it is the English CV on its own, so the file to submit always has the same name.
+  - Every fi-first and en-first role has both `cv-fi.tex` and `cv-en.tex`; an en-only role has
+    only `cv-en.tex`. Every role gets a combined PDF.
   - Check it: both versions are there in that order, and the page count is the two added
-    together (normally 1 + 1 = 2 pages).
+    together (normally 1 + 1 = 2 pages; 1 page for en-only).
   - The GitHub Action builds and publishes it automatically as
     `david-adegbola-<role-slug>.pdf`. Never commit it (PDFs are git-ignored).
 - Do NOT list the role or its links in README.md or on the public root page (David's decision,
   2026-10-30: links are shared one at a time). The GitHub Action builds the role's employer page
   `/r/<role-slug>/` automatically (`site/build.py`).
-- Commit only the .tex and .md files, e.g. "Add CV: <Role> (FI + EN)", and push to main.
+- Commit only the .tex and .md files, e.g. "Add CV: <Role> (FI + EN)" ("(EN)" for en-only), and
+  push to main.
 - Wait for the GitHub Action "Build CVs and deploy to Pages" to finish with build and deploy
   both successful. Then check that each link returns HTTP 200:
   - employer page: `https://david-adegbola.github.io/cv/r/<role-slug>/`
