@@ -1,0 +1,70 @@
+% !TEX TS-program = pdflatex
+% David - Process Worker CV
+
+\documentclass[a4paper,11pt]{article}
+
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+
+\cvrole{Process Worker}
+
+\begin{document}
+\small
+\setlength{\cvlabelw}{3.9cm}
+\titlespacing{\section}{0pt}{0.55em}{2pt}
+
+\begin{cvheader}
+\par{\centering
+		{\Huge \textsc{David Adegbola}}\\[0.4em]
+		{\Large Process Worker}
+	\bigskip\par}
+
+\hrule
+\vspace{0.5em}
+\cvline[2.4cm]{\cvt{location}:}{Joensuu, Finland}
+\cvline[2.4cm]{\cvt{phone}:}{+358 46 800 7210}
+\cvline[2.4cm]{\cvt{email}:}{\href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}}
+\end{cvheader}
+
+\section{\cvt{summary}}
+\begin{tabular}{p{0.9\textwidth}}
+ Hi! I'm David, 24. I worked as a fitter at UPM Kaukas pulp mill in Lappeenranta, on the electrostatic precipitator rebuild project. I know what a process industry plant is like, and I'm used to its strict safety rules. My employer rated my work excellent and described me as eager to learn and to take responsibility.\\\\
+
+ I work accurately and carefully, and I learn quickly. I can work on my own and with the rest of the shift. I'm used to heavy physical work. I can do continuous three-shift work, start immediately and work anywhere in Finland. My Finnish is still basic, and I'm actively studying it.
+\end{tabular}
+
+\section{\cvt{skills}}
+\cvline{Plant work:}{Work at a process industry plant; angle grinders, lifting equipment, power and hand tools}
+\cvline{Ways of working:}{Independent work and teamwork; accuracy; keeping the site clean; tracking tools and materials; occupational safety}
+\cvline{Shift work:}{Ready for continuous three-shift work (including nights and weekends)}
+\cvline{Want to learn:}{Process monitoring and control; operating and maintaining production machines; quality control; the vocational qualification in process industry}
+\cvline{IT:}{Basic computer skills; builds own tools with AI coding agents (own projects)}
+\cvline{\cvt{cards}:}{Occupational safety card (työturvallisuuskortti)}
+\cvline{\cvt{languages}:}{Finnish (basic, actively studying); English (fluent); Yoruba (native)}
+
+\section{\cvt{experience}}
+\begin{cventry}{Aug 2025--Oct 2025}{\job{Fitter}{Axioma Servisas UAB}}
+  UPM Kaukas pulp mill, Lappeenranta\par
+  Assembly work on the electrostatic precipitator rebuild project.\par
+  Used angle grinders and lifting equipment.\par
+  Kept the work site clean, tracked tools and materials, and followed the mill's strict safety rules.\par
+  Employer rating: excellent. A responsible and conscientious employee, eager to learn and to take responsibility.
+  \sotagrow{pulp-mill,process-industry,angle-grinder,lifting-equipment,site-safety,precision}
+\end{cventry}
+\begin{cventry}{Apr 2025--Aug 2025}{\textbf{Independent Courier}, Finnbox and SSM, Vaasa: early-morning delivery routes alone, in all weather.}
+\end{cventry}
+\begin{cventry}{Nov 2024--Aug 2026}{\textbf{Audio-Visual Volunteer}, Vaasa City Church, Vaasa: sound and video every weekend.}
+\end{cventry}
+\begin{cventry}{Jun 2026--Aug 2026}{\textbf{Founder in Residence}, Vaasa Startup Factory, Vaasa: built a digital product with a team.}
+\end{cventry}
+\begin{cventry}{Sep 2016--Sep 2020}{Sales and customer service jobs in Nigeria (Desire Feeds, Bunmi Pastries).}
+\end{cventry}
+
+\section{\cvt{education}}
+\cvline{2026--present:}{B.Sc Sustainable Forest Bioeconomy, University of Eastern Finland (UEF)}
+\cvline{2024--2026:}{B.Eng studies, Information Technology, VAMK (Vaasa University of Applied Sciences); not completed, included Microsoft Active Directory}
+\cvline{2019--2022:}{OND in Computer Science, The Polytechnic, Ibadan, Nigeria}
+
+\section{\cvt{references}}
+\cvt{refsavailable}
+
+\end{document}

@@ -1,0 +1,71 @@
+% !TEX TS-program = pdflatex
+% David - Prosessityöntekijä CV (suomi)
+
+\documentclass[a4paper,11pt]{article}
+
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+
+\cvlang{fi}
+\cvrole{Prosessityöntekijä}
+
+\begin{document}
+\small
+\setlength{\cvlabelw}{3.9cm}
+\titlespacing{\section}{0pt}{0.55em}{2pt}
+
+\begin{cvheader}
+\par{\centering
+		{\Huge \textsc{David Adegbola}}\\[0.4em]
+		{\Large Prosessityöntekijä}
+	\bigskip\par}
+
+\hrule
+\vspace{0.5em}
+\cvline[2.4cm]{\cvt{location}:}{Joensuu, Suomi}
+\cvline[2.4cm]{\cvt{phone}:}{+358 46 800 7210}
+\cvline[2.4cm]{\cvt{email}:}{\href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}}
+\end{cvheader}
+
+\section{\cvt{summary}}
+\begin{tabular}{p{0.9\textwidth}}
+ Hei! Olen David, 24-vuotias. Olin asentajana UPM Kaukaan sellutehtaalla Lappeenrannassa sähkösuodattimen uudelleenrakennushankkeessa. Prosessiteollisuuden tehdasympäristö ja sen tiukat turvallisuusohjeet ovat minulle tuttuja. Työnantaja arvioi työni kiitettäväksi ja kuvasi minua halukkaaksi oppimaan ja ottamaan vastuuta.\\\\
+
+ Teen työni tarkasti ja huolellisesti, ja opin nopeasti. Pystyn työskentelemään itsenäisesti ja vuoron muun tiimin kanssa. Olen tottunut raskaaseen fyysiseen työhön. Voin tehdä keskeytymätöntä kolmivuorotyötä, aloittaa heti ja työskennellä missä päin Suomea tahansa. Suomen kielen taitoni on vielä perustasolla, ja opiskelen sitä aktiivisesti.
+\end{tabular}
+
+\section{\cvt{skills}}
+\cvline{Tehdastyö:}{Työ prosessiteollisuuden tehtaalla; kulmahiomakone, nostolaitteet, sähkö- ja käsityökalut}
+\cvline{Työtavat:}{Itsenäinen työ ja tiimityö; tarkkuus; työmaan siisteys; työkalujen ja materiaalien seuranta; työturvallisuus}
+\cvline{Vuorotyö:}{Valmis keskeytymättömään kolmivuorotyöhön (myös yöt ja viikonloput)}
+\cvline{Haluan oppia:}{Prosessin valvonta ja ohjaus; tuotantokoneiden käyttö ja kunnossapito; laadunvalvonta; prosessiteollisuuden perustutkinto}
+\cvline{Tietotekniikka:}{Tietotekniikan perustaidot; omien työkalujen rakentaminen tekoälyagenteilla (omat projektit)}
+\cvline{\cvt{cards}:}{Työturvallisuuskortti}
+\cvline{\cvt{languages}:}{Suomi (perustaso, opiskelen aktiivisesti); englanti (sujuva); yoruba (äidinkieli)}
+
+\section{\cvt{experience}}
+\begin{cventry}{elo 2025--loka 2025}{\job{Asentaja}{Axioma Servisas UAB}}
+  UPM Kaukaan sellutehdas, Lappeenranta\par
+  Asennustyöt sähkösuodattimen uudelleenrakennushankkeessa.\par
+  Kulmahiomakoneen käyttö ja nostolaitteiden käyttö.\par
+  Pidin työmaan siistinä, seurasin työkaluja ja materiaaleja sekä noudatin tehtaan tiukkoja turvallisuusohjeita.\par
+  Työnantajan arvio: kiitettävä. Vastuuntuntoinen ja tunnollinen työntekijä, halukas oppimaan ja ottamaan vastuuta.
+  \sotagrow{sellutehdas,prosessiteollisuus,kulmahiomakone,nostolaitteet,työturvallisuus,tarkkuus}
+\end{cventry}
+\begin{cventry}{huhti 2025--elo 2025}{\textbf{Lehdenjakaja}, Finnbox ja SSM, Vaasa: varhaiset aamureitit yksin, säällä kuin säällä.}
+\end{cventry}
+\begin{cventry}{marras 2024--elo 2026}{\textbf{AV-vapaaehtoinen}, Vaasa City Church, Vaasa: ääni- ja videolaitteet joka viikonloppu.}
+\end{cventry}
+\begin{cventry}{kesä 2026--elo 2026}{\textbf{Founder in Residence}, Vaasa Startup Factory, Vaasa: tuotekehitystä tiimissä.}
+\end{cventry}
+\begin{cventry}{syys 2016--syys 2020}{Myynti- ja asiakaspalvelutyötä Nigeriassa (Desire Feeds, Bunmi Pastries).}
+\end{cventry}
+
+\section{\cvt{education}}
+\cvline{2026--nykyhetki:}{B.Sc, kestävä metsäbiotalous, Itä-Suomen yliopisto (UEF)}
+\cvline{2024--2026:}{B.Eng-opinnot, tietotekniikka, Vaasan ammattikorkeakoulu (VAMK), kesken; opinnoissa Microsoft Active Directory}
+\cvline{2019--2022:}{OND, tietojenkäsittely, The Polytechnic, Ibadan, Nigeria}
+
+\section{\cvt{references}}
+\cvt{refsavailable}
+
+\end{document}
