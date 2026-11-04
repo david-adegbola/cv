@@ -13,5 +13,6 @@
 - English only (en-only): the combined PDF is the English CV.
 - The Axioma Servisas UAB entry uses the work certificate wording and exact dates (aligned 2026-10-31).
 - The hands-on IT skills are confirmed facts (CV-RULES.md section 7).
+- 2026-11-04: added the store TV in Kokkola (POS row), Cloudflare and Resend for hetkin.app, and the Raspberry Pi 3 temperature logger (VAMK course project, built with an AI coding agent); the job scraper line is now Woodesk (correction for all CVs).
 - Two pages are allowed (CV-RULES.md section 2 exception).
 - Employers, contacts, ad links, deadlines and status: private, in `applications/job-details/it-field-technician.md` (not in this public repo).

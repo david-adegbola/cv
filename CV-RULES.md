@@ -231,6 +231,18 @@ Check the summary and every experience line in both languages:
   steps; setting up laptops, desktops, printers and peripherals, basic Windows troubleshooting;
   Active Directory user accounts and groups, password resets, joining computers to a domain;
   following work orders and keeping job notes and photos.
+- More hands-on IT work (confirmed by David, 2026-11-04; used on the IT Field Technician CV):
+  set up the domain and email routing for hetkin.app with Cloudflare and Resend; connected a
+  fashion store's TV in Kokkola to a server so it could show ads; Linux on a Raspberry Pi 3
+  (the temperature logger below).
+- Temperature logger (david-adegbola/temp-sensor), a VAMK IT studies course project, Nov 2025,
+  built with help from an AI coding agent: a C program on a Raspberry Pi 3 running Linux reads
+  a DS18B20 temperature sensor through the 1-Wire interface every two seconds and logs it to
+  CSV. Never claim he wrote the C by hand.
+- Field work (David, 2026-11-04): on the UEF forest ecology course's field trips he measured
+  standing trees (tree measurement / mensuration) and took and described soil samples to a
+  checklist. List forest measurement beyond the course as "want to learn"
+  ("Want to learn: GIS, forest measurement beyond the course, …").
 - Cards: occupational safety card (työturvallisuuskortti). The hygiene passport (hygieniapassi)
   is only listed for food or retail jobs.
 - Main job, following his work certificate wording exactly:
@@ -255,7 +267,8 @@ Check the summary and every experience line in both languages:
 - Audio-Visual Volunteer (Finnish: AV-vapaaehtoinen): Vaasa City Church, Vaasa,
   Nov 2024–Aug 2026. Sound and video every weekend.
 - Founder in Residence: Vaasa Startup Factory, Jun 2026–Aug 2026. Researched user needs with
-  interviews and calls, then built and pitched hetkin.app with a team.
+  interviews and calls, then built and pitched hetkin.app with a team. Pitched at the end of the
+  residency; not continued (David, 2026-11-04).
 - AI Automation Developer (Finnish: Tekoälykehittäjä), own projects, Jan 2026–present
   (1/2026–). I build practical tools and automate work with AI coding agents (Claude Code).
   I write the spec and the rules the agent follows, guide it and check the result. Code is
@@ -265,7 +278,12 @@ Check the summary and every experience line in both languages:
     automatically with GitHub Actions and published on GitHub Pages.
   - CV-RULES.md: the rules file he wrote that keeps the agent's output accurate (fixed facts,
     claims it may never make, checks before every task).
-  - A job scraper and application tracker (Python, SQLite).
+  - Woodesk (correction for all CVs, David, 2026-11-04; it replaces "a job scraper and
+    application tracker"): a multi-user forestry careers portal, invitation-only, Python and
+    SQLite. It collects forestry jobs, internships and summer jobs from Finnish job boards,
+    state agencies, UEF and forest companies in Finnish and English, scores each against the
+    member's own CV, and has a forestry news desk. It grew out of his first job scraper
+    (david-adegbola/job-aggregator, now stopped). The repo is private: don't link it.
   - His portfolio website, built with Claude Code (in progress).
   - A 2D forest learning game for children aged 8–16, built with AI agents (in progress).
   - Always call these "own projects" / "omat projektit". Never present them as paid or client
@@ -274,6 +292,9 @@ Check the summary and every experience line in both languages:
   - Placement: it-field-technician and trainee-master get the full entry after Vaasa Startup
     Factory; forestry-master gets bullets 1, 2 and 5; the other CVs get one Skills mention only,
     merged into their single IT row (technical / industrial CVs still keep IT to one row).
+  - Placement of the 2026-11-04 facts (David): the field work goes on forestry-master and
+    trainee-master; the extra hands-on IT work and the temperature logger go on
+    it-field-technician; industrial, process, warehouse and salesperson CVs don't change.
 - Nigeria:
   - Salesperson, Desire Feeds, Lagos, Mar 2019–Sep 2020. Feed sales, advice, cash balancing.
   - Sales Assistant and Kitchen Helper, Bunmi Pastries, Ibadan, Sep 2016–Jun 2018.

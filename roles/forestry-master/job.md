@@ -14,7 +14,8 @@
 - The summary keeps the Sustainable Forest Bioeconomy student line although the work is full-time (exception in CV-RULES.md section 4).
 - Axioma Servisas UAB entry uses the work certificate wording, with tags for forest industry and safety.
 - Founder in Residence and the courier job are one-line entries so the CV fits on one page; the skills row on IT was dropped because Education and the summary already cover it.
-- "Want to learn" lists GIS, forest measurement, brush saw and chainsaw: skills David doesn't have yet.
+- "Field work" row (2026-11-04): tree measurement and soil sampling on the UEF forest ecology course field trips.
+- "Want to learn" lists GIS, forest measurement beyond the course, brush saw and chainsaw: skills David doesn't have yet.
 - Left out: hygiene passport, driving licence, salary, course names, sales and AV detail beyond one line.
 - Has a Hobbies section (gym, fixing things, photography).
 - Employers, contacts, ad links, deadlines and status: private, in `applications/job-details/forestry-master.md` (not in this public repo).
