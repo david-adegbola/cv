@@ -41,6 +41,8 @@ lastpage
 latexconfig
 libertine
 ltxcmds
+# nameref: hyperref loads it; TeX Live ships it as its own package since Nov 2026
+nameref
 mptopdf
 mweights
 pdfescape
