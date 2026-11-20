@@ -1,0 +1,69 @@
+% !TEX TS-program = pdflatex
+% David - Cleaner CV
+
+\documentclass[a4paper,11pt]{article}
+
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+
+\cvrole{Cleaner}
+
+\begin{document}
+\small
+\setlength{\cvlabelw}{3.9cm}
+\titlespacing{\section}{0pt}{0.55em}{2pt}
+
+\begin{cvheader}
+\par{\centering
+		{\Huge \textsc{David Adegbola}}\\[0.4em]
+		{\Large Cleaner}
+	\bigskip\par}
+
+\hrule
+\vspace{0.5em}
+\cvline[2.4cm]{\cvt{location}:}{Joensuu, Finland}
+\cvline[2.4cm]{\cvt{phone}:}{+358 46 800 7210}
+\cvline[2.4cm]{\cvt{email}:}{\href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}}
+\end{cvheader}
+
+\section{\cvt{summary}}
+\begin{tabular}{p{0.9\textwidth}}
+ Hi! I'm David, 24, a Sustainable Forest Bioeconomy student at the University of Eastern Finland. At Axioma Servisas UAB, on the UPM Kaukas pulp mill site, I kept the work site clean and safe and followed the mill's strict safety rules. My employer rated my work excellent and described me as ``A responsible and conscientious employee, eager to learn and to take responsibility.''\\\\
+
+ I do careful work on my own. In Vaasa I delivered newspapers alone on early-morning routes, so early starts are normal for me. I have customer service experience from sales jobs. I'm happy to learn new machines and digital tools. My Finnish is still basic, and I'm actively studying it.
+\end{tabular}
+
+\section{\cvt{skills}}
+\cvline{Cleanliness:}{Keeping a work site clean and in order; keen to learn cleaning machines and robots, interested in cleaning industry training (puhtausalan koulutus)}
+\cvline{Work practices:}{Working alone, early starts, following safety rules}
+\cvline{Customer service:}{Advising and serving customers in sales jobs}
+\cvline{IT:}{Basic IT skills; builds own tools with AI coding agents (own projects)}
+\cvline{\cvt{cards}:}{Occupational safety card (työturvallisuuskortti)}
+\cvline{\cvt{languages}:}{Finnish (basic, actively studying); English (fluent); Yoruba (native)}
+
+\section{\cvt{experience}}
+\begin{cventry}{Aug 2025--Oct 2025}{\job{Fitter}{Axioma Servisas UAB}}
+  UPM Kaukas pulp mill, Lappeenranta\par
+  Worked on the electrostatic precipitator rebuild project at UPM Kaukas pulp mill.\par
+  Kept the site clean and safe, tracked tools and materials, and followed the mill's strict safety rules.\par
+  Used angle grinders and lifting equipment.\par
+  Employer rating: excellent. A responsible and conscientious employee, eager to learn and to take responsibility.
+  \sotagrow{site-cleanliness,site-safety,tools-tracking,responsible}
+\end{cventry}
+\begin{cventry}{Apr 2025--Aug 2025}{\textbf{Independent Courier}, Finnbox and SSM, Vaasa: early-morning delivery routes alone, in all weather.}
+\end{cventry}
+\begin{cventry}{Nov 2024--Aug 2026}{\textbf{Audio-Visual Volunteer}, Vaasa City Church, Vaasa: sound and video every weekend.}
+\end{cventry}
+\begin{cventry}{Jun 2026--Aug 2026}{\textbf{Founder in Residence}, Vaasa Startup Factory.}
+\end{cventry}
+\begin{cventry}{Sep 2016--Sep 2020}{\textbf{Sales and customer service jobs in Nigeria} (Desire Feeds, Bunmi Pastries).}
+\end{cventry}
+
+\section{\cvt{education}}
+\cvline{2026--present:}{B.Sc Sustainable Forest Bioeconomy, University of Eastern Finland (UEF)}
+\cvline{2024--2026:}{B.Eng studies, Information Technology, VAMK (Vaasa University of Applied Sciences); not completed, included Microsoft Active Directory}
+\cvline{2019--2022:}{OND in Computer Science, The Polytechnic, Ibadan, Nigeria}
+
+\section{\cvt{references}}
+Available on request.
+
+\end{document}
