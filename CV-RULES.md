@@ -243,6 +243,18 @@ Check the summary and every experience line in both languages:
   standing trees (tree measurement / mensuration) and took and described soil samples to a
   checklist. List forest measurement beyond the course as "want to learn"
   ("Want to learn: GIS, forest measurement beyond the course, …").
+- Programming (correction for all CVs, David, 2026-11-22): he writes Python and C himself, at a
+  basic level (studies and own projects). Write it as "Python and C (basic)". The temperature
+  logger is still "built with help from an AI coding agent", and the AI Automation Developer
+  projects are still built with agents.
+- Traffic light controller (david-adegbola/traffic-light-controller), own project, Apr 2026,
+  built by David on his own: an Arduino Uno (ATmega328P) program in C/C++ with PlatformIO,
+  simulated in Wokwi. It cycles the lights and handles a pedestrian button at any point in the
+  cycle without blocking the main loop. Say "simulated", never that it ran on real hardware.
+- Fibre (David, 2026-11-22): hands-on experience with fibre-optic cabling; wants to learn more.
+  Don't name specific tools or certifications.
+- Placement of the 2026-11-22 facts (David): data-centre-technician and tech-trainee use them;
+  the other CVs don't change.
 - Cards: occupational safety card (työturvallisuuskortti). The hygiene passport (hygieniapassi)
   is only listed for food or retail jobs.
 - Main job, following his work certificate wording exactly:
@@ -287,8 +299,8 @@ Check the summary and every experience line in both languages:
   - His portfolio website, built with Claude Code (in progress).
   - A 2D forest learning game for children aged 8–16, built with AI agents (in progress).
   - Always call these "own projects" / "omat projektit". Never present them as paid or client
-    work. Never claim to write Python, JavaScript or other languages (including LaTeX) by hand,
-    or to review code line by line.
+    work. Never claim to write JavaScript or other languages (including LaTeX) by hand,
+    or to review code line by line. Python and C (basic) are the exception (2026-11-22).
   - Placement: it-field-technician and trainee-master get the full entry after Vaasa Startup
     Factory; forestry-master gets bullets 1, 2 and 5; the other CVs get one Skills mention only,
     merged into their single IT row (technical / industrial CVs still keep IT to one row).
