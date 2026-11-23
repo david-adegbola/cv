@@ -71,7 +71,8 @@ jobs:
           done
 
       # One PDF per role, the file that is sent: main language first (fi-first: FI + EN, en-first: EN + FI),
-      # or the English CV alone for en-only, so every role has david-adegbola-<role>.pdf
+      # or the English CV alone for en-only, so every role has a combined PDF (site/build.py then
+      # publishes them as David-Adegbola-CV-<Job-Title>[-FI|-EN].pdf)
       - name: Combine each role into one PDF
         run: |
           for dir in roles/*/; do

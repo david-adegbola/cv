@@ -24,8 +24,8 @@ a download button per language. Nothing else: no other roles, no jobs, no tracke
 - The root page (`https://david-adegbola.github.io/cv/`) shows only the name, contact details and
   one line. It does **not** list the roles: links are shared one at a time.
 - Every public page has `<meta name="robots" content="noindex">`.
-- The PDFs keep their old addresses (`…/david-adegbola-<role>.pdf`, `-fi.pdf`, `-en.pdf`), so links
-  already sent still work.
+- The PDFs are published as `…/David-Adegbola-CV-<Job-Title>.pdf` (`-FI.pdf`, `-EN.pdf` for one
+  language), the same clean names they download as; the job title is the English `\cvrole`.
 - When roles are merged, `site/redirects.json` maps each old role to the one that absorbed it: the old
   employer page redirects there, and the old PDF names serve the new PDFs (same language).
 - The repo itself is public, so the `roles/` folders can still be seen on GitHub. This README and
@@ -68,7 +68,7 @@ global hook from running.
 ## Language option
 
 Each role's `job.md` has a line `- **Language:** fi-first`, `en-first` or `en-only` (no line means
-fi-first). It decides what is built and which file you send, `david-adegbola-<role>.pdf`:
+fi-first). It decides what is built and which file you send, `David-Adegbola-CV-<Job-Title>.pdf`:
 
 - **fi-first:** Finnish is the main version; the combined PDF is Finnish, then English.
 - **en-first:** English is the main version; the combined PDF is English, then Finnish. For
@@ -81,7 +81,7 @@ The employer page shows the main version first and only the download buttons tha
 
 ## Languages
 
-- Each role folder has `cv-en.tex` and, unless the role is en-only, `cv-fi.tex`. The file name sets the language code: `cv-<lang>.tex` is published as `david-adegbola-<role>-<lang>.pdf`.
+- Each role folder has `cv-en.tex` and, unless the role is en-only, `cv-fi.tex`. The file name sets the language code: `cv-<lang>.tex` is published as `David-Adegbola-CV-<Job-Title>-<LANG>.pdf`.
 - Each role's employer page shows one download button per language. Its title comes from the first `# ` heading in `job.md`.
 - In the preamble of each CV, `\cvlang{en}` (the default) or `\cvlang{fi}` switches the fixed labels to that language. These are the contact labels, the section titles, "Page X of Y" / "Sivu X / Y", and the word joining job title and employer in `\job` ("at" in English, a comma in Finnish). `\cvlang{fi}` also loads Finnish hyphenation. Use the labels with `\cvt{key}`, for example `\section{\cvt{experience}}` or `\textsc{\cvt{phone}:}`. The available keys are listed in `shared/cv-style.sty`.
 - `ä`, `ö` and `å` can be typed directly; the style loads `fontenc` T1 and `inputenc` utf8.

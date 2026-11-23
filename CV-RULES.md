@@ -73,7 +73,8 @@ written in LaTeX and published by GitHub Actions to https://david-adegbola.githu
   - Check it: both versions are there in that order, and the page count is the two added
     together (normally 1 + 1 = 2 pages; 1 page for en-only).
   - The GitHub Action builds and publishes it automatically as
-    `david-adegbola-<role-slug>.pdf`. Never commit it (PDFs are git-ignored).
+    `David-Adegbola-CV-<Job-Title>.pdf` (the English `\cvrole`, see "Download names" in
+    section 9). Never commit it (PDFs are git-ignored).
 - Do NOT list the role or its links in README.md or on the public root page (David's decision,
   2026-10-30: links are shared one at a time).
   - Exception (David, 2026-11-23): an unlisted downloads page for David lists every role's PDFs. Its
@@ -88,8 +89,8 @@ written in LaTeX and published by GitHub Actions to https://david-adegbola.githu
 - Wait for the GitHub Action "Build CVs and deploy to Pages" to finish with build and deploy
   both successful. Then check that each link returns HTTP 200:
   - employer page: `https://david-adegbola.github.io/cv/r/<role-slug>/`
-  - combined: `https://david-adegbola.github.io/cv/david-adegbola-<role-slug>.pdf`
-  - one language: `https://david-adegbola.github.io/cv/david-adegbola-<role-slug>-<lang>.pdf`
+  - combined: `https://david-adegbola.github.io/cv/David-Adegbola-CV-<Job-Title>.pdf`
+  - one language: `https://david-adegbola.github.io/cv/David-Adegbola-CV-<Job-Title>-<FI|EN>.pdf`
 - Report to David:
   - the employer link `https://david-adegbola.github.io/cv/r/<role-slug>/` first (the link he
     sends), then the combined PDF and both language links;
@@ -387,7 +388,8 @@ this one?"
 - Download names (David, 2026-11-23): the site's download buttons save files under names HR and
   ATS handle well: full name, document type, English job title; ASCII, hyphens, no spaces, versions
   or company names. `David-Adegbola-CV-<Job-Title>.pdf` (`-FI` / `-EN` for one language) and
-  `David-Adegbola-Cover-Letter-<Job-Title>.pdf`. `site/build.py` (`file_name`) makes them; the
-  published URLs keep their old names so links already sent still work.
+  `David-Adegbola-Cover-Letter-<Job-Title>.pdf`. `site/build.py` (`file_name`) makes them, and
+  the published addresses use the same names (David, 2026-11-23; no links had been sent). Two roles
+  must not share an English `\cvrole`, or the build stops.
 - In the report, list anything in the letter that isn't on the CV, and anything the ad asks
   for that you couldn't confirm (e.g. a sector-specific work permit, willingness to relocate).

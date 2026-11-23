@@ -11,7 +11,8 @@
   secret): an unlisted page for David with every role's downloads. Its address is not in this repo and nothing
   links to it (David, 2026-11-23).
 - Every page has <meta name="robots" content="noindex">.
-- The PDFs stay where they were (_site/david-adegbola-<slug>[-<lang>].pdf), so old links keep working.
+- The PDFs are published under clean names (David-Adegbola-CV-<Job-Title>[-FI|-EN].pdf), the same names they
+  download as; the workflow's david-adegbola-<slug>[-<lang>].pdf files are moved, not kept (David, 2026-11-23).
 - Merged roles (site/redirects.json): /r/<old>/ redirects to /r/<new>/, and the new PDFs are also published
   under the old file names (combined -> combined, -fi -> -fi, -en -> -en).
 
@@ -88,8 +89,8 @@ def redirects(out, made, name):
         target = out / "r" / old
         target.mkdir(parents=True, exist_ok=True)
         (target / "index.html").write_text(REDIRECT_PAGE.format(new=new, name=name), encoding="utf-8")
-        for suffix in ("", "-fi", "-en"):
-            src = out / f"david-adegbola-{new}{suffix}.pdf"
+        for suffix, lang in (("", None), ("-fi", "fi"), ("-en", "en")):
+            src = out / cv_file_name(new, lang)
             if src.exists():
                 shutil.copyfile(src, out / f"david-adegbola-{old}{suffix}.pdf")
         done.append(f"r/{old}/ -> r/{new}/")
@@ -157,17 +158,19 @@ def build(out_dir):
         hero='<p class="lead">If I sent you a link, it opens my CV for that job.</p>', body=OWNER_DOOR),
         encoding="utf-8")
 
-    made, rows = [], []
+    made, rows, taken = [], [], {}
     for d in sorted((REPO / "roles").glob("*/")):
         slug = d.name
-        langs = [lang for lang in language.langs(d) if (out / f"david-adegbola-{slug}-{lang}.pdf").exists()]
+        langs = [lang for lang in language.langs(d)
+                 if (out / f"david-adegbola-{slug}-{lang}.pdf").exists() or (out / cv_file_name(slug, lang)).exists()]
         if not langs:
             continue
-        combined = (out / f"david-adegbola-{slug}.pdf").exists()
-        embed = f"david-adegbola-{slug}.pdf" if combined else f"david-adegbola-{slug}-{langs[0]}.pdf"
+        files = publish(out, slug, langs, taken)
+        combined = None in files
+        embed = files[None] if combined else files[langs[0]]
         labels = {"fi": "Lataa CV (suomi)", "en": "Download CV (English)"}
         # the main language is the primary button, the other one secondary
-        buttons = "".join(f'<a class="btn{" secondary" if i else ""}" href="../../david-adegbola-{slug}-{lang}.pdf" download="{cv_file_name(slug, lang)}" hreflang="{lang}">'
+        buttons = "".join(f'<a class="btn{" secondary" if i else ""}" href="../../{files[lang]}" download="{files[lang]}" hreflang="{lang}">'
                           f'{labels[lang]}</a>' for i, lang in enumerate(langs))
         title = role_title(slug)
         body = (f'<p class="buttons">{buttons}</p>'
@@ -180,9 +183,28 @@ def build(out_dir):
             common, title=f"{esc(facts['name'])} – {esc(title)}", eyebrow="CV · Ansioluettelo",
             hero=f'<p class="role">{esc(title)}</p>', body=body), encoding="utf-8")
         made.append(slug)
-        rows.append((slug, title, combined, langs))
+        rows.append((slug, title, files, langs))
     downloads(out, page, common, rows)
     return made
+
+
+def publish(out, slug, langs, taken):
+    """Move a role's compiled PDFs (david-adegbola-<slug>[-<lang>].pdf, written by the workflow) to their
+    published names, e.g. David-Adegbola-CV-Warehouse-Worker-FI.pdf (David, 2026-11-23: the address is
+    the same clean name the file downloads as; internal folder names are never published).
+    Returns {None: combined, "fi": ..., "en": ...}. Two roles with the same job title stop the build."""
+    files = {}
+    for lang in [None] + list(langs):
+        src = out / (f"david-adegbola-{slug}-{lang}.pdf" if lang else f"david-adegbola-{slug}.pdf")
+        name = cv_file_name(slug, lang)
+        if not src.exists() and not (out / name).exists():
+            continue
+        if taken.setdefault(name, slug) != slug:
+            sys.exit(f"{slug} and {taken[name]} would both publish {name}: give one a different \\cvrole")
+        if src.exists():  # already moved when the build runs twice on one folder
+            shutil.move(src, out / name)
+        files[lang] = name
+    return files
 
 
 def downloads(out, page, common, rows):
@@ -195,21 +217,21 @@ def downloads(out, page, common, rows):
     names = {"fi": "suomi", "en": "English"}
     target = out / path
     items = []
-    for slug, title, combined, langs in rows:
+    for slug, title, published, langs in rows:
         # a private view page per CV under the secret path (the public employer pages are not linked here)
-        embed = f"david-adegbola-{slug}.pdf" if combined else f"david-adegbola-{slug}-{langs[0]}.pdf"
-        files = ([("Combined", f"david-adegbola-{slug}.pdf", cv_file_name(slug))] if combined else []) + \
-                [(names[lang], f"david-adegbola-{slug}-{lang}.pdf", cv_file_name(slug, lang)) for lang in langs]
+        embed = published.get(None) or published[langs[0]]
+        files = ([("Combined", published[None])] if None in published else []) + \
+                [(names[lang], published[lang]) for lang in langs]
         dest = target / "cv" / slug
         dest.mkdir(parents=True, exist_ok=True)
-        btns = "".join(f'<a class="btn{" secondary" if i else ""}" href="../../../{f}" download="{dl}">{label}</a>'
-                       for i, (label, f, dl) in enumerate(files))
+        btns = "".join(f'<a class="btn{" secondary" if i else ""}" href="../../../{f}" download="{f}">{label}</a>'
+                       for i, (label, f) in enumerate(files))
         (dest / "index.html").write_text(page.substitute(
             common, title=f"CV – {esc(title)}", eyebrow="CV",
             hero=f'<p class="role">{esc(title)}</p>',
             body=pdf_view(btns, f"../../../{embed}", f"CV: {title}", "CV")), encoding="utf-8")
         links = [f'<a class="btn" href="cv/{slug}/">View</a>'] + \
-                [f'<a class="btn secondary" href="../{f}" download="{dl}">{label}</a>' for label, f, dl in files]
+                [f'<a class="btn secondary" href="../{f}" download="{f}">{label}</a>' for label, f in files]
         items.append(f'<li><p class="role">{esc(title)}</p><p class="buttons">{"".join(links)}</p></li>')
     target.mkdir(parents=True, exist_ok=True)
     letter_rows = letters(target, page, common)
@@ -307,14 +329,15 @@ def letters(target, page, common):
         # download name: the job title only (the subject up to its first comma), no company name
         job = title.split(",")[0]
         suffix = {"cover-letter-combined.pdf": "", "cover-letter-fi.pdf": "FI", "cover-letter-en.pdf": "EN"}
-        links = []
+        links, published = [], {}
         for i, (fname, label) in enumerate(names.items()):
             if (app / fname).is_file():
-                shutil.copyfile(app / fname, dest / fname)
                 dl = file_name("David Adegbola Cover Letter", job, suffix[fname])
-                links.append(f'<a class="btn{" secondary" if i else ""}" href="letters/{esc(app.name)}/{fname}" download="{esc(dl)}">{label}</a>')
+                shutil.copyfile(app / fname, dest / dl)
+                published[fname] = dl
+                links.append(f'<a class="btn{" secondary" if i else ""}" href="letters/{esc(app.name)}/{esc(dl)}" download="{esc(dl)}">{label}</a>')
         # a view page per letter, like the employer pages: the combined letter embedded, downloads above
-        embed = "cover-letter-combined.pdf"
+        embed = esc(published["cover-letter-combined.pdf"])
         view = pdf_view("".join(l.replace(f"letters/{esc(app.name)}/", "") for l in links), embed, f"Cover letter: {title}", "letter", back="../../#letters")
         (dest / "index.html").write_text(page.substitute(
             common, title=f"Cover letter – {esc(title)}", eyebrow="Cover letter",

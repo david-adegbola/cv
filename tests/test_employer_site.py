@@ -37,7 +37,9 @@ class EmployerSiteTests(unittest.TestCase):
         for slug in self.made:
             page = (self.out / "r" / slug / "index.html").read_text(encoding="utf-8")
             self.assertIn('<meta name="robots" content="noindex">', page)
-            self.assertIn(f"david-adegbola-{slug}.pdf", page)
+            self.assertIn(build.cv_file_name(slug), page)
+            self.assertNotIn(f"david-adegbola-{slug}", page)
+            self.assertTrue((self.out / build.cv_file_name(slug)).is_file())
 
     def test_language_downloads_follow_each_role_setting(self):
         for slug in self.made:
@@ -45,12 +47,12 @@ class EmployerSiteTests(unittest.TestCase):
             langs = language.langs(role_dir)
             page = (self.out / "r" / slug / "index.html").read_text(encoding="utf-8")
             positions = [
-                page.index(f'href="../../david-adegbola-{slug}-{lang}.pdf"')
+                page.index(f'href="../../{build.cv_file_name(slug, lang)}"')
                 for lang in langs
             ]
             self.assertEqual(positions, sorted(positions), slug)
             if langs == ["en"]:
-                self.assertNotIn(f"david-adegbola-{slug}-fi.pdf", page)
+                self.assertNotIn(build.cv_file_name(slug, "fi"), page)
 
     def test_merged_role_redirects_keep_legacy_pdf_names(self):
         name = "David Adegbola"
@@ -84,10 +86,10 @@ class EmployerSiteTests(unittest.TestCase):
         page = (self.out / "test-secret-path-1234" / "index.html").read_text(encoding="utf-8")
         self.assertIn('<meta name="robots" content="noindex">', page)
         for slug in self.made:
-            self.assertIn(f"../david-adegbola-{slug}.pdf", page)
+            self.assertIn(f"../{build.cv_file_name(slug)}", page)
             self.assertIn(f'href="cv/{slug}/"', page)
             view = (self.out / "test-secret-path-1234" / "cv" / slug / "index.html").read_text(encoding="utf-8")
-            self.assertIn(f'data="../../../david-adegbola-{slug}.pdf', view)
+            self.assertIn(f'data="../../../{build.cv_file_name(slug)}', view)
         self.assertNotIn("/r/", page)  # no public employer page links on the private page
         self.assertIn('role="tablist"', page)
         self.assertIn("cv-applications/issues/new?template=new-job.yml", page)
@@ -108,8 +110,8 @@ class EmployerSiteTests(unittest.TestCase):
             self.addCleanup(os.environ.pop, key, None)
         build.build(self.out)
         page = (self.out / "test-secret-path-1234" / "index.html").read_text(encoding="utf-8")
-        self.assertIn("letters/role-a-company-city/cover-letter-combined.pdf", page)
-        self.assertTrue((self.out / "test-secret-path-1234" / "letters" / "role-a-company-city" / "cover-letter-fi.pdf").is_file())
+        self.assertIn("letters/role-a-company-city/David-Adegbola-Cover-Letter-Role-A.pdf", page)
+        self.assertTrue((self.out / "test-secret-path-1234" / "letters" / "role-a-company-city" / "David-Adegbola-Cover-Letter-Role-A-FI.pdf").is_file())
         self.assertNotIn("job-details", page)
         self.assertIn("Role A, 0\u201340 h/week, Company City", page)
         self.assertIn("1 May 2026", page)
@@ -118,7 +120,7 @@ class EmployerSiteTests(unittest.TestCase):
         self.assertIn('download="David-Adegbola-CV-Warehouse-Worker.pdf"', page)
         self.assertNotIn('download="david-adegbola-', page)
         view = (self.out / "test-secret-path-1234" / "letters" / "role-a-company-city" / "index.html").read_text(encoding="utf-8")
-        self.assertIn('data="cover-letter-combined.pdf', view)
+        self.assertIn('data="David-Adegbola-Cover-Letter-Role-A.pdf', view)
         self.assertIn('<meta name="robots" content="noindex">', view)
         self.assertIn('href="letters/role-a-company-city/"', page)
         self.assertNotIn("role-a-company-city", (self.out / "index.html").read_text(encoding="utf-8"))
