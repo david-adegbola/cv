@@ -52,6 +52,9 @@ jobs_report_*.html
 *.JPEG
 *.PNG
 !shared/photos/david.jpg
+# the site's favicons (generated from site/favicon.svg)
+!site/favicon.png
+!site/apple-touch-icon.png
 
 # OS and editor files
 .DS_Store

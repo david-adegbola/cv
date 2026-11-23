@@ -123,6 +123,10 @@ def build(out_dir):
     style = (SITE_SRC / "style.css").read_text(encoding="utf-8")
     common = {"name": esc(facts["name"]), "contact": contact_html(facts), "style": style}
 
+    # favicons: SVG for modern browsers, PNG for Safari, and the iPhone home-screen icon
+    for icon in ("favicon.svg", "favicon.png", "apple-touch-icon.png"):
+        shutil.copyfile(SITE_SRC / icon, out / icon)
+
     (out / "index.html").write_text(page.substitute(
         common, title=esc(facts["name"]), eyebrow="Job applications",
         hero='<p class="lead">If I sent you a link, it opens my CV for that job.</p>', body=OWNER_DOOR),
