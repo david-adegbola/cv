@@ -1,4 +1,5 @@
 import json
+import os
 import sys
 import tempfile
 import unittest
@@ -14,6 +15,7 @@ import language
 
 class EmployerSiteTests(unittest.TestCase):
     def setUp(self):
+        os.environ.pop("DOWNLOADS_PATH", None)
         self.temp_dir = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp_dir.cleanup)
         self.out = Path(self.temp_dir.name)
@@ -71,6 +73,18 @@ class EmployerSiteTests(unittest.TestCase):
         })
         self.assertNotIn("<script>", markup)
         self.assertIn("&lt;script&gt;", markup)
+
+
+    def test_downloads_page_only_at_secret_path_and_lists_every_role(self):
+        self.assertEqual([p for p in self.out.iterdir() if p.is_dir() and p.name != "r"], [])
+        os.environ["DOWNLOADS_PATH"] = "test-secret-path-1234"
+        self.addCleanup(os.environ.pop, "DOWNLOADS_PATH", None)
+        build.build(self.out)
+        page = (self.out / "test-secret-path-1234" / "index.html").read_text(encoding="utf-8")
+        self.assertIn('<meta name="robots" content="noindex">', page)
+        for slug in self.made:
+            self.assertIn(f"../david-adegbola-{slug}.pdf", page)
+        self.assertNotIn("test-secret-path-1234", (self.out / "index.html").read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

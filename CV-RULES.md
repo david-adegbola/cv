@@ -75,7 +75,9 @@ written in LaTeX and published by GitHub Actions to https://david-adegbola.githu
   - The GitHub Action builds and publishes it automatically as
     `david-adegbola-<role-slug>.pdf`. Never commit it (PDFs are git-ignored).
 - Do NOT list the role or its links in README.md or on the public root page (David's decision,
-  2026-10-30: links are shared one at a time). The GitHub Action builds the role's employer page
+  2026-10-30: links are shared one at a time).
+  - Exception (David, 2026-11-23): an unlisted downloads page for David lists every role's PDFs. Its
+    address is the repo secret `DOWNLOADS_PATH`; never write it into the repo or link to it. The GitHub Action builds the role's employer page
   `/r/<role-slug>/` automatically (`site/build.py`).
 - Commit only the .tex and .md files, e.g. "Add CV: <Role> (FI + EN)" ("(EN)" for en-only), and
   push to main. When adding regression tests or CI test steps, include only directly related
@@ -343,8 +345,10 @@ this one?"
 - Every new job application gets a cover letter along with the CV, in the same languages as the
   role's CV (fi-first: Finnish and English; en-first: English and Finnish; en-only: English).
 - Cover letters name the employer and contacts, so they are PRIVATE:
-  - write them in `applications/<role-slug>/cover-letter-fi.tex` and `cover-letter-en.tex`
-    (git-ignored); never put them in `roles/`, and never commit them or their PDFs;
+  - write them in `applications/<role-slug>/cover-letter-fi.tex` and `cover-letter-en.tex`.
+    `applications/` is git-ignored here; it is a clone of the PRIVATE repo
+    `david-adegbola/cv-applications`, the only place letters, job details and their PDFs are
+    committed. Never put them in `roles/` or commit them to this repo;
   - add the employer's postal address and the letter's location to
     `applications/job-details/<role-slug>.md`.
 - Layout: copy `shared/cover-letter-template-<lang>.tex`, which uses `shared/cover-letter.sty`.

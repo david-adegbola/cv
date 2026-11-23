@@ -66,3 +66,9 @@ main.wrap:empty { display: none; }
   .btn { flex: 1 1 100%; }
   .cv { height: 70vh; min-height: 420px; }
 }
+
+/* unlisted downloads page: one row per role, title then its buttons */
+.downloads { list-style: none; padding: 0; margin: 0; }
+.downloads li { padding: 16px 0; border-bottom: 1px solid var(--border-subtle); }
+.downloads .role { margin: 0 0 12px; color: var(--text-primary); }
+.downloads .buttons { margin: 0; }

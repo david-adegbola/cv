@@ -84,10 +84,13 @@ jobs:
 
       # Public site: a root page with name and contact only (no list of roles) and one employer page per role
       # at /r/<slug>/ with that role's CV. Every page is noindex. See site/build.py.
+      # DOWNLOADS_PATH (repo secret) also builds David's unlisted all-CVs page at that address
       - name: Build employer pages
+        env:
+          DOWNLOADS_PATH: ${{ secrets.DOWNLOADS_PATH }}
         run: |
           python3 site/build.py _site
-          ls -lR _site
+          ls -l _site _site/r
 
       - name: Test CV and employer-site output
         run: python3 -m unittest discover -s tests -v

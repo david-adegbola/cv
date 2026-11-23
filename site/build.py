@@ -7,6 +7,9 @@
 - _site/r/<slug>/index.html: one employer page per role: name, role title, contact, the CV embedded
   (the combined PDF, main language first) and one download button per language built, main language
   first (no Finnish button for en-only roles; see site/language.py). Nothing else.
+- _site/<DOWNLOADS_PATH>/index.html (only when the DOWNLOADS_PATH environment variable is set, from a repo
+  secret): an unlisted page for David with every role's downloads. Its address is not in this repo and nothing
+  links to it (David, 2026-11-23).
 - Every page has <meta name="robots" content="noindex">.
 - The PDFs stay where they were (_site/david-adegbola-<slug>[-<lang>].pdf), so old links keep working.
 - Merged roles (site/redirects.json): /r/<old>/ redirects to /r/<new>/, and the new PDFs are also published
@@ -18,6 +21,7 @@ is read here: JobDesk is a separate private repo, and its database never reaches
 
 import html
 import json
+import os
 import re
 import shutil
 import sys
@@ -94,7 +98,7 @@ def build(out_dir):
         hero='<p class="lead">If I sent you a link, it opens my CV for that job.</p>', body=""),
         encoding="utf-8")
 
-    made = []
+    made, rows = [], []
     for d in sorted((REPO / "roles").glob("*/")):
         slug = d.name
         langs = [lang for lang in language.langs(d) if (out / f"david-adegbola-{slug}-{lang}.pdf").exists()]
@@ -117,7 +121,33 @@ def build(out_dir):
             common, title=f"{esc(facts['name'])} – {esc(title)}", eyebrow="CV · Ansioluettelo",
             hero=f'<p class="role">{esc(title)}</p>', body=body), encoding="utf-8")
         made.append(slug)
+        rows.append((slug, title, combined, langs))
+    downloads(out, page, common, rows)
     return made
+
+
+def downloads(out, page, common, rows):
+    """Unlisted page listing every role's PDFs, at the secret path in DOWNLOADS_PATH (skipped when unset)."""
+    path = os.environ.get("DOWNLOADS_PATH", "").strip().strip("/")
+    if not path:
+        return
+    if not re.fullmatch(r"[A-Za-z0-9_-]{16,64}", path):
+        sys.exit("DOWNLOADS_PATH must be 16-64 letters, digits, _ or -")
+    names = {"fi": "suomi", "en": "English"}
+    items = []
+    for slug, title, combined, langs in rows:
+        links = []
+        if combined:
+            links.append(f'<a class="btn" href="../david-adegbola-{slug}.pdf" download>Combined</a>')
+        links += [f'<a class="btn secondary" href="../david-adegbola-{slug}-{lang}.pdf" download>{names[lang]}</a>' for lang in langs]
+        items.append(f'<li><p class="role">{esc(title)}</p><p class="buttons">{"".join(links)}'
+                     f'<a class="btn secondary" href="../r/{slug}/">Employer page</a></p></li>')
+    target = out / path
+    target.mkdir(parents=True, exist_ok=True)
+    (target / "index.html").write_text(page.substitute(
+        common, title="All CVs", eyebrow="Downloads",
+        hero='<p class="lead">Every CV, newest build.</p>', body=f'<ul class="downloads">{"".join(items)}</ul>'),
+        encoding="utf-8")
 
 
 if __name__ == "__main__":
