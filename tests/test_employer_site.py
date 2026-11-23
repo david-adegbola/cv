@@ -103,6 +103,10 @@ class EmployerSiteTests(unittest.TestCase):
         self.assertIn("letters/role-a-company-city/cover-letter-combined.pdf", page)
         self.assertTrue((self.out / "test-secret-path-1234" / "letters" / "role-a-company-city" / "cover-letter-fi.pdf").is_file())
         self.assertNotIn("job-details", page)
+        view = (self.out / "test-secret-path-1234" / "letters" / "role-a-company-city" / "index.html").read_text(encoding="utf-8")
+        self.assertIn('data="cover-letter-combined.pdf', view)
+        self.assertIn('<meta name="robots" content="noindex">', view)
+        self.assertIn('href="letters/role-a-company-city/"', page)
         self.assertNotIn("role-a-company-city", (self.out / "index.html").read_text(encoding="utf-8"))
 
 

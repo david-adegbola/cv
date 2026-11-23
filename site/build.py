@@ -174,14 +174,14 @@ def downloads(out, page, common, rows):
                      f'<a class="btn secondary" href="../r/{slug}/">Employer page</a></p></li>')
     target = out / path
     target.mkdir(parents=True, exist_ok=True)
-    body = f'<h2 class="section">CVs</h2><ul class="downloads">{"".join(items)}</ul>' + letters(target)
+    body = f'<h2 class="section">CVs</h2><ul class="downloads">{"".join(items)}</ul>' + letters(target, page, common)
     (target / "index.html").write_text(page.substitute(
         common, title="All CVs", eyebrow="Downloads",
         hero='<p class="lead">Every CV and cover letter, newest build.</p>', body=body),
         encoding="utf-8")
 
 
-def letters(target):
+def letters(target, page, common):
     """Cover letters from the private applications repo, copied in at build time only (never committed here).
 
     APPLICATIONS_DIR is a checkout of david-adegbola/cv-applications made by the build with a read-only
@@ -200,7 +200,20 @@ def letters(target):
             if (app / fname).is_file():
                 shutil.copyfile(app / fname, dest / fname)
                 links.append(f'<a class="btn{" secondary" if i else ""}" href="letters/{esc(app.name)}/{fname}" download>{label}</a>')
-        rows.append(f'<li><p class="role">{esc(app.name.replace("-", " "))}</p><p class="buttons">{"".join(links)}</p></li>')
+        title = app.name.replace("-", " ")
+        # a view page per letter, like the employer pages: the combined letter embedded, downloads above
+        embed = "cover-letter-combined.pdf"
+        view = (f'<p class="buttons">{"".join(l.replace(f"letters/{esc(app.name)}/", "") for l in links)}'
+                f'<a class="btn secondary" href="../../">All downloads</a></p>'
+                f'<object class="cv" data="{embed}{esc(VIEWER)}" type="application/pdf" aria-label="Cover letter: {esc(title)}">'
+                f'<p>Your browser can\'t show the PDF here. <a href="{embed}">Open the letter</a>.</p></object>'
+                f'<p class="open"><a href="{embed}">Open the letter as a PDF</a></p>')
+        (dest / "index.html").write_text(page.substitute(
+            common, title=f"Cover letter – {esc(title)}", eyebrow="Cover letter",
+            hero=f'<p class="role">{esc(title)}</p>', body=view), encoding="utf-8")
+        links.insert(0, f'<a class="btn" href="letters/{esc(app.name)}/">View</a>')
+        links[1] = links[1].replace('class="btn"', 'class="btn secondary"', 1)
+        rows.append(f'<li><p class="role">{esc(title)}</p><p class="buttons">{"".join(links)}</p></li>')
     if not rows:
         return ""
     return f'<h2 class="section">Cover letters</h2><ul class="downloads">{"".join(rows)}</ul>'
