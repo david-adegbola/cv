@@ -394,6 +394,9 @@ this one?"
   cover letter are attached here as well; two or three sentences of the strongest
   facts from the letter (nothing new); the honest Finnish line; an offer to talk; then the closing,
   name, phone and email. Plain text, about 80 to 120 words, same writing rules as the letter.
+  If the ad names a contact email (or the application goes to an email address), write it in
+  `email-to.txt` in the same folder (addresses separated by commas). The downloads page's "Open in
+  email" button fills it in as the recipient; without the file the recipient is left empty.
 - Download names (David, 2026-11-23): the site's download buttons save files under names HR and
   ATS handle well: full name, document type, English job title; ASCII, hyphens, no spaces, versions
   or company names. `David-Adegbola-CV-<Job-Title>.pdf` (`-FI` / `-EN` for one language) and

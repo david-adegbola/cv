@@ -26,6 +26,7 @@ import os
 import re
 import shutil
 import unicodedata
+import urllib.parse
 import sys
 from pathlib import Path
 from string import Template
@@ -273,15 +274,23 @@ def email_html(app):
     """The application email for this application (email-fi.txt / email-en.txt in its folder: subject on
     the first line, a blank line, then the message), with buttons to copy each part. Finnish first."""
     blocks = []
+    # recipients (optional): email-to.txt, addresses separated by commas, from the job ad
+    to_file = app / "email-to.txt"
+    to = ",".join(a.strip() for a in to_file.read_text(encoding="utf-8").replace("\n", ",").split(",")
+                  if re.fullmatch(r"[^@\s,]+@[^@\s,]+\.[^@\s,]+", a.strip())) if to_file.is_file() else ""
     for lang, label in (("fi", "suomi"), ("en", "English")):
         f = app / f"email-{lang}.txt"
         if not f.is_file():
             continue
         subject, _, body = f.read_text(encoding="utf-8").strip().partition("\n")
-        blocks.append(f'<div class="mail" lang="{lang}"><p class="mail-lang">{label}</p>'
+        mailto = ("mailto:" + urllib.parse.quote(to, safe="@,") + "?subject=" + urllib.parse.quote(subject.strip(), safe="")
+                  + "&body=" + urllib.parse.quote(body.strip().replace("\n", "\r\n"), safe=""))
+        to_line = f'<p class="mail-subject"><span>To</span>{esc(to.replace(",", ", "))}</p>' if to else ""
+        blocks.append(f'<div class="mail" lang="{lang}"><p class="mail-lang">{label}</p>{to_line}'
                       f'<p class="mail-subject"><span>Subject</span><b id="s-{lang}">{esc(subject.strip())}</b></p>'
                       f'<pre id="m-{lang}">{esc(body.strip())}</pre>'
-                      f'<p class="buttons"><button class="btn" type="button" data-copy="m-{lang}">Copy message</button>'
+                      f'<p class="buttons"><a class="btn" href="{esc(mailto)}">Open in email</a>'
+                      f'<button class="btn secondary" type="button" data-copy="m-{lang}">Copy message</button>'
                       f'<button class="btn secondary" type="button" data-copy="s-{lang}">Copy subject</button></p></div>')
     if not blocks:
         return ""
