@@ -37,6 +37,36 @@ SITE_SRC = Path(__file__).resolve().parent
 VIEWER = "#view=FitH&navpanes=0&pagemode=none"
 
 
+# Root page: a near-invisible "·" for David. It asks for his code (the DOWNLOADS_PATH value) and opens
+# the unlisted downloads page; the code is never in the page, and the browser remembers it after one use.
+OWNER_DOOR = """<details class="owner"><summary aria-label="Owner access">·</summary>
+<form id="owner-form" autocomplete="on"><label for="owner-code">Code</label>
+<input id="owner-code" type="password" autocomplete="current-password" spellcheck="false">
+<button class="btn" type="submit">Open</button><p id="owner-msg" role="status"></p></form></details>
+<script>
+(function () {
+  var KEY = "cv-downloads-code", d = document.querySelector(".owner"), f = document.getElementById("owner-form"),
+      i = document.getElementById("owner-code"), m = document.getElementById("owner-msg");
+  function saved() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function go(code, remember) {
+    if (!/^[A-Za-z0-9_-]{16,64}$/.test(code)) { m.textContent = "Wrong code."; return; }
+    var url = "./" + code + "/";
+    fetch(url, { method: "HEAD", cache: "no-store" }).then(function (r) {
+      if (!r.ok) { m.textContent = "Wrong code."; try { localStorage.removeItem(KEY); } catch (e) {} return; }
+      if (remember) { try { localStorage.setItem(KEY, code); } catch (e) {} }
+      location.href = url;
+    }).catch(function () { m.textContent = "Couldn't check the code. Try again."; });
+  }
+  d.addEventListener("toggle", function () {
+    if (!d.open) return;
+    var c = saved();
+    if (c) { go(c, false); } else { i.focus(); }
+  });
+  f.addEventListener("submit", function (e) { e.preventDefault(); m.textContent = ""; go(i.value.trim(), true); });
+})();
+</script>"""
+
+
 REDIRECT_PAGE = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -95,7 +125,7 @@ def build(out_dir):
 
     (out / "index.html").write_text(page.substitute(
         common, title=esc(facts["name"]), eyebrow="Job applications",
-        hero='<p class="lead">If I sent you a link, it opens my CV for that job.</p>', body=""),
+        hero='<p class="lead">If I sent you a link, it opens my CV for that job.</p>', body=OWNER_DOOR),
         encoding="utf-8")
 
     made, rows = [], []

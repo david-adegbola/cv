@@ -72,3 +72,14 @@ main.wrap:empty { display: none; }
 .downloads li { padding: 16px 0; border-bottom: 1px solid var(--border-subtle); }
 .downloads .role { margin: 0 0 12px; color: var(--text-primary); }
 .downloads .buttons { margin: 0; }
+
+/* root page: the owner's near-invisible door to the downloads page */
+.owner { margin-top: 32px; font-size: .875rem; }
+.owner summary { list-style: none; cursor: pointer; width: 44px; height: 44px; line-height: 44px; margin-left: -14px; text-align: center; font-size: 1.5rem; color: var(--text-secondary); opacity: .5; }
+.owner summary::-webkit-details-marker { display: none; }
+.owner summary:hover, .owner summary:focus-visible { opacity: 1; }
+.owner form { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 8px; }
+.owner label { font-family: var(--font-mono); font-size: .75rem; color: var(--text-secondary); }
+.owner input { font: inherit; padding: 0 12px; height: 48px; min-width: 0; flex: 1 1 220px; max-width: 360px; background: var(--layer-01); color: var(--text-primary); border: 0; border-bottom: 1px solid var(--border-strong); }
+.owner .btn { height: 48px; }
+.owner #owner-msg { flex-basis: 100%; margin: 0; color: var(--text-secondary); min-height: 1.5em; }
