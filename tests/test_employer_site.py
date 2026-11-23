@@ -99,6 +99,8 @@ class EmployerSiteTests(unittest.TestCase):
         (apps / "role-a-company-city").mkdir(parents=True)
         (apps / "role-a-company-city" / "cover-letter-combined.pdf").write_bytes(b"pdf")
         (apps / "role-a-company-city" / "cover-letter-fi.pdf").write_bytes(b"pdf")
+        (apps / "role-a-company-city" / "cover-letter-en.tex").write_text(
+            "\\recipient{1 May 2026}{Someone}\n\\subject{Application: Role A, 0--40 h/week, Company City}\n", encoding="utf-8")
         (apps / "job-details").mkdir()
         for key, value in {"DOWNLOADS_PATH": "test-secret-path-1234", "APPLICATIONS_DIR": str(apps)}.items():
             os.environ[key] = value
@@ -108,6 +110,8 @@ class EmployerSiteTests(unittest.TestCase):
         self.assertIn("letters/role-a-company-city/cover-letter-combined.pdf", page)
         self.assertTrue((self.out / "test-secret-path-1234" / "letters" / "role-a-company-city" / "cover-letter-fi.pdf").is_file())
         self.assertNotIn("job-details", page)
+        self.assertIn("Role A, 0\u201340 h/week, Company City", page)
+        self.assertIn("1 May 2026", page)
         view = (self.out / "test-secret-path-1234" / "letters" / "role-a-company-city" / "index.html").read_text(encoding="utf-8")
         self.assertIn('data="cover-letter-combined.pdf', view)
         self.assertIn('<meta name="robots" content="noindex">', view)

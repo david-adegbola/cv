@@ -195,6 +195,29 @@ def downloads(out, page, common, rows):
         encoding="utf-8")
 
 
+def tex_text(value):
+    """Plain text from a short LaTeX string: -- to an en dash, commands and braces removed."""
+    value = value.replace("---", "\u2014").replace("--", "\u2013").replace("~", " ")
+    value = re.sub(r"\\[A-Za-z]+\*?", "", value)
+    return re.sub(r"\s+", " ", value.replace("{", "").replace("}", "")).strip()
+
+
+def letter_title(app):
+    """A letter's title and date from its .tex: the English subject without "Application:" (the Finnish
+    one without "Hakemus:" for Finnish-only letters), and the \\recipient date. Falls back to the folder name."""
+    for lang, prefix in (("en", r"Application:\s*"), ("fi", r"Hakemus:\s*")):
+        tex = app / f"cover-letter-{lang}.tex"
+        if not tex.is_file():
+            continue
+        src = tex.read_text(encoding="utf-8", errors="replace")
+        subject = re.search(r"\\subject\{(.+?)\}\s*$", src, re.M)
+        date = re.search(r"\\recipient\{([^}]*)\}", src)
+        if subject:
+            return (re.sub("^" + prefix, "", tex_text(subject.group(1))) or app.name,
+                    tex_text(date.group(1)) if date else "")
+    return app.name.replace("-", " "), ""
+
+
 def pdf_view(buttons, embed, label, noun, back="../../"):
     """Body of a private view page: download buttons, the PDF embedded, and a plain link."""
     return (f'<p class="buttons">{buttons}<a class="btn secondary" href="{back}">All downloads</a></p>'
@@ -251,7 +274,7 @@ def letters(target, page, common):
             if (app / fname).is_file():
                 shutil.copyfile(app / fname, dest / fname)
                 links.append(f'<a class="btn{" secondary" if i else ""}" href="letters/{esc(app.name)}/{fname}" download>{label}</a>')
-        title = app.name.replace("-", " ")
+        title, date = letter_title(app)
         # a view page per letter, like the employer pages: the combined letter embedded, downloads above
         embed = "cover-letter-combined.pdf"
         view = pdf_view("".join(l.replace(f"letters/{esc(app.name)}/", "") for l in links), embed, f"Cover letter: {title}", "letter", back="../../#letters")
@@ -260,7 +283,8 @@ def letters(target, page, common):
             hero=f'<p class="role">{esc(title)}</p>', body=view), encoding="utf-8")
         links.insert(0, f'<a class="btn" href="letters/{esc(app.name)}/">View</a>')
         links[1] = links[1].replace('class="btn"', 'class="btn secondary"', 1)
-        rows.append(f'<li><p class="role">{esc(title)}</p><p class="buttons">{"".join(links)}</p></li>')
+        when = f' <span class="date">{esc(date)}</span>' if date else ""
+        rows.append(f'<li><p class="role">{esc(title)}{when}</p><p class="buttons">{"".join(links)}</p></li>')
     return rows
 
 
