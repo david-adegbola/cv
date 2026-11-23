@@ -384,5 +384,10 @@ this one?"
   in the same language order as the CV (Finnish then English for fi-first, English then Finnish
   for en-first, English alone for en-only). Check both versions are there in that order (normally
   2 pages; 1 for en-only). David sends two files: `cv-combined.pdf` and `cover-letter-combined.pdf`.
+- Download names (David, 2026-11-23): the site's download buttons save files under names HR and
+  ATS handle well: full name, document type, English job title; ASCII, hyphens, no spaces, versions
+  or company names. `David-Adegbola-CV-<Job-Title>.pdf` (`-FI` / `-EN` for one language) and
+  `David-Adegbola-Cover-Letter-<Job-Title>.pdf`. `site/build.py` (`file_name`) makes them; the
+  published URLs keep their old names so links already sent still work.
 - In the report, list anything in the letter that isn't on the CV, and anything the ad asks
   for that you couldn't confirm (e.g. a sector-specific work permit, willingness to relocate).

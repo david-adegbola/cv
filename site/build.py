@@ -24,6 +24,7 @@ import json
 import os
 import re
 import shutil
+import unicodedata
 import sys
 from pathlib import Path
 from string import Template
@@ -109,6 +110,30 @@ def role_title(slug):
     return slug.replace("-", " ").title()
 
 
+def file_name(*parts):
+    """Download name that HR and ATS handle well (David, 2026-11-23): full name first, document type,
+    job title; ASCII only, words joined by hyphens, no spaces, versions or company names.
+    e.g. David-Adegbola-CV-Warehouse-Worker-FI.pdf"""
+    text = " ".join(p for p in parts if p)
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
+    words = re.findall(r"[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*", text)
+    return "-".join(words)[:120] + ".pdf"
+
+
+def cv_job_title(slug):
+    """The CV's English job title (\\cvrole in cv-en.tex), never the internal folder name."""
+    tex = REPO / "roles" / slug / "cv-en.tex"
+    if tex.is_file():
+        m = re.search(r"\\cvrole\{([^}]*)\}", tex.read_text(encoding="utf-8"))
+        if m:
+            return tex_text(m.group(1))
+    return role_title(slug).split(" / ")[-1]
+
+
+def cv_file_name(slug, lang=None):
+    return file_name("David Adegbola CV", cv_job_title(slug), lang.upper() if lang else "")
+
+
 def contact_html(facts):
     phone_href = re.sub(r"\s+", "", facts["phone"])
     return (f'<dl class="contact"><dt>Location</dt><dd>{esc(facts["location"])}</dd>'
@@ -142,7 +167,7 @@ def build(out_dir):
         embed = f"david-adegbola-{slug}.pdf" if combined else f"david-adegbola-{slug}-{langs[0]}.pdf"
         labels = {"fi": "Lataa CV (suomi)", "en": "Download CV (English)"}
         # the main language is the primary button, the other one secondary
-        buttons = "".join(f'<a class="btn{" secondary" if i else ""}" href="../../david-adegbola-{slug}-{lang}.pdf" download hreflang="{lang}">'
+        buttons = "".join(f'<a class="btn{" secondary" if i else ""}" href="../../david-adegbola-{slug}-{lang}.pdf" download="{cv_file_name(slug, lang)}" hreflang="{lang}">'
                           f'{labels[lang]}</a>' for i, lang in enumerate(langs))
         title = role_title(slug)
         body = (f'<p class="buttons">{buttons}</p>'
@@ -173,18 +198,18 @@ def downloads(out, page, common, rows):
     for slug, title, combined, langs in rows:
         # a private view page per CV under the secret path (the public employer pages are not linked here)
         embed = f"david-adegbola-{slug}.pdf" if combined else f"david-adegbola-{slug}-{langs[0]}.pdf"
-        files = ([("Combined", f"david-adegbola-{slug}.pdf")] if combined else []) + \
-                [(names[lang], f"david-adegbola-{slug}-{lang}.pdf") for lang in langs]
+        files = ([("Combined", f"david-adegbola-{slug}.pdf", cv_file_name(slug))] if combined else []) + \
+                [(names[lang], f"david-adegbola-{slug}-{lang}.pdf", cv_file_name(slug, lang)) for lang in langs]
         dest = target / "cv" / slug
         dest.mkdir(parents=True, exist_ok=True)
-        btns = "".join(f'<a class="btn{" secondary" if i else ""}" href="../../../{f}" download>{label}</a>'
-                       for i, (label, f) in enumerate(files))
+        btns = "".join(f'<a class="btn{" secondary" if i else ""}" href="../../../{f}" download="{dl}">{label}</a>'
+                       for i, (label, f, dl) in enumerate(files))
         (dest / "index.html").write_text(page.substitute(
             common, title=f"CV – {esc(title)}", eyebrow="CV",
             hero=f'<p class="role">{esc(title)}</p>',
             body=pdf_view(btns, f"../../../{embed}", f"CV: {title}", "CV")), encoding="utf-8")
         links = [f'<a class="btn" href="cv/{slug}/">View</a>'] + \
-                [f'<a class="btn secondary" href="../{f}" download>{label}</a>' for label, f in files]
+                [f'<a class="btn secondary" href="../{f}" download="{dl}">{label}</a>' for label, f, dl in files]
         items.append(f'<li><p class="role">{esc(title)}</p><p class="buttons">{"".join(links)}</p></li>')
     target.mkdir(parents=True, exist_ok=True)
     letter_rows = letters(target, page, common)
@@ -278,12 +303,16 @@ def letters(target, page, common):
     for app in sorted(p for p in Path(src).iterdir() if (p / "cover-letter-combined.pdf").is_file()):
         dest = target / "letters" / app.name
         dest.mkdir(parents=True, exist_ok=True)
+        title, date = letter_title(app)
+        # download name: the job title only (the subject up to its first comma), no company name
+        job = title.split(",")[0]
+        suffix = {"cover-letter-combined.pdf": "", "cover-letter-fi.pdf": "FI", "cover-letter-en.pdf": "EN"}
         links = []
         for i, (fname, label) in enumerate(names.items()):
             if (app / fname).is_file():
                 shutil.copyfile(app / fname, dest / fname)
-                links.append(f'<a class="btn{" secondary" if i else ""}" href="letters/{esc(app.name)}/{fname}" download>{label}</a>')
-        title, date = letter_title(app)
+                dl = file_name("David Adegbola Cover Letter", job, suffix[fname])
+                links.append(f'<a class="btn{" secondary" if i else ""}" href="letters/{esc(app.name)}/{fname}" download="{esc(dl)}">{label}</a>')
         # a view page per letter, like the employer pages: the combined letter embedded, downloads above
         embed = "cover-letter-combined.pdf"
         view = pdf_view("".join(l.replace(f"letters/{esc(app.name)}/", "") for l in links), embed, f"Cover letter: {title}", "letter", back="../../#letters")
