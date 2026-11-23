@@ -269,6 +269,44 @@ def letter_title(app):
     return app.name.replace("-", " "), ""
 
 
+def email_html(app):
+    """The application email for this application (email-fi.txt / email-en.txt in its folder: subject on
+    the first line, a blank line, then the message), with buttons to copy each part. Finnish first."""
+    blocks = []
+    for lang, label in (("fi", "suomi"), ("en", "English")):
+        f = app / f"email-{lang}.txt"
+        if not f.is_file():
+            continue
+        subject, _, body = f.read_text(encoding="utf-8").strip().partition("\n")
+        blocks.append(f'<div class="mail" lang="{lang}"><p class="mail-lang">{label}</p>'
+                      f'<p class="mail-subject"><span>Subject</span><b id="s-{lang}">{esc(subject.strip())}</b></p>'
+                      f'<pre id="m-{lang}">{esc(body.strip())}</pre>'
+                      f'<p class="buttons"><button class="btn" type="button" data-copy="m-{lang}">Copy message</button>'
+                      f'<button class="btn secondary" type="button" data-copy="s-{lang}">Copy subject</button></p></div>')
+    if not blocks:
+        return ""
+    return (f'<section class="email" id="email"><h2 class="section">Application email</h2>{"".join(blocks)}</section>'
+            + COPY_SCRIPT)
+
+
+# Copy buttons on the letter pages: copy the text, then say "Copied" for a moment
+COPY_SCRIPT = """<script>
+document.addEventListener("click", function (e) {
+  var b = e.target.closest("[data-copy]");
+  if (!b) return;
+  var text = document.getElementById(b.getAttribute("data-copy")).textContent, label = b.textContent;
+  function done() { b.textContent = "Copied"; setTimeout(function () { b.textContent = label; }, 1500); }
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(done, fallback);
+  } else { fallback(); }
+  function fallback() {
+    var t = document.createElement("textarea"); t.value = text; document.body.appendChild(t);
+    t.select(); try { document.execCommand("copy"); done(); } catch (err) {} t.remove();
+  }
+});
+</script>"""
+
+
 def pdf_view(buttons, embed, label, noun, back="../../"):
     """Body of a private view page: download buttons, the PDF embedded, and a plain link."""
     return (f'<p class="buttons">{buttons}<a class="btn secondary" href="{back}">All downloads</a></p>'
@@ -338,12 +376,15 @@ def letters(target, page, common):
                 links.append(f'<a class="btn{" secondary" if i else ""}" href="letters/{esc(app.name)}/{esc(dl)}" download="{esc(dl)}">{label}</a>')
         # a view page per letter, like the employer pages: the combined letter embedded, downloads above
         embed = esc(published["cover-letter-combined.pdf"])
-        view = pdf_view("".join(l.replace(f"letters/{esc(app.name)}/", "") for l in links), embed, f"Cover letter: {title}", "letter", back="../../#letters")
+        mail = email_html(app)
+        view = mail + pdf_view("".join(l.replace(f"letters/{esc(app.name)}/", "") for l in links), embed, f"Cover letter: {title}", "letter", back="../../#letters")
         (dest / "index.html").write_text(page.substitute(
             common, title=f"Cover letter – {esc(title)}", eyebrow="Cover letter",
             hero=f'<p class="role">{esc(title)}</p>', body=view), encoding="utf-8")
         links.insert(0, f'<a class="btn" href="letters/{esc(app.name)}/">View</a>')
-        links[1] = links[1].replace('class="btn"', 'class="btn secondary"', 1)
+        if mail:
+            links.insert(1, f'<a class="btn secondary" href="letters/{esc(app.name)}/#email">Email text</a>')
+        links = [links[0]] + [l.replace('class="btn"', 'class="btn secondary"', 1) for l in links[1:]]
         when = f' <span class="date">{esc(date)}</span>' if date else ""
         rows.append(f'<li><p class="role">{esc(title)}{when}</p><p class="buttons">{"".join(links)}</p></li>')
     return rows

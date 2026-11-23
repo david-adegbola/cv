@@ -102,6 +102,7 @@ class EmployerSiteTests(unittest.TestCase):
         (apps / "role-a-company-city").mkdir(parents=True)
         (apps / "role-a-company-city" / "cover-letter-combined.pdf").write_bytes(b"pdf")
         (apps / "role-a-company-city" / "cover-letter-fi.pdf").write_bytes(b"pdf")
+        (apps / "role-a-company-city" / "email-fi.txt").write_text("Hakemus: Rooli A\n\nHei,\n\nhaen <työtä>.\n", encoding="utf-8")
         (apps / "role-a-company-city" / "cover-letter-en.tex").write_text(
             "\\recipient{1 May 2026}{Someone}\n\\subject{Application: Role A, 0--40 h/week, Company City}\n", encoding="utf-8")
         (apps / "job-details").mkdir()
@@ -121,6 +122,9 @@ class EmployerSiteTests(unittest.TestCase):
         self.assertNotIn('download="david-adegbola-', page)
         view = (self.out / "test-secret-path-1234" / "letters" / "role-a-company-city" / "index.html").read_text(encoding="utf-8")
         self.assertIn('data="David-Adegbola-Cover-Letter-Role-A.pdf', view)
+        self.assertIn('id="s-fi">Hakemus: Rooli A</b>', view)
+        self.assertIn("haen &lt;työtä&gt;.", view)  # the text is escaped
+        self.assertIn('letters/role-a-company-city/#email', page)
         self.assertIn('<meta name="robots" content="noindex">', view)
         self.assertIn('href="letters/role-a-company-city/"', page)
         self.assertNotIn("role-a-company-city", (self.out / "index.html").read_text(encoding="utf-8"))

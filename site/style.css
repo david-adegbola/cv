@@ -94,3 +94,12 @@ main.wrap:empty { display: none; }
 .downloads .date { font-family: var(--font-mono); font-size: .75rem; color: var(--text-secondary); margin-left: 8px; white-space: nowrap; }
 .newjob { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin: 0 0 32px; }
 .newjob span { font-size: .875rem; color: var(--text-secondary); }
+/* application email on the letter pages: subject and message ready to copy */
+.email { margin: 0 0 40px; }
+.mail { background: var(--layer-01); padding: 16px; margin: 0 0 16px; }
+.mail-lang { margin: 0 0 8px; font-family: var(--font-mono); font-size: .75rem; color: var(--text-secondary); }
+.mail-subject { margin: 0 0 12px; }
+.mail-subject span { font-family: var(--font-mono); font-size: .75rem; color: var(--text-secondary); margin-right: 8px; }
+.mail pre { margin: 0 0 16px; font-family: var(--font-sans); font-size: .9375rem; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; }
+.mail .buttons { margin: 0; }
+button.btn { font: inherit; font-size: .875rem; cursor: pointer; }

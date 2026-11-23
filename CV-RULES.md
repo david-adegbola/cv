@@ -385,6 +385,13 @@ this one?"
   in the same language order as the CV (Finnish then English for fi-first, English then Finnish
   for en-first, English alone for en-only). Check both versions are there in that order (normally
   2 pages; 1 for en-only). David sends two files: `cv-combined.pdf` and `cover-letter-combined.pdf`.
+- Application email (David, 2026-11-23): every application also gets a short email David can copy
+  when he sends the application, in the same languages as the letter: `email-fi.txt` and
+  `email-en.txt` in the application folder. First line: the subject, the same as the letter's
+  subject line. Then a blank line and the message: the same greeting as the letter; one line on
+  the job and that the CV and cover letter are attached; two or three sentences of the strongest
+  facts from the letter (nothing new); the honest Finnish line; an offer to talk; then the closing,
+  name, phone and email. Plain text, about 80 to 120 words, same writing rules as the letter.
 - Download names (David, 2026-11-23): the site's download buttons save files under names HR and
   ATS handle well: full name, document type, English job title; ASCII, hyphens, no spaces, versions
   or company names. `David-Adegbola-CV-<Job-Title>.pdf` (`-FI` / `-EN` for one language) and
