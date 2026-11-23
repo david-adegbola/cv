@@ -388,8 +388,10 @@ this one?"
 - Application email (David, 2026-11-23): every application also gets a short email David can copy
   when he sends the application, in the same languages as the letter: `email-fi.txt` and
   `email-en.txt` in the application folder. First line: the subject, the same as the letter's
-  subject line. Then a blank line and the message: the same greeting as the letter; one line on
-  the job and that the CV and cover letter are attached; two or three sentences of the strongest
+  subject line. Then a blank line and the message, written as a note David sends right after he
+  has applied (David, 2026-11-23): the same greeting as the letter; one line saying he just applied
+  for the job ("hain juuri …" / "I just applied for …"), without naming how, and that his CV and
+  cover letter are attached here as well; two or three sentences of the strongest
   facts from the letter (nothing new); the honest Finnish line; an offer to talk; then the closing,
   name, phone and email. Plain text, about 80 to 120 words, same writing rules as the letter.
 - Download names (David, 2026-11-23): the site's download buttons save files under names HR and
