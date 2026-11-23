@@ -188,7 +188,7 @@ def downloads(out, page, common, rows):
         items.append(f'<li><p class="role">{esc(title)}</p><p class="buttons">{"".join(links)}</p></li>')
     target.mkdir(parents=True, exist_ok=True)
     letter_rows = letters(target, page, common)
-    body = (TABS.format(cvs=len(items), letters=len(letter_rows))
+    body = (NEW_JOB + TABS.format(cvs=len(items), letters=len(letter_rows))
             + f'<div class="tabpanel" id="panel-cvs" role="tabpanel" aria-labelledby="tab-cvs"><ul class="downloads">{"".join(items)}</ul></div>'
             + f'<div class="tabpanel" id="panel-letters" role="tabpanel" aria-labelledby="tab-letters" hidden>'
             + (f'<ul class="downloads">{"".join(letter_rows)}</ul>' if letter_rows else '<p>No cover letters yet.</p>')
@@ -229,6 +229,11 @@ def pdf_view(buttons, embed, label, noun, back="../../"):
             f'<p>Your browser can\'t show the PDF here. <a href="{embed}">Open the {noun}</a>.</p></object>'
             f'<p class="open"><a href="{embed}">Open the {noun} as a PDF</a></p>')
 
+
+# Top of the downloads page: start a new application (the "New job" issue form in the private repo)
+NEW_JOB = ('<p class="newjob"><a class="btn" href="https://github.com/david-adegbola/cv-applications/issues/new'
+           '?template=new-job.yml" target="_blank" rel="noopener">Create a new CV and cover letter</a>'
+           '<span>Opens the New job form on GitHub. Paste the job ad; the CV and letter appear here when it\'s done.</span></p>')
 
 TABS = ('<div class="tabs" role="tablist" aria-label="Documents">'
         '<button class="tab" id="tab-cvs" role="tab" aria-selected="true" aria-controls="panel-cvs">CVs <span>{cvs}</span></button>'
