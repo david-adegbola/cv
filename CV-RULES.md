@@ -345,12 +345,15 @@ this one?"
 - Every new job application gets a cover letter along with the CV, in the same languages as the
   role's CV (fi-first: Finnish and English; en-first: English and Finnish; en-only: English).
 - Cover letters name the employer and contacts, so they are PRIVATE:
-  - write them in `applications/<role-slug>/cover-letter-fi.tex` and `cover-letter-en.tex`.
+  - one folder per application (David, 2026-11-23), so a role used for several jobs never
+    overwrites an earlier letter: `applications/<role-slug>-<company>-<place>/`, lowercase ASCII
+    with hyphens, e.g. `applications/warehouse-master-examplecorp-tampere/`. Write
+    `cover-letter-fi.tex` and `cover-letter-en.tex` there.
     `applications/` is git-ignored here; it is a clone of the PRIVATE repo
     `david-adegbola/cv-applications`, the only place letters, job details and their PDFs are
     committed. Never put them in `roles/` or commit them to this repo;
-  - add the employer's postal address and the letter's location to
-    `applications/job-details/<role-slug>.md`.
+  - add the employer's postal address and the application folder's name to that application's
+    entry in `applications/job-details/<role-slug>.md`.
 - Layout: copy `shared/cover-letter-template-<lang>.tex`, which uses `shared/cover-letter.sty`.
   Don't change the layout per letter. The fixed layout is:
   - header: name and job title on the left, location, phone and email on the right, rule below;
@@ -373,7 +376,8 @@ this one?"
 - Compile each letter twice with pdflatex from inside its folder. It must be one page with no
   Overfull warnings; render it and look at it.
 - Make the single combined letter, the file David actually submits:
-  `shared/combine-letter.sh <role-slug>` writes `applications/<role-slug>/cover-letter-combined.pdf`
+  `shared/combine-letter.sh <role-slug> <application-folder>` writes
+  `applications/<application-folder>/cover-letter-combined.pdf`
   in the same language order as the CV (Finnish then English for fi-first, English then Finnish
   for en-first, English alone for en-only). Check both versions are there in that order (normally
   2 pages; 1 for en-only). David sends two files: `cv-combined.pdf` and `cover-letter-combined.pdf`.
