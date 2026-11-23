@@ -83,3 +83,5 @@ main.wrap:empty { display: none; }
 .owner input { font: inherit; padding: 0 12px; height: 48px; min-width: 0; flex: 1 1 220px; max-width: 360px; background: var(--layer-01); color: var(--text-primary); border: 0; border-bottom: 1px solid var(--border-strong); }
 .owner .btn { height: 48px; }
 .owner #owner-msg { flex-basis: 100%; margin: 0; color: var(--text-secondary); min-height: 1.5em; }
+.section { margin: 32px 0 8px; font-size: 1.25rem; font-weight: 400; }
+.section:first-child { margin-top: 0; }

@@ -16,6 +16,7 @@ import language
 class EmployerSiteTests(unittest.TestCase):
     def setUp(self):
         os.environ.pop("DOWNLOADS_PATH", None)
+        os.environ.pop("APPLICATIONS_DIR", None)
         self.temp_dir = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp_dir.cleanup)
         self.out = Path(self.temp_dir.name)
@@ -87,6 +88,22 @@ class EmployerSiteTests(unittest.TestCase):
         self.assertNotIn("test-secret-path-1234", (self.out / "index.html").read_text(encoding="utf-8"))
         root = (self.out / "index.html").read_text(encoding="utf-8")
         self.assertIn('class="owner"', root)  # the owner's code box is there, without the code
+
+    def test_downloads_page_lists_cover_letters_from_the_private_checkout(self):
+        apps = Path(self.temp_dir.name) / "apps"
+        (apps / "role-a-company-city").mkdir(parents=True)
+        (apps / "role-a-company-city" / "cover-letter-combined.pdf").write_bytes(b"pdf")
+        (apps / "role-a-company-city" / "cover-letter-fi.pdf").write_bytes(b"pdf")
+        (apps / "job-details").mkdir()
+        for key, value in {"DOWNLOADS_PATH": "test-secret-path-1234", "APPLICATIONS_DIR": str(apps)}.items():
+            os.environ[key] = value
+            self.addCleanup(os.environ.pop, key, None)
+        build.build(self.out)
+        page = (self.out / "test-secret-path-1234" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("letters/role-a-company-city/cover-letter-combined.pdf", page)
+        self.assertTrue((self.out / "test-secret-path-1234" / "letters" / "role-a-company-city" / "cover-letter-fi.pdf").is_file())
+        self.assertNotIn("job-details", page)
+        self.assertNotIn("role-a-company-city", (self.out / "index.html").read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

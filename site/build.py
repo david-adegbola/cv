@@ -174,10 +174,36 @@ def downloads(out, page, common, rows):
                      f'<a class="btn secondary" href="../r/{slug}/">Employer page</a></p></li>')
     target = out / path
     target.mkdir(parents=True, exist_ok=True)
+    body = f'<h2 class="section">CVs</h2><ul class="downloads">{"".join(items)}</ul>' + letters(target)
     (target / "index.html").write_text(page.substitute(
         common, title="All CVs", eyebrow="Downloads",
-        hero='<p class="lead">Every CV, newest build.</p>', body=f'<ul class="downloads">{"".join(items)}</ul>'),
+        hero='<p class="lead">Every CV and cover letter, newest build.</p>', body=body),
         encoding="utf-8")
+
+
+def letters(target):
+    """Cover letters from the private applications repo, copied in at build time only (never committed here).
+
+    APPLICATIONS_DIR is a checkout of david-adegbola/cv-applications made by the build with a read-only
+    token. Each application folder with a combined letter gets a row. Nothing is printed, because the
+    public repo's build logs are public (David, 2026-11-23)."""
+    src = os.environ.get("APPLICATIONS_DIR", "").strip()
+    if not src or not Path(src).is_dir():
+        return ""
+    names = {"cover-letter-combined.pdf": "Combined", "cover-letter-fi.pdf": "suomi", "cover-letter-en.pdf": "English"}
+    rows = []
+    for app in sorted(p for p in Path(src).iterdir() if (p / "cover-letter-combined.pdf").is_file()):
+        dest = target / "letters" / app.name
+        dest.mkdir(parents=True, exist_ok=True)
+        links = []
+        for i, (fname, label) in enumerate(names.items()):
+            if (app / fname).is_file():
+                shutil.copyfile(app / fname, dest / fname)
+                links.append(f'<a class="btn{" secondary" if i else ""}" href="letters/{esc(app.name)}/{fname}" download>{label}</a>')
+        rows.append(f'<li><p class="role">{esc(app.name.replace("-", " "))}</p><p class="buttons">{"".join(links)}</p></li>')
+    if not rows:
+        return ""
+    return f'<h2 class="section">Cover letters</h2><ul class="downloads">{"".join(rows)}</ul>'
 
 
 if __name__ == "__main__":

@@ -9,6 +9,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: write   # delete the Pages build artifact after deploy (it holds the private cover letters)
 
 concurrency:
   group: pages
@@ -84,10 +85,22 @@ jobs:
 
       # Public site: a root page with name and contact only (no list of roles) and one employer page per role
       # at /r/<slug>/ with that role's CV. Every page is noindex. See site/build.py.
+      # Cover letters for David's unlisted downloads page, from the PRIVATE repo cv-applications
+      # (read-only token). They go only into the Pages build, never into this repo, and nothing about
+      # them is printed: this repo's logs are public.
+      - name: Fetch private cover letters
+        env:
+          APPLICATIONS_TOKEN: ${{ secrets.APPLICATIONS_TOKEN }}
+        run: |
+          if [ -z "$APPLICATIONS_TOKEN" ]; then echo "No APPLICATIONS_TOKEN, skipping"; exit 0; fi
+          git clone -q --depth 1 "https://x-access-token:${APPLICATIONS_TOKEN}@github.com/david-adegbola/cv-applications.git" "$RUNNER_TEMP/applications" >/dev/null 2>&1 \
+            && echo "Fetched" || echo "::warning::Could not fetch the cover letters"
+
       # DOWNLOADS_PATH (repo secret) also builds David's unlisted all-CVs page at that address
       - name: Build employer pages
         env:
           DOWNLOADS_PATH: ${{ secrets.DOWNLOADS_PATH }}
+          APPLICATIONS_DIR: ${{ runner.temp }}/applications
         run: |
           python3 site/build.py _site
           ls -l _site _site/r
@@ -100,6 +113,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
+          retention-days: 1
 
   deploy:
     needs: build
@@ -110,3 +124,14 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v5
+
+      # The artifact holds the private cover letters, and artifacts of a public repo can be downloaded
+      # by any GitHub user, so delete it as soon as the site is live
+      - name: Delete the Pages build artifact
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for id in $(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" -q '.artifacts[].id'); do
+            gh api -X DELETE "repos/$GITHUB_REPOSITORY/actions/artifacts/$id"
+          done

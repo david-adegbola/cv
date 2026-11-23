@@ -77,7 +77,10 @@ written in LaTeX and published by GitHub Actions to https://david-adegbola.githu
 - Do NOT list the role or its links in README.md or on the public root page (David's decision,
   2026-10-30: links are shared one at a time).
   - Exception (David, 2026-11-23): an unlisted downloads page for David lists every role's PDFs. Its
-    address is the repo secret `DOWNLOADS_PATH`; never write it into the repo or link to it. The GitHub Action builds the role's employer page
+    address is the repo secret `DOWNLOADS_PATH`; never write it into the repo or link to it.
+    It also offers the cover letters (David, 2026-11-23): the build copies them in from the private
+    repo with the `APPLICATIONS_TOKEN` secret. They are never committed here, never printed in the
+    build log, and the Pages build artifact is deleted after each deploy. The GitHub Action builds the role's employer page
   `/r/<role-slug>/` automatically (`site/build.py`).
 - Commit only the .tex and .md files, e.g. "Add CV: <Role> (FI + EN)" ("(EN)" for en-only), and
   push to main. When adding regression tests or CI test steps, include only directly related
