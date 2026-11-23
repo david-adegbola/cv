@@ -291,19 +291,42 @@ def email_html(app):
 
 # Copy buttons on the letter pages: copy the text, then say "Copied" for a moment
 COPY_SCRIPT = """<script>
-document.addEventListener("click", function (e) {
-  var b = e.target.closest("[data-copy]");
-  if (!b) return;
-  var text = document.getElementById(b.getAttribute("data-copy")).textContent, label = b.textContent;
-  function done() { b.textContent = "Copied"; setTimeout(function () { b.textContent = label; }, 1500); }
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(text).then(done, fallback);
-  } else { fallback(); }
-  function fallback() {
-    var t = document.createElement("textarea"); t.value = text; document.body.appendChild(t);
-    t.select(); try { document.execCommand("copy"); done(); } catch (err) {} t.remove();
+(function () {
+  // 1. the Clipboard API (Chrome, Safari, Firefox); 2. if it is missing or refused (some in-app browsers),
+  // execCommand on a focused, selected textarea set up the way iOS needs, and only if it reports success;
+  // 3. otherwise select the text on the page, so long-press "Copy" is one tap away. Never say "Copied"
+  // unless something was copied.
+  function flash(b, text) { var l = b.getAttribute("data-label") || b.textContent; b.setAttribute("data-label", l);
+    b.textContent = text; clearTimeout(b._t); b._t = setTimeout(function () { b.textContent = l; }, 2000); }
+  function execCopy(text) {
+    var t = document.createElement("textarea"), ok = false, sel = window.getSelection();
+    t.value = text; t.contentEditable = "true"; t.readOnly = false;
+    t.style.cssText = "position:fixed;top:0;left:0;width:2em;height:2em;padding:0;border:0;opacity:0;font-size:16px";
+    document.body.appendChild(t); t.focus(); t.select();
+    var r = document.createRange(); r.selectNodeContents(t); sel.removeAllRanges(); sel.addRange(r);
+    t.setSelectionRange(0, text.length);
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    t.blur(); t.remove(); sel.removeAllRanges();
+    return ok;
   }
-});
+  function selectOnPage(el) {
+    var r = document.createRange(); r.selectNodeContents(el);
+    var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+  }
+  function fallback(b, el, text) {
+    if (execCopy(text)) flash(b, "Copied");
+    else { selectOnPage(el); flash(b, "Selected: tap Copy"); }
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("[data-copy]") : null;
+    if (!b) return;
+    var el = document.getElementById(b.getAttribute("data-copy")), text = el.textContent;
+    if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function () { flash(b, "Copied"); },
+                                               function () { fallback(b, el, text); });
+    } else { fallback(b, el, text); }
+  });
+})();
 </script>"""
 
 
