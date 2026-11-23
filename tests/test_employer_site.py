@@ -85,6 +85,11 @@ class EmployerSiteTests(unittest.TestCase):
         self.assertIn('<meta name="robots" content="noindex">', page)
         for slug in self.made:
             self.assertIn(f"../david-adegbola-{slug}.pdf", page)
+            self.assertIn(f'href="cv/{slug}/"', page)
+            view = (self.out / "test-secret-path-1234" / "cv" / slug / "index.html").read_text(encoding="utf-8")
+            self.assertIn(f'data="../../../david-adegbola-{slug}.pdf', view)
+        self.assertNotIn("/r/", page)  # no public employer page links on the private page
+        self.assertIn('role="tablist"', page)
         self.assertNotIn("test-secret-path-1234", (self.out / "index.html").read_text(encoding="utf-8"))
         root = (self.out / "index.html").read_text(encoding="utf-8")
         self.assertIn('class="owner"', root)  # the owner's code box is there, without the code

@@ -164,21 +164,72 @@ def downloads(out, page, common, rows):
     if not re.fullmatch(r"[A-Za-z0-9_-]{16,64}", path):
         sys.exit("DOWNLOADS_PATH must be 16-64 letters, digits, _ or -")
     names = {"fi": "suomi", "en": "English"}
+    target = out / path
     items = []
     for slug, title, combined, langs in rows:
-        links = []
-        if combined:
-            links.append(f'<a class="btn" href="../david-adegbola-{slug}.pdf" download>Combined</a>')
-        links += [f'<a class="btn secondary" href="../david-adegbola-{slug}-{lang}.pdf" download>{names[lang]}</a>' for lang in langs]
-        items.append(f'<li><p class="role">{esc(title)}</p><p class="buttons">{"".join(links)}'
-                     f'<a class="btn secondary" href="../r/{slug}/">Employer page</a></p></li>')
-    target = out / path
+        # a private view page per CV under the secret path (the public employer pages are not linked here)
+        embed = f"david-adegbola-{slug}.pdf" if combined else f"david-adegbola-{slug}-{langs[0]}.pdf"
+        files = ([("Combined", f"david-adegbola-{slug}.pdf")] if combined else []) + \
+                [(names[lang], f"david-adegbola-{slug}-{lang}.pdf") for lang in langs]
+        dest = target / "cv" / slug
+        dest.mkdir(parents=True, exist_ok=True)
+        btns = "".join(f'<a class="btn{" secondary" if i else ""}" href="../../../{f}" download>{label}</a>'
+                       for i, (label, f) in enumerate(files))
+        (dest / "index.html").write_text(page.substitute(
+            common, title=f"CV – {esc(title)}", eyebrow="CV",
+            hero=f'<p class="role">{esc(title)}</p>',
+            body=pdf_view(btns, f"../../../{embed}", f"CV: {title}", "CV")), encoding="utf-8")
+        links = [f'<a class="btn" href="cv/{slug}/">View</a>'] + \
+                [f'<a class="btn secondary" href="../{f}" download>{label}</a>' for label, f in files]
+        items.append(f'<li><p class="role">{esc(title)}</p><p class="buttons">{"".join(links)}</p></li>')
     target.mkdir(parents=True, exist_ok=True)
-    body = f'<h2 class="section">CVs</h2><ul class="downloads">{"".join(items)}</ul>' + letters(target, page, common)
+    letter_rows = letters(target, page, common)
+    body = (TABS.format(cvs=len(items), letters=len(letter_rows))
+            + f'<div class="tabpanel" id="panel-cvs" role="tabpanel" aria-labelledby="tab-cvs"><ul class="downloads">{"".join(items)}</ul></div>'
+            + f'<div class="tabpanel" id="panel-letters" role="tabpanel" aria-labelledby="tab-letters" hidden>'
+            + (f'<ul class="downloads">{"".join(letter_rows)}</ul>' if letter_rows else '<p>No cover letters yet.</p>')
+            + '</div>' + TABS_SCRIPT)
     (target / "index.html").write_text(page.substitute(
         common, title="All CVs", eyebrow="Downloads",
         hero='<p class="lead">Every CV and cover letter, newest build.</p>', body=body),
         encoding="utf-8")
+
+
+def pdf_view(buttons, embed, label, noun, back="../../"):
+    """Body of a private view page: download buttons, the PDF embedded, and a plain link."""
+    return (f'<p class="buttons">{buttons}<a class="btn secondary" href="{back}">All downloads</a></p>'
+            f'<object class="cv" data="{embed}{esc(VIEWER)}" type="application/pdf" aria-label="{esc(label)}">'
+            f'<p>Your browser can\'t show the PDF here. <a href="{embed}">Open the {noun}</a>.</p></object>'
+            f'<p class="open"><a href="{embed}">Open the {noun} as a PDF</a></p>')
+
+
+TABS = ('<div class="tabs" role="tablist" aria-label="Documents">'
+        '<button class="tab" id="tab-cvs" role="tab" aria-selected="true" aria-controls="panel-cvs">CVs <span>{cvs}</span></button>'
+        '<button class="tab" id="tab-letters" role="tab" aria-selected="false" aria-controls="panel-letters" tabindex="-1">'
+        'Cover letters <span>{letters}</span></button></div>')
+
+# Tabs: click or arrow keys switch; the choice is kept in the address (#letters) so Back and reload keep it
+TABS_SCRIPT = """<script>
+(function () {
+  var tabs = [].slice.call(document.querySelectorAll('[role="tab"]'));
+  function show(tab, push) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    });
+    if (push) history.replaceState(null, "", tab.id === "tab-letters" ? "#letters" : location.pathname);
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { show(t, true); });
+    t.addEventListener("keydown", function (e) {
+      var k = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (k) { var n = tabs[(i + k + tabs.length) % tabs.length]; n.focus(); show(n, true); }
+    });
+  });
+  if (location.hash === "#letters") show(tabs[1], false);
+})();
+</script>"""
 
 
 def letters(target, page, common):
@@ -189,7 +240,7 @@ def letters(target, page, common):
     public repo's build logs are public (David, 2026-11-23)."""
     src = os.environ.get("APPLICATIONS_DIR", "").strip()
     if not src or not Path(src).is_dir():
-        return ""
+        return []
     names = {"cover-letter-combined.pdf": "Combined", "cover-letter-fi.pdf": "suomi", "cover-letter-en.pdf": "English"}
     rows = []
     for app in sorted(p for p in Path(src).iterdir() if (p / "cover-letter-combined.pdf").is_file()):
@@ -203,20 +254,14 @@ def letters(target, page, common):
         title = app.name.replace("-", " ")
         # a view page per letter, like the employer pages: the combined letter embedded, downloads above
         embed = "cover-letter-combined.pdf"
-        view = (f'<p class="buttons">{"".join(l.replace(f"letters/{esc(app.name)}/", "") for l in links)}'
-                f'<a class="btn secondary" href="../../">All downloads</a></p>'
-                f'<object class="cv" data="{embed}{esc(VIEWER)}" type="application/pdf" aria-label="Cover letter: {esc(title)}">'
-                f'<p>Your browser can\'t show the PDF here. <a href="{embed}">Open the letter</a>.</p></object>'
-                f'<p class="open"><a href="{embed}">Open the letter as a PDF</a></p>')
+        view = pdf_view("".join(l.replace(f"letters/{esc(app.name)}/", "") for l in links), embed, f"Cover letter: {title}", "letter", back="../../#letters")
         (dest / "index.html").write_text(page.substitute(
             common, title=f"Cover letter – {esc(title)}", eyebrow="Cover letter",
             hero=f'<p class="role">{esc(title)}</p>', body=view), encoding="utf-8")
         links.insert(0, f'<a class="btn" href="letters/{esc(app.name)}/">View</a>')
         links[1] = links[1].replace('class="btn"', 'class="btn secondary"', 1)
         rows.append(f'<li><p class="role">{esc(title)}</p><p class="buttons">{"".join(links)}</p></li>')
-    if not rows:
-        return ""
-    return f'<h2 class="section">Cover letters</h2><ul class="downloads">{"".join(rows)}</ul>'
+    return rows
 
 
 if __name__ == "__main__":
