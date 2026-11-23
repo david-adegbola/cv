@@ -1,0 +1,72 @@
+% !TEX TS-program = pdflatex
+% David - Tekstiilihuoltaja CV (suomi)
+
+\documentclass[a4paper,11pt]{article}
+
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+
+\cvlang{fi}
+\cvrole{Tekstiilihuoltaja}
+
+\begin{document}
+\small
+\setlength{\cvlabelw}{3.9cm}
+\titlespacing{\section}{0pt}{0.55em}{2pt}
+
+\begin{cvheader}
+\par{\centering
+		{\Huge \textsc{David Adegbola}}\\[0.4em]
+		{\Large Tekstiilihuoltaja}
+	\bigskip\par}
+
+\hrule
+\vspace{0.5em}
+\cvline[2.4cm]{\cvt{location}:}{Tampere, Suomi}
+\cvline[2.4cm]{\cvt{phone}:}{+358 46 800 7210}
+\cvline[2.4cm]{\cvt{email}:}{\href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}}
+\end{cvheader}
+
+\section{\cvt{summary}}
+\begin{tabular}{p{0.9\textwidth}}
+ Hei! Olen David, 24-vuotias. Olin asentajana UPM Kaukaan sellutehtaalla Lappeenrannassa. Työ oli fyysistä, ja tehtaalla noudatettiin tiukkoja turvallisuusohjeita. Työnantaja arvioi työni kiitettäväksi ja kuvasi minua halukkaaksi oppimaan ja ottamaan vastuuta.\\\\
+
+ Teen työni huolellisesti ja opin uudet tehtävät nopeasti. Työskentelen sekä itsenäisesti että tiimissä, ja olen tottunut raskaaseen fyysiseen työhön. Voin tehdä vuorotyötä, aloittaa heti ja työskennellä missä päin Suomea tahansa. Suomen kielen taitoni on vielä perustasolla, ja opiskelen sitä aktiivisesti.
+\end{tabular}
+
+\section{\cvt{skills}}
+\cvline{Fyysinen työ:}{Raskas fyysinen työ; materiaalien siirto ja järjestäminen; nostolaitteet, sähkö- ja käsityökalut}
+\cvline{Työtavat:}{Itsenäinen työ ja tiimityö; huolellisuus; työpaikan siisteys; työkalujen ja materiaalien seuranta; työturvallisuus}
+\cvline{Vuorotyö:}{Valmis vuorotyöhön (myös yöt ja viikonloput)}
+\cvline{Työlupa:}{Minulla on työlupa eikä minulla ole allergioita}
+\cvline{Haluan oppia:}{Pyykin lajittelu, pesu, viimeistely ja pakkaus; pesu- ja viimeistelykoneiden käyttö; tekstiilihuollon laatuvaatimukset}
+\cvline{Tietotekniikka:}{Tietotekniikan perustaidot; omien työkalujen rakentaminen tekoälyagenteilla (omat projektit)}
+\cvline{\cvt{cards}:}{Työturvallisuuskortti; hygieniapassi}
+\cvline{\cvt{languages}:}{Suomi (perustaso, opiskelen aktiivisesti); englanti (sujuva); yoruba (äidinkieli)}
+
+\section{\cvt{experience}}
+\begin{cventry}{elo 2025--loka 2025}{\job{Asentaja}{Axioma Servisas UAB}}
+  UPM Kaukaan sellutehdas, Lappeenranta\par
+  Asennustyöt sähkösuodattimen uudelleenrakennushankkeessa.\par
+  Kulmahiomakoneen käyttö ja nostolaitteiden käyttö.\par
+  Siirsin ja järjestin materiaaleja, seurasin työkaluja, pidin työmaan siistinä ja noudatin tehtaan tiukkoja turvallisuusohjeita.\par
+  Työnantajan arvio: kiitettävä. Vastuuntuntoinen ja tunnollinen työntekijä, halukas oppimaan ja ottamaan vastuuta.
+  \sotagrow{fyysinen-työ,materiaalien-käsittely,nostolaitteet,työturvallisuus,siisteys,huolellisuus}
+\end{cventry}
+\begin{cventry}{huhti 2025--elo 2025}{\textbf{Lehdenjakaja}, Finnbox ja SSM, Vaasa: varhaiset aamureitit yksin, säällä kuin säällä.}
+\end{cventry}
+\begin{cventry}{marras 2024--elo 2026}{\textbf{AV-vapaaehtoinen}, Vaasa City Church, Vaasa: ääni- ja videolaitteet joka viikonloppu.}
+\end{cventry}
+\begin{cventry}{kesä 2026--elo 2026}{\textbf{Founder in Residence}, Vaasa Startup Factory, Vaasa: tuotekehitystä tiimissä.}
+\end{cventry}
+\begin{cventry}{syys 2016--syys 2020}{Myynti- ja asiakaspalvelutyötä Nigeriassa (Desire Feeds, Bunmi Pastries).}
+\end{cventry}
+
+\section{\cvt{education}}
+\cvline{2026--nykyhetki:}{B.Sc, kestävä metsäbiotalous, Itä-Suomen yliopisto (UEF)}
+\cvline{2024--2026:}{B.Eng-opinnot, tietotekniikka, Vaasan ammattikorkeakoulu (VAMK), kesken; opinnoissa Microsoft Active Directory}
+\cvline{2019--2022:}{OND, tietojenkäsittely, The Polytechnic, Ibadan, Nigeria}
+
+\section{\cvt{references}}
+\cvt{refsavailable}
+
+\end{document}
