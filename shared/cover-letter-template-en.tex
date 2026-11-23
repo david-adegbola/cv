@@ -1,0 +1,31 @@
+% !TEX TS-program = pdflatex
+% Cover letter template (en). Copy to applications/<role-slug>/cover-letter-en.tex; see CV-RULES.md section 9.
+\documentclass[a4paper,11pt]{article}
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+\IfFileExists{cover-letter.sty}{\usepackage{cover-letter}}{\usepackage{../../shared/cover-letter}}
+
+
+\begin{document}
+\letterhead{<Job Title>}{Joensuu, Finland}
+
+\recipient{<D Month YYYY>}{<Name>, <Title>\\
+<Company Oy>, <Unit>\\
+<Street address>\\
+<Postcode> <City>}
+
+\subject{Application: <Job Title>, <Company> <City>}
+
+Hi <First name>,
+
+<paragraph 1: what I'm applying for and why>
+
+<paragraph 2: last job in the certificate wording>
+
+<paragraph 3: what is new to me and how I learn>
+
+<paragraph 4: shifts, start date, location, cards and permits>
+
+My Finnish is still basic, and I'm actively studying it. My CV is attached, and I'm happy to tell you more by phone or in an interview.
+
+\signoff{Kind regards}
+\end{document}

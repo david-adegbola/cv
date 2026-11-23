@@ -1,0 +1,41 @@
+% cover-letter.sty: shared layout for David Adegbola's cover letters (David's default, 2026-11-23).
+% Load after cv-style (same font and colours as the CVs). Letters live in the git-ignored
+% applications/<role-slug>/ folder; see CV-RULES.md, section 9.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cover-letter}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em}
+\AtBeginDocument{\frenchspacing}
+
+\newcommand{\cl@phone}{+358 46 800 7210}
+\newcommand{\cl@email}{\href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}}
+
+% \letterhead{job title}{location}: name and job title left, contacts right, rule below
+\newcommand{\letterhead}[2]{%
+  \noindent
+  \begin{minipage}[c]{0.55\textwidth}
+    {\Huge\bfseries David Adegbola}\\[0.4em]
+    {\Large #1}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.4\textwidth}\raggedleft
+    #2\\
+    \cl@phone\\
+    \cl@email
+  \end{minipage}
+  \par\vspace{1em}\hrule\vspace{1.5em}}
+
+% \recipient{date}{address lines separated by \\}: date first, then the address, both left
+\newcommand{\recipient}[2]{#1\par #2\par}
+
+% \subject{text}
+\newcommand{\subject}[1]{\textbf{#1}\par}
+
+% \signoff{closing}: closing, space to sign, name, phone and email
+\newcommand{\signoff}[1]{%
+  #1\\[2.2em]
+  David Adegbola\\
+  \cl@phone\\
+  \cl@email\par}
+
+\endinput

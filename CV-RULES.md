@@ -26,6 +26,8 @@ written in LaTeX and published by GitHub Actions to https://david-adegbola.githu
 
 ## 1. Repo layout and workflow for a new CV
 
+- When David pastes a job ad, make BOTH the CV (this section) and the cover letter
+  (section 9) in the same task, unless he asks for only one (David, 2026-11-23).
 - One folder per job: `roles/<role-slug>/` containing
   - `cv-fi.tex` (Finnish; not needed for en-only roles),
   - `cv-en.tex` (English), and
@@ -335,3 +337,41 @@ fails if the two differ.
 Before starting any CV task, read this file in full. If a request differs from a fact in
 section 7, stop before editing and ask David: "Is this a correction for all CVs, or only for
 this one?"
+
+## 9. Cover letters (David's default, 2026-11-23)
+
+- Every new job application gets a cover letter along with the CV, in the same languages as the
+  role's CV (fi-first: Finnish and English; en-first: English and Finnish; en-only: English).
+- Cover letters name the employer and contacts, so they are PRIVATE:
+  - write them in `applications/<role-slug>/cover-letter-fi.tex` and `cover-letter-en.tex`
+    (git-ignored); never put them in `roles/`, and never commit them or their PDFs;
+  - add the employer's postal address and the letter's location to
+    `applications/job-details/<role-slug>.md`.
+- Layout: copy `shared/cover-letter-template-<lang>.tex`, which uses `shared/cover-letter.sty`.
+  Don't change the layout per letter. The fixed layout is:
+  - header: name and job title on the left, location, phone and email on the right, rule below;
+  - date on the left (Finnish `23.11.2026`, English `23 November 2026`);
+  - recipient: contact name(s) and title, company and unit, street address, postcode and city.
+    No recipient emails or phone numbers. Find the address on the employer's own website; if
+    you can't confirm it, ask David;
+  - bold subject line `Hakemus: <job>, <company> <city>` / `Application: <job>, <company> <city>`;
+  - greeting by first name (`Hei Miisa ja Jani,` / `Hi Miisa and Jani,`); if no contact is named,
+    `Hei,` / `Hello,`;
+  - closing `Ystävällisin terveisin` / `Kind regards`, space to sign, then name, phone and email.
+- Content (one page, about five short paragraphs):
+  1. what he is applying for and a plain reason it fits him;
+  2. his most relevant job, using the work-certificate wording from section 7;
+  3. what is new to him in this job, stated honestly, and how he works and learns;
+  4. practical fit from the ad: shifts, start date, location, cards, permits;
+  5. the honest Finnish line from section 4, then "my CV is attached".
+- Every rule in sections 4 to 7 applies to the letter too: same facts as the CV, nothing claimed
+  that he doesn't have, no AI tells, natural Finnish. The age is not required in the letter.
+- Compile each letter twice with pdflatex from inside its folder. It must be one page with no
+  Overfull warnings; render it and look at it.
+- Make the single combined letter, the file David actually submits:
+  `shared/combine-letter.sh <role-slug>` writes `applications/<role-slug>/cover-letter-combined.pdf`
+  in the same language order as the CV (Finnish then English for fi-first, English then Finnish
+  for en-first, English alone for en-only). Check both versions are there in that order (normally
+  2 pages; 1 for en-only). David sends two files: `cv-combined.pdf` and `cover-letter-combined.pdf`.
+- In the report, list anything in the letter that isn't on the CV, and anything the ad asks
+  for that you couldn't confirm (e.g. a sector-specific work permit, willingness to relocate).

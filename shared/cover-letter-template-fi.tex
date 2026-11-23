@@ -1,0 +1,31 @@
+% !TEX TS-program = pdflatex
+% Cover letter template (fi). Copy to applications/<role-slug>/cover-letter-fi.tex; see CV-RULES.md section 9.
+\documentclass[a4paper,11pt]{article}
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+\IfFileExists{cover-letter.sty}{\usepackage{cover-letter}}{\usepackage{../../shared/cover-letter}}
+\cvlang{fi}
+
+\begin{document}
+\letterhead{<Työnimike>}{Joensuu, Suomi}
+
+\recipient{<pp.kk.vvvv>}{<Nimi>, <titteli>\\
+<Yritys Oy>, <toimipiste>\\
+<Katuosoite>\\
+<Postinumero> <Kaupunki>}
+
+\subject{Hakemus: <Työnimike>, <Yritys> <Kaupunki>}
+
+Hei <Etunimi>,
+
+<kappale 1: mitä haen ja miksi>
+
+<kappale 2: viimeisin työ todistuksen sanoin>
+
+<kappale 3: mitä on uutta ja miten opin>
+
+<kappale 4: vuorot, aloitus, sijainti, kortit ja luvat>
+
+Suomen kielen taitoni on vielä perustasolla, ja opiskelen sitä aktiivisesti. CV on liitteenä, ja kerron mielelläni lisää puhelimessa tai haastattelussa.
+
+\signoff{Ystävällisin terveisin}
+\end{document}
