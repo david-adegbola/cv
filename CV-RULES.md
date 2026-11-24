@@ -305,6 +305,12 @@ Check the summary and every experience line in both languages:
     member's own CV, and has a forestry news desk. It grew out of his first job scraper
     (david-adegbola/job-aggregator, now stopped). The repo is public and may be linked:
     github.com/david-adegbola/jobdesk (correction, David, 2026-11-24).
+  - Finnish requirement checker (david-adegbola/finnish-check, public), Nov 2026, built with
+    Claude Code for a Metropolia application (David, 2026-11-24): a Flask app that uses an LLM
+    (Claude) to tell international students whether each internship ad requires Finnish, quoting
+    the sentence the answer is based on, and ranks the ads. On 20 real hand-labelled ads it was
+    right on 19 for "is Finnish required?"; JobDesk's old keyword rule was right on 9.
+    Placement: ai-student-developer only.
   - His portfolio website, built with Claude Code (in progress).
   - A 2D forest learning game for children aged 8–16, built with AI agents (in progress).
   - Always call these "own projects" / "omat projektit". Never present them as paid or client
@@ -313,6 +319,7 @@ Check the summary and every experience line in both languages:
   - Placement: it-field-technician and trainee-master get the full entry after Vaasa Startup
     Factory; forestry-master gets bullets 1, 2 and 5; the other CVs get one Skills mention only,
     merged into their single IT row (technical / industrial CVs still keep IT to one row).
+    ai-student-developer (David, 2026-11-24) also gets the full entry, leading Work Experience.
   - Placement of the 2026-11-04 facts (David): the field work goes on forestry-master and
     trainee-master; the extra hands-on IT work and the temperature logger go on
     it-field-technician; industrial, process, warehouse and salesperson CVs don't change.

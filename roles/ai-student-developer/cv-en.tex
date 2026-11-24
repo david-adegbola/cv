@@ -1,0 +1,74 @@
+% !TEX TS-program = pdflatex
+% David - AI Student Developer CV
+
+\documentclass[a4paper,11pt]{article}
+
+\IfFileExists{cv-style.sty}{\usepackage{cv-style}}{\usepackage{../../shared/cv-style}}
+
+\cvrole{AI Student Developer}
+
+\begin{document}
+\small
+\setlength{\cvlabelw}{3.2cm}
+\titlespacing{\section}{0pt}{0.55em}{2pt}
+
+\begin{cvheader}
+\par{\centering
+		{\Huge \textsc{David Adegbola}}\\[0.4em]
+		{\Large AI Student Developer}
+	\bigskip\par}
+
+\hrule
+\vspace{0.5em}
+\cvline[2.4cm]{\cvt{location}:}{Joensuu, Finland}
+\cvline[2.4cm]{\cvt{phone}:}{+358 46 800 7210}
+\cvline[2.4cm]{\cvt{email}:}{\href{mailto:adavidadegbola@gmail.com}{adavidadegbola@gmail.com}}
+\cvline[2.4cm]{Links:}{\faGithub{} \href{https://github.com/david-adegbola}{github.com/david-adegbola}}
+\end{cvheader}
+
+\section{\cvt{summary}}
+\begin{tabular}{p{0.9\textwidth}}
+ Hi! I'm David, 24, a full-time degree student in Finland: I study Sustainable Forest Bioeconomy at the University of Eastern Finland. Since January 2026 I have built tools with AI coding agents, and I write basic Python and C.\\\\
+
+ I write the spec and the rules the agent follows, then check the result and measure it. At UPM Kaukas pulp mill my employer rated my work excellent and called me eager to learn and to take responsibility. I speak fluent English. My Finnish is still basic, and I'm actively studying it.
+\end{tabular}
+
+\section{\cvt{education}}
+\cvline{2026--present:}{B.Sc Sustainable Forest Bioeconomy, University of Eastern Finland (UEF), full-time student}
+\cvline{2024--2026:}{B.Eng studies, Information Technology, VAMK; not completed}
+\cvline{2019--2022:}{OND in Computer Science, The Polytechnic, Ibadan, Nigeria}
+
+\section{\cvt{skills}}
+\cvline{Programming:}{Python and C (basic). Arduino traffic light controller in C/C++, simulated in Wokwi (built myself)}
+\cvline{Linux:}{Raspberry Pi 3 temperature logger on Linux (course project, built with an AI coding agent)}
+\cvline{AI and LLMs:}{Claude Code; rules and checks for AI agents; testing an LLM against a baseline}
+\cvline{Web and GitHub:}{Flask; GitHub Actions and Pages; hetkin.app domain and email (Cloudflare, Resend)}
+\cvline{Want to learn:}{JavaScript, modern UI frameworks, machine learning}
+\cvline{\cvt{languages}:}{English (fluent); Finnish (basic, actively studying); Yoruba (native)}
+
+\section{\cvt{experience}}
+\begin{cventry}{Jan 2026--present}{\textbf{AI Automation Developer (own projects)}}
+  Build tools with AI coding agents (Claude Code): I write the spec and a rules file the agent follows (fixed facts, banned claims, checks before every task), then check the result.\par
+  Finnish requirement checker (\href{https://github.com/david-adegbola/finnish-check}{github.com/david-adegbola/finnish-check}): a Flask app in which an LLM tells students if an internship ad requires Finnish. Right on 19 of 20 real ads; a keyword rule got 9.\par
+  JobDesk (\href{https://github.com/david-adegbola/jobdesk}{github.com/david-adegbola/jobdesk}): a multi-user forestry careers portal (Python, SQLite) that collects jobs and scores each against the member's CV.
+  \sotagrow{llm,python,flask,claude-code,agent-rules,github-actions}
+\end{cventry}
+\begin{cventry}{Jun 2026--Aug 2026}{\textbf{Founder in Residence}, Vaasa Startup Factory, Vaasa: built and pitched hetkin.app with a team.}
+\end{cventry}
+\begin{cventry}{Aug 2025--Oct 2025}{\job{Fitter}{Axioma Servisas UAB}}
+  UPM Kaukas pulp mill, Lappeenranta: electrostatic precipitator rebuild project.\par
+  Followed the mill's strict safety rules, kept the work site clean, and tracked tools and materials.\par
+  Employer rating: excellent. A responsible and conscientious employee, eager to learn and to take responsibility.
+  \sotagrow{site-safety,industrial-site,teamwork,documentation,reliability}
+\end{cventry}
+\begin{cventry}{Nov 2024--Aug 2026}{\textbf{Audio-Visual Volunteer}, Vaasa City Church, Vaasa: ran sound and video every weekend.}
+\end{cventry}
+\begin{cventry}{Apr 2025--Aug 2025}{\textbf{Independent Courier}, Finnbox and SSM, Vaasa: early-morning delivery routes alone.}
+\end{cventry}
+\begin{cventry}{Sep 2016--Sep 2020}{Sales and customer service jobs in Nigeria (Desire Feeds, Bunmi Pastries).}
+\end{cventry}
+
+\section{\cvt{references}}
+\cvt{refsavailable}
+
+\end{document}
