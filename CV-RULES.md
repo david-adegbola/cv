@@ -303,7 +303,8 @@ Check the summary and every experience line in both languages:
     SQLite. It collects forestry jobs, internships and summer jobs from Finnish job boards,
     state agencies, UEF and forest companies in Finnish and English, scores each against the
     member's own CV, and has a forestry news desk. It grew out of his first job scraper
-    (david-adegbola/job-aggregator, now stopped). The repo is private: don't link it.
+    (david-adegbola/job-aggregator, now stopped). The repo is public and may be linked:
+    github.com/david-adegbola/jobdesk (correction, David, 2026-11-24).
   - His portfolio website, built with Claude Code (in progress).
   - A 2D forest learning game for children aged 8–16, built with AI agents (in progress).
   - Always call these "own projects" / "omat projektit". Never present them as paid or client
