@@ -18,3 +18,4 @@
 - English is listed first under Languages because the ads ask for fluent English.
 - Left out: hygiene passport, driving licence, salary, availability line, heavy physical work, angle grinder and lifting equipment detail.
 - Employers, contacts, ad links, deadlines and status: private, in `applications/job-details/trainee-master.md` (not in this public repo).
+- 2026-11-24: Woodesk is now called JobDesk (correction for all CVs).

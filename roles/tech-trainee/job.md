@@ -18,3 +18,4 @@
 - The angle grinder and lifting equipment line is left out, as on trainee-master.
 - Left out: field work row, hobbies, hygiene passport, driving licence, salary, fibre, heavy physical work, the forest learning game, to fit one page.
 - Employers, contacts, ad links, deadlines and status: private, in `applications/job-details/tech-trainee.md` (not in this public repo).
+- 2026-11-24: Woodesk is now called JobDesk (correction for all CVs).

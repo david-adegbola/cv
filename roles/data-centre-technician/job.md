@@ -14,5 +14,5 @@
 - Uses the 2026-11-22 facts: Python and C (basic), the traffic light controller (simulated in Wokwi) and hands-on fibre-optic cabling.
 - Axioma Servisas UAB comes first, with the full work certificate wording.
 - AI Automation Developer is cut to two lines; Founder in Residence, courier and Nigeria are one-line entries, to fit one page.
-- Left out: POS and audio-visual skills rows, hobbies, hygiene passport, driving licence, salary, Microsoft Office, video and graphics work, Woodesk and the game.
+- Left out: POS and audio-visual skills rows, hobbies, hygiene passport, driving licence, salary, Microsoft Office, video and graphics work, JobDesk and the game.
 - Employers, contacts, ad links, deadlines and status: private, in `applications/job-details/data-centre-technician.md` (not in this public repo).

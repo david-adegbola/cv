@@ -16,3 +16,4 @@
 - 2026-11-04: added the store TV in Kokkola (POS row), Cloudflare and Resend for hetkin.app, and the Raspberry Pi 3 temperature logger (VAMK course project, built with an AI coding agent); the job scraper line is now Woodesk (correction for all CVs).
 - Two pages are allowed (CV-RULES.md section 2 exception).
 - Employers, contacts, ad links, deadlines and status: private, in `applications/job-details/it-field-technician.md` (not in this public repo).
+- 2026-11-24: Woodesk is now called JobDesk (correction for all CVs).
