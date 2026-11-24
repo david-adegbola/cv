@@ -298,8 +298,8 @@ Check the summary and every experience line in both languages:
     automatically with GitHub Actions and published on GitHub Pages.
   - CV-RULES.md: the rules file he wrote that keeps the agent's output accurate (fixed facts,
     claims it may never make, checks before every task).
-  - JobDesk (renamed from Woodesk, correction for all CVs, David, 2026-11-24; Woodesk replaced
-    "a job scraper and application tracker" on 2026-11-04): a multi-user forestry careers portal, invitation-only, Python and
+  - JobDesk (correction for all CVs, David, 2026-11-04; it replaces "a job scraper and
+    application tracker"; name corrected for all CVs 2026-11-24): a multi-user forestry careers portal, invitation-only, Python and
     SQLite. It collects forestry jobs, internships and summer jobs from Finnish job boards,
     state agencies, UEF and forest companies in Finnish and English, scores each against the
     member's own CV, and has a forestry news desk. It grew out of his first job scraper
